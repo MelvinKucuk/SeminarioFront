@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Seminario</string>
+    <string name="hint_mail">Mail</string>
+    <string name="hint_contraseña">Contraseña</string>
+    <string name="button_ingresar">Ingresar</string>
+    <string name="boton_siniestros">Siniestros</string>
+</resources>
