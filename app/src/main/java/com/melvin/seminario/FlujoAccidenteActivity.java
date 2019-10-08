@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements UbicacionFragment.OnFragmentInteractionListener, CantidadVehiculosFragment.OnFragmentInteractionListener,
-        OtroConductorFragment.OnFragmentInteractionListener{
+        OtroConductorFragment.OnFragmentInteractionListener, DatosOtroConductorFragment.OnFragmentInteractionListener{
 
     private ProgressBar progressBar;
     private ImageView imageView;
@@ -50,7 +50,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     @Override
-    public void abrirCamara() {
-
+    public void pasarDatosOtroConductor() {
+        DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
     }
+
 }

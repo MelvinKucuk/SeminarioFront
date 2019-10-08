@@ -17,4 +17,10 @@
     <string name="seleccion_consulta">Selccioná tu consulta</string>
     <string name="boton_consulta">Consultá el estado de tu siniestro</string>
     <string name="boton_datos">Mis Datos</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="n_licencia">N° Licencia</string>
+    <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
+    <string name="pais">País</string>
+    <string name="siguiente">Siguiente</string>
 </resources>

@@ -69,7 +69,7 @@ public class OtroConductorFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void abrirCamara();
+        void pasarDatosOtroConductor();
     }
 
     @Override
@@ -79,10 +79,11 @@ public class OtroConductorFragment extends Fragment {
                 // Do something with imagePath
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(photo);
+                mListener.pasarDatosOtroConductor();
                 // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-                Uri selectedImage = getImageUri(getActivity(), photo);
-                String realPath=getRealPathFromURI(selectedImage);
-                selectedImage = Uri.parse(realPath);
+//                Uri selectedImage = getImageUri(getActivity(), photo);
+//                String realPath=getRealPathFromURI(selectedImage);
+//                selectedImage = Uri.parse(realPath);
 
             }
         }
