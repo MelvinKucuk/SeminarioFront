@@ -3,25 +3,28 @@ package com.melvin.seminario;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements UbicacionFragment.OnFragmentInteractionListener, CantidadVehiculosFragment.OnFragmentInteractionListener,
         OtroConductorFragment.OnFragmentInteractionListener{
 
-    public final static int CAMERA_ACTION = 101;
     private ProgressBar progressBar;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flujo_accidente);
 
-        progressBar = findViewById(R.id.progressBarFlujo);
-        animate(0, 250, 1000);
+        imageView = findViewById(R.id.imagen2);
+//        progressBar = findViewById(R.id.progressBarFlujo);
+//        animate(0, 250, 1000);
         UbicacionFragment ubicacionFragment = new UbicacionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, ubicacionFragment).commit();
     }
@@ -37,7 +40,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     public void enSi() {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
-        animate(250, 500, 1000);
+//        animate(250, 500, 1000);
     }
 
     @Override
@@ -48,9 +51,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void abrirCamara() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(intent, CAMERA_ACTION);
+
     }
-
-
 }

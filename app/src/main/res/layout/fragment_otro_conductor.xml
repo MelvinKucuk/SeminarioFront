@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/colorPrimary"
+    tools:background="@color/white"
     tools:context=".UbicacionFragment">
 
     <ImageView
         android:id="@+id/licenciaIcono"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_licencia"
+        android:src="@drawable/ic_registro"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewCamara"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="20dp"
         android:text="@string/text_licencia"
         android:textAlignment="center"
-        android:textColor="#fff"
+        android:textColor="@color/primaryText"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +38,12 @@
         android:id="@+id/cardViewCamara"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="#fff"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewOmitir"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/licenciaIcono">
+        app:layout_constraintRight_toRightOf="parent">
 
 
         <android.support.constraint.ConstraintLayout
@@ -56,7 +56,7 @@
                 android:padding="16dp"
                 android:text="@string/abrir_camara"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,12 +72,12 @@
         android:id="@+id/cardViewOmitir"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="#fff"
+        android:layout_marginBottom="27dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewCamara">
+        app:layout_constraintRight_toRightOf="parent">
 
 
         <android.support.constraint.ConstraintLayout
@@ -90,7 +90,7 @@
                 android:padding="16dp"
                 android:text="@string/omitir"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

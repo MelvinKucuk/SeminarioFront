@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Seminario</string>
+    <string name="app_name">crash app</string>
     <string name="hint_mail">Mail</string>
     <string name="hint_contraseña">Contraseña</string>
     <string name="button_ingresar">Ingresar</string>
@@ -8,10 +8,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_ubicacion">¿Te encontras en el lugar del accidente?</string>
-    <string name="si">SI</string>
-    <string name="no">NO</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
     <string name="text_cant_vehiculo">¿Tuviste un accidente con otro vehiculo?</string>
     <string name="omitir">Omitir</string>
     <string name="abrir_camara">Abrir cámara</string>
     <string name="text_licencia">Sacale una foto al registro del otro conductor</string>
+    <string name="seleccion_consulta">Selccioná tu consulta</string>
+    <string name="boton_consulta">Consultá el estado de tu siniestro</string>
+    <string name="boton_datos">Mis Datos</string>
 </resources>
