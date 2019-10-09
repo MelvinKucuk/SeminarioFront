@@ -15,18 +15,8 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="265dp"
-                android:layout_height="165dp"
-                android:layout_marginTop="100dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_height="wrap_content"
+            android:paddingBottom="45dp">
 
             <TextView
                 android:id="@+id/textViewNombre"
@@ -37,7 +27,8 @@
                 android:text="@string/nombre"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/cardViewImage" />
+
 
             <TextView
                 android:id="@+id/textViewApellido"
@@ -64,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:layout_marginEnd="55dp"
+                android:layout_marginEnd="75dp"
                 android:text="@string/fecha_de_nacimiento"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,13 +72,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardViewLicencia" />
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cardViewImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageViewLicencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/ic_auto" />
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/cardViewSiguiente"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:layout_marginBottom="43dp"
+                android:paddingBottom="50dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
+                app:cardUseCompatPadding="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewPais">
@@ -120,11 +135,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardViewIngresar"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewNombre"
@@ -136,11 +153,14 @@
 
                     <EditText
                         android:id="@+id/editTextNombre"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_contraseña"
-                        android:inputType="textPassword"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="text"
                         android:padding="16dp"
+                        android:text="Ana Victoria"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -155,7 +175,9 @@
                 android:id="@+id/cardViewApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
@@ -169,11 +191,14 @@
 
                     <EditText
                         android:id="@+id/editTextApellido"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_contraseña"
-                        android:inputType="textPassword"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="text"
                         android:padding="16dp"
+                        android:text="Guevara"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -188,7 +213,9 @@
                 android:id="@+id/cardViewPais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="9dp"
+                android:layout_marginRight="20dp"
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
@@ -202,11 +229,14 @@
 
                     <EditText
                         android:id="@+id/editTextPais"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_contraseña"
-                        android:inputType="textPassword"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="text"
                         android:padding="16dp"
+                        android:text="Argentina"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -219,14 +249,14 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardViewFecha"
-                android:layout_width="156dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewFecha"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFecha">
 
                 <android.support.constraint.ConstraintLayout
@@ -235,11 +265,15 @@
 
                     <EditText
                         android:id="@+id/editTextFecha"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_contraseña"
-                        android:inputType="textPassword"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="dd/mm/aaaa"
+                        android:inputType="date"
                         android:padding="16dp"
+                        android:text="21/07/1994"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -254,13 +288,13 @@
                 android:id="@+id/cardViewLicencia"
                 android:layout_width="157dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewLicencia"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLicencia">
 
                 <android.support.constraint.ConstraintLayout
@@ -269,12 +303,15 @@
 
                     <EditText
                         android:id="@+id/editTextLicencia"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:hint="@string/hint_contraseña"
-                        android:inputType="textPassword"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="number"
                         android:padding="16dp"
+                        android:text="99.999.999"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"

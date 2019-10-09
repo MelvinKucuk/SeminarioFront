@@ -8,9 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class OtroConductorFragment extends Fragment {
@@ -25,6 +33,7 @@ public class OtroConductorFragment extends Fragment {
     public static final int CAMERA_ACTION = 200;
     private OnFragmentInteractionListener mListener;
     private ImageView image;
+    private String currentPhotoPath;
 
     public OtroConductorFragment() {
         // Required empty public constructor
@@ -40,8 +49,7 @@ public class OtroConductorFragment extends Fragment {
         botonAbrirCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                OtroConductorFragment.this.startActivityForResult(intent, CAMERA_ACTION);
+                dipatchTakePicture();
             }
         });
 
@@ -69,45 +77,59 @@ public class OtroConductorFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void pasarDatosOtroConductor();
+        void pasarDatosOtroConductor(String imagePath);
+    }
+
+    private void dipatchTakePicture(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        File photoFile = null;
+
+        try{
+            photoFile = createImageFile();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(getContext(),
+                    "com.melvin.seminario",
+                    photoFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            OtroConductorFragment.this.startActivityForResult(intent, CAMERA_ACTION);
+        }
+
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_ACTION) {
-                // Do something with imagePath
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                image.setImageBitmap(photo);
-                mListener.pasarDatosOtroConductor();
-                // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-//                Uri selectedImage = getImageUri(getActivity(), photo);
-//                String realPath=getRealPathFromURI(selectedImage);
-//                selectedImage = Uri.parse(realPath);
+
+//                Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//                image.setImageBitmap(bitmap);
+                mListener.pasarDatosOtroConductor(currentPhotoPath);
+
 
             }
         }
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.GERMANY).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
-    public String getRealPathFromURI(Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = getActivity().getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
 }

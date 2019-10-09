@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     private ProgressBar progressBar;
     private ImageView imageView;
+    private String imagePathLicencia;
+    private ConstraintLayout rootLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         imageView = findViewById(R.id.imagen2);
 //        progressBar = findViewById(R.id.progressBarFlujo);
 //        animate(0, 250, 1000);
+
+        rootLayout = findViewById(R.id.rootLayout);
+
         UbicacionFragment ubicacionFragment = new UbicacionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, ubicacionFragment).commit();
     }
@@ -50,9 +56,14 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     @Override
-    public void pasarDatosOtroConductor() {
+    public void pasarDatosOtroConductor(String imagePath) {
         DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
+        imagePathLicencia = imagePath;
+        Bundle datos = new Bundle();
+        datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
+        fragment.setArguments(datos);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        rootLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
 }

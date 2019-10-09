@@ -48,8 +48,10 @@
 
                     <EditText
                         android:id="@+id/editTextMail"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:hint="@string/hint_mail"
                         android:inputType="textEmailAddress"
                         android:padding="16dp"
@@ -81,8 +83,10 @@
 
                     <EditText
                         android:id="@+id/editTextConstraseña"
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:hint="@string/hint_contraseña"
                         android:inputType="textPassword"
                         android:padding="16dp"
