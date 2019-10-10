@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".FlujoAccidenteActivity"></activity>
-        <activity android:name=".SeleccionarSiniestroActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.FlujoAccidenteActivity"></activity>
+        <activity android:name=".view.SeleccionarSiniestroActivity" />
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

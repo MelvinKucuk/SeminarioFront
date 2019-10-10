@@ -1,16 +1,12 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.CardView;
@@ -18,42 +14,66 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
+import com.melvin.seminario.R;
+
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 
-public class OtroConductorFragment extends Fragment {
+public class CamaraFragment extends Fragment {
+
+    public static final String KEY_CHOQUE = "choque";
+    public static final String KEY_CEDULA = "cedula";
+    public static final String KEY_POLIZA = "poliza";
+
 
     public static final int CAMERA_ACTION = 200;
     private OnFragmentInteractionListener mListener;
     private ImageView image;
     private String currentPhotoPath;
+    private TextView textView;
+    private boolean esChoque;
+    private boolean esCedula;
+    private boolean esPoliza;
 
-    public OtroConductorFragment() {
-        // Required empty public constructor
+    public CamaraFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_otro_conductor, container, false);
+        View view = inflater.inflate(R.layout.fragment_camara, container, false);
 
         CardView botonAbrirCamara = view.findViewById(R.id.cardViewCamara);
-        botonAbrirCamara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dipatchTakePicture();
-            }
-        });
+        botonAbrirCamara.setOnClickListener(v -> dipatchTakePicture());
 
         image = view.findViewById(R.id.licenciaIcono);
+        textView  = view.findViewById(R.id.textViewCamara);
+
+        if (getArguments() != null) {
+            esChoque = getArguments().getBoolean(KEY_CHOQUE);
+            esCedula = getArguments().getBoolean(KEY_CEDULA);
+            esPoliza = getArguments().getBoolean(KEY_POLIZA);
+            if (esChoque){
+                textView.setText(getString(R.string.text_choque));
+                image.setImageResource(R.drawable.ic_auto);
+            }
+            if (esCedula){
+                textView.setText(getString(R.string.text_cedula));
+            }
+            if (esPoliza){
+                textView.setText(getString(R.string.text_poliza));
+                image.setImageResource(R.drawable.ic_poliza);
+            }
+        }
+
+
 
         return view;
     }
@@ -78,6 +98,9 @@ public class OtroConductorFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void pasarDatosOtroConductor(String imagePath);
+        void pasarDatosChoque(String imagePath);
+        void pasarDatosCedula(String imagePath);
+        void pasarDatosPoliza(String imagePath);
     }
 
     private void dipatchTakePicture(){
@@ -96,7 +119,7 @@ public class OtroConductorFragment extends Fragment {
                     "com.melvin.seminario",
                     photoFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            OtroConductorFragment.this.startActivityForResult(intent, CAMERA_ACTION);
+            CamaraFragment.this.startActivityForResult(intent, CAMERA_ACTION);
         }
 
 
@@ -109,8 +132,15 @@ public class OtroConductorFragment extends Fragment {
 
 //                Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
 //                image.setImageBitmap(bitmap);
-                mListener.pasarDatosOtroConductor(currentPhotoPath);
-
+                if (esChoque){
+                    mListener.pasarDatosChoque(currentPhotoPath);
+                } else if (esCedula) {
+                    mListener.pasarDatosCedula(currentPhotoPath);
+                } else if (esPoliza){
+                    mListener.pasarDatosPoliza(currentPhotoPath);
+                } else {
+                    mListener.pasarDatosOtroConductor(currentPhotoPath);
+                }
 
             }
         }

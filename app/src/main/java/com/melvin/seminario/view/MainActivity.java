@@ -1,13 +1,12 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import com.melvin.seminario.R;
 import com.melvin.seminario.Util.ResultListener;
 import com.melvin.seminario.dao.DaoInternetPosts;
 import com.melvin.seminario.model.Post;
@@ -22,19 +21,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CardView botonIngresar = findViewById(R.id.cardViewIngresar);
-        botonIngresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SeleccionarSiniestroActivity.class));
-            }
-        });
+        botonIngresar.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, SeleccionarSiniestroActivity.class)));
 
 
-        new DaoInternetPosts().obtenerPosts(new ResultListener<List<Post>>() {
-            @Override
-            public void finish(List<Post> resultado) {
-                String respuesta = resultado.get(0).getDescription();
-            }
+        new DaoInternetPosts().obtenerPosts(resultado -> {
+            String respuesta = resultado.get(0).getDescription();
         });
     }
 }

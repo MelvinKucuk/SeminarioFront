@@ -1,15 +1,22 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.melvin.seminario.R;
+import com.melvin.seminario.model.Conductor;
+
+import java.io.File;
 
 
 public class DatosOtroConductorFragment extends Fragment {
@@ -24,6 +31,7 @@ public class DatosOtroConductorFragment extends Fragment {
     private EditText editTextFechaNac;
     private EditText editTextPais;
     private ImageView imageView;
+    private CardView botonSiguiente;
 
     public DatosOtroConductorFragment() {
         // Required empty public constructor
@@ -41,10 +49,23 @@ public class DatosOtroConductorFragment extends Fragment {
         editTextFechaNac = view.findViewById(R.id.editTextFecha);
         editTextPais = view.findViewById(R.id.editTextPais);
         imageView = view.findViewById(R.id.imageViewLicencia);
+        botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
+
+        botonSiguiente.setOnClickListener(v -> {
+            Conductor conductor = new Conductor.Builder()
+                                        .setNombre(editTextNombre.getText().toString())
+                                        .setApellido(editTextApellido.getText().toString())
+                                        .setLicencia(editTextLicencia.getText().toString())
+                                        .setFechaNacimiento(editTextFechaNac.getText().toString())
+                                        .setPais(editTextPais.getText().toString())
+                                        .build();
+            mListener.enDatosConfirmados(conductor);
+        });
 
         String imagePath = getArguments().getString(KEY_IMAGE_PATH);
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        imageView.setImageBitmap(bitmap);
+        Glide.with(view)
+                .load(new File(imagePath))
+                .into(imageView);
 
         return view;
     }
@@ -68,5 +89,6 @@ public class DatosOtroConductorFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void enDatosConfirmados(Conductor conductor);
     }
 }

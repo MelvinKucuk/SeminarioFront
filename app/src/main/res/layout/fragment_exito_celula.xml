@@ -4,27 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/white"
-    tools:context=".view.UbicacionFragment">
+    tools:context=".view.ExitoCedulaFragment">
+
 
     <ImageView
-        android:id="@+id/ubicacionIcono"
-        android:layout_width="110dp"
-        android:layout_height="180dp"
-        android:src="@drawable/ic_location"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewSi"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewSiguiente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCamara" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewExitoConductor"
+        android:src="@drawable/ic_check" />
 
     <TextView
-        android:id="@+id/textViewCamara"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewExitoConductor"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/text_ubicacion"
+        android:layout_marginTop="40dp"
+        android:text="@string/text_datos_cedula"
         android:textAlignment="center"
         android:textColor="@color/primaryText"
         android:textSize="25sp"
@@ -35,41 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewSi"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewNo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/si"
-                android:textAlignment="center"
-                android:textColor="@color/primaryText"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewNo"
+        android:id="@+id/cardViewSiguiente"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
@@ -88,7 +52,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/no"
+                android:text="@string/siguiente"
                 android:textAlignment="center"
                 android:textColor="@color/primaryText"
                 android:textSize="20sp"
@@ -101,5 +65,6 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
+
 
 </android.support.constraint.ConstraintLayout>

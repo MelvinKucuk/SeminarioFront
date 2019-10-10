@@ -8,11 +8,11 @@
     tools:context=".view.UbicacionFragment">
 
     <ImageView
-        android:id="@+id/ubicacionIcono"
-        android:layout_width="110dp"
-        android:layout_height="180dp"
-        android:src="@drawable/ic_location"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewSi"
+        android:id="@+id/licenciaIcono"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/ic_registro"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewCamara"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +22,12 @@
         android:id="@+id/textViewCamara"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/text_ubicacion"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/text_licencia"
         android:textAlignment="center"
         android:textColor="@color/primaryText"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,13 +35,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewSi"
+        android:id="@+id/cardViewCamara"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewNo"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewOmitir"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -54,7 +54,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/si"
+                android:text="@string/abrir_camara"
                 android:textAlignment="center"
                 android:textColor="@color/primaryText"
                 android:textSize="20sp"
@@ -69,7 +69,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewNo"
+        android:id="@+id/cardViewOmitir"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
@@ -88,7 +88,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/no"
+                android:text="@string/omitir"
                 android:textAlignment="center"
                 android:textColor="@color/primaryText"
                 android:textSize="20sp"

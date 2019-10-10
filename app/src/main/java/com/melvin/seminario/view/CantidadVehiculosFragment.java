@@ -1,4 +1,4 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.melvin.seminario.R;
 
 
-public class UbicacionFragment extends Fragment {
+public class CantidadVehiculosFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public UbicacionFragment() {
+    public CantidadVehiculosFragment() {
         // Required empty public constructor
     }
 
@@ -23,19 +24,16 @@ public class UbicacionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ubicacion, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_cantidad_vehiculos, container, false);
 
         CardView botonSi = view.findViewById(R.id.cardViewSi);
-        botonSi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.enSi();
-            }
-        });
+        CardView botonNo = view.findViewById(R.id.cardViewNo);
+        botonSi.setOnClickListener(v -> mListener.enInteraccion());
+        botonNo.setOnClickListener(v -> mListener.enInteraccion());
 
         return view;
     }
-
 
 
     @Override
@@ -55,8 +53,7 @@ public class UbicacionFragment extends Fragment {
         mListener = null;
     }
 
-
     public interface OnFragmentInteractionListener {
-        void enSi();
+        void enInteraccion();
     }
 }

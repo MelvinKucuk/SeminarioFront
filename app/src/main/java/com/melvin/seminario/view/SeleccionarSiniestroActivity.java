@@ -1,11 +1,12 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.melvin.seminario.R;
 
 public class SeleccionarSiniestroActivity extends AppCompatActivity {
 
@@ -15,11 +16,7 @@ public class SeleccionarSiniestroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seleccionar_siniestro);
 
         ImageView botonSiniestro = findViewById(R.id.botonSiniestros);
-        botonSiniestro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SeleccionarSiniestroActivity.this, FlujoAccidenteActivity.class));
-            }
-        });
+        botonSiniestro.setOnClickListener(v ->
+                startActivity(new Intent(SeleccionarSiniestroActivity.this, FlujoAccidenteActivity.class)));
     }
 }

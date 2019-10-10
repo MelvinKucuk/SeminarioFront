@@ -1,4 +1,4 @@
-package com.melvin.seminario;
+package com.melvin.seminario.view;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.melvin.seminario.R;
 
 
-public class CantidadVehiculosFragment extends Fragment {
+public class ExitoChoqueFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public CantidadVehiculosFragment() {
+    public ExitoChoqueFragment() {
         // Required empty public constructor
     }
 
@@ -24,22 +25,10 @@ public class CantidadVehiculosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cantidad_vehiculos, container, false);
+        View view = inflater.inflate(R.layout.fragment_exito_choque, container, false);
 
-        CardView botonSi = view.findViewById(R.id.cardViewSi);
-        CardView botonNo = view.findViewById(R.id.cardViewNo);
-        botonSi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.enInteraccion();
-            }
-        });
-        botonNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.enInteraccion();
-            }
-        });
+        CardView botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
+        botonSiguiente.setOnClickListener(v -> mListener.enChoqueConfirmado());
 
         return view;
     }
@@ -63,6 +52,6 @@ public class CantidadVehiculosFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enInteraccion();
+        void enChoqueConfirmado();
     }
 }
