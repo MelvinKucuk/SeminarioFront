@@ -1,6 +1,5 @@
 package com.melvin.seminario.view;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -9,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.melvin.seminario.R;
+import com.melvin.seminario.dao.DaoInternetPosts;
 import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Email;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements  UbicacionFragment.OnFragmentInteractionListener,
@@ -19,7 +20,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     ExitoConductorFragment.OnFragmentInteractionListener,
                     ExitoChoqueFragment.OnFragmentInteractionListener,
                     ExitoCedulaFragment.OnFragmentInteractionListener,
-                    ResumenFragment.OnFragmentInteractionListener{
+                    ResumenFragment.OnFragmentInteractionListener,
+                    ExitoResumenFragment.OnFragmentInteractionListener{
 
     private ProgressBar progressBar;
     private ImageView imageView;
@@ -36,33 +38,27 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         setContentView(R.layout.activity_flujo_accidente);
 
         imageView = findViewById(R.id.imagen2);
-//        progressBar = findViewById(R.id.progressBarFlujo);
-//        animate(0, 250, 1000);
 
         rootLayout = findViewById(R.id.rootLayout);
 
         UbicacionFragment ubicacionFragment = new UbicacionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, ubicacionFragment).commit();
+
+
     }
 
-    private void animate(int percentageStart, int percentageEnd, int duration) {
-        ObjectAnimator animator = ObjectAnimator.ofInt(progressBar, "progress", percentageStart, percentageEnd);
-        animator.setDuration(duration);
-        animator.start();
-    }
 
 
     @Override
     public void enSi() {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
-//        animate(250, 500, 1000);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
     public void enInteraccion() {
         CamaraFragment fragment = new CamaraFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -77,7 +73,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         rootLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
@@ -91,14 +87,14 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         constraintSet.applyTo(rootLayout);
         this.conductor = conductor;
         ExitoConductorFragment fragment = new ExitoConductorFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
     public void pasarDatosChoque(String imagePath) {
         imagePathChoque = imagePath;
         ExitoChoqueFragment fragment = new ExitoChoqueFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -107,7 +103,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -116,14 +112,14 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
     public void pasarDatosCedula(String imagePath) {
         imagePathCedula = imagePath;
         ExitoCedulaFragment fragment = new ExitoCedulaFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -132,7 +128,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_POLIZA, true);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -145,6 +141,23 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         datos.putString(ResumenFragment.KEY_CEDULA, imagePathCedula);
         datos.putString(ResumenFragment.KEY_LICENCIA, imagePathLicencia);
         fragment.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void enResumenConfirmado(Conductor conductor) {
+        ExitoResumenFragment fragment = new ExitoResumenFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        new DaoInternetPosts().mandarMail(conductor);
+    }
+
+    @Override
+    public void enReintentar() {
+        onBackPressed();
+    }
+
+    @Override
+    public void enExitoResumen() {
+        finish();
     }
 }

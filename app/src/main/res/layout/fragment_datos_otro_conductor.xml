@@ -95,11 +95,47 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cardViewReintentar"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="43dp"
+                android:paddingBottom="50dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="30dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewSiguiente">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/reintenar"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryText"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/cardViewSiguiente"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:layout_marginBottom="43dp"
                 android:paddingBottom="50dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
@@ -160,7 +196,6 @@
                         android:layout_marginEnd="10dp"
                         android:inputType="text"
                         android:padding="16dp"
-                        android:text="Ana Victoria"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -198,7 +233,6 @@
                         android:layout_marginEnd="10dp"
                         android:inputType="text"
                         android:padding="16dp"
-                        android:text="Guevara"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -236,7 +270,6 @@
                         android:layout_marginEnd="10dp"
                         android:inputType="text"
                         android:padding="16dp"
-                        android:text="Argentina"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -270,10 +303,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:hint="dd/mm/aaaa"
+                        android:hint="dd-mm-aaaa"
                         android:inputType="date"
                         android:padding="16dp"
-                        android:text="21/07/1994"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -311,7 +343,6 @@
                         android:layout_marginEnd="10dp"
                         android:inputType="number"
                         android:padding="16dp"
-                        android:text="99.999.999"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

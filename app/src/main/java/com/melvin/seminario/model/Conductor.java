@@ -10,13 +10,21 @@ public class Conductor implements Parcelable {
     private String licencia;
     private String fechaNacimiento;
     private String pais;
+    private String dni;
+    private String detalle;
+    private String email;
+    private String domicilio;
 
-    public Conductor(String nombre, String apellido, String licencia, String fechaNacimiento, String pais) {
+    public Conductor(String nombre, String apellido, String licencia, String fechaNacimiento, String pais, String dni, String detalle, String email, String domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.licencia = licencia;
         this.fechaNacimiento = fechaNacimiento;
         this.pais = pais;
+        this.dni = dni;
+        this.detalle = detalle;
+        this.email = email;
+        this.domicilio = domicilio;
     }
 
     public static class Builder{
@@ -25,6 +33,10 @@ public class Conductor implements Parcelable {
         private String licencia;
         private String fechaNacimiento;
         private String pais;
+        private String dni;
+        private String detalle;
+        private String email;
+        private String domicilio;
 
         public Builder(){}
 
@@ -53,8 +65,28 @@ public class Conductor implements Parcelable {
             return this;
         }
 
+        public Builder setDni(String dni){
+            this.dni = dni;
+            return this;
+        }
+
+        public Builder setDetalle(String detalle){
+            this.detalle = detalle;
+            return this;
+        }
+
+        public Builder setEmail(String email){
+            this.email = email;
+            return this;
+        }
+
+        public Builder setDomicilio(String domicilio){
+            this.domicilio = domicilio;
+            return this;
+        }
+
         public Conductor build(){
-            return new Conductor(nombre, apellido, licencia, fechaNacimiento, pais);
+            return new Conductor(nombre, apellido, licencia, fechaNacimiento, pais, dni, detalle, email, domicilio);
         }
     }
 

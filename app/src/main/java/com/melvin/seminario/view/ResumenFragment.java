@@ -1,28 +1,26 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.melvin.seminario.R;
+import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Email;
 
 import java.io.File;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ResumenFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
 public class ResumenFragment extends Fragment {
 
     public static final String KEY_LICENCIA = "licencia";
@@ -32,11 +30,36 @@ public class ResumenFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private ImageView imagenLicencia;
-    private ImageView imagenCedula;
-    private ImageView imagenPoliza;
-    private ImageView imagenChoque;
+    @BindView(R.id.imageViewCedula)
+    ImageView imagenCedula;
+    @BindView(R.id.imageViewLicencia)
+    ImageView imagenLicencia;
+    @BindView(R.id.imageViewPoliza)
+    ImageView imagenPoliza;
+    @BindView(R.id.imageViewChoque)
+    ImageView imagenChoque;
+    @BindView (R.id.editTextNombre)
+    EditText editTextNombre;
+    @BindView (R.id.editTextApellido)
+    EditText editTextApellido;
+    @BindView (R.id.editTextDni)
+    EditText editTextDni;
+    @BindView (R.id.editTextFecha)
+    EditText editTextFecha;
+    @BindView (R.id.editTextPais)
+    EditText editTextPais;
+    @BindView (R.id.editTextDomicilio)
+    EditText editTextDomicilio;
+    @BindView (R.id.editTextMail)
+    EditText editTextMail;
+    @BindView (R.id.cardViewSiguiente)
+    CardView botonSiguiente;
+    @BindView (R.id.editTextDetalle)
+    EditText editTextDetalle;
+
+
     private  String pathLicencia;
+
 
     public ResumenFragment() {
     }
@@ -47,6 +70,8 @@ public class ResumenFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resumen, container, false);
 
+        ButterKnife.bind(this, view);
+
         Bundle datos = getArguments();
 
         if (datos != null) {
@@ -56,58 +81,44 @@ public class ResumenFragment extends Fragment {
             String pathPoliza = datos.getString(KEY_POLIZA);
             String pathChoque = datos.getString(KEY_CHOQUE);
 
-            imagenCedula = view.findViewById(R.id.imageViewCedula);
-            imagenLicencia = view.findViewById(R.id.imageViewLicencia);
-            imagenChoque = view.findViewById(R.id.imageViewChoque);
-            imagenPoliza = view.findViewById(R.id.imageViewPoliza);
+            File filePoliza = new File(pathPoliza);
+            File fileChoque = new File(pathChoque);
+            File fileCedula = new File(pathCedula);
+            File fileLicencia = new File(pathLicencia);
 
-//            setPic(imagenCedula, pathCedula);
-//            setPic(imagenPoliza, pathPoliza);
-//            setPic(imagenChoque, pathChoque);
-//            setPic(imagenLicencia, pathLicencia);
             Glide.with(view)
-                    .load(new File(pathPoliza))
+                    .load(filePoliza)
                     .into(imagenPoliza);
             Glide.with(view)
-                    .load(new File(pathChoque))
+                    .load(fileChoque)
                     .into(imagenChoque);
             Glide.with(view)
-                    .load(new File(pathCedula))
+                    .load(fileCedula)
                     .into(imagenCedula);
             Glide.with(view)
-                    .load(new File(pathLicencia))
+                    .load(fileLicencia)
                     .into(imagenLicencia);
+
+
+            botonSiguiente.setOnClickListener(v -> {
+                Conductor conductor = new Conductor.Builder()
+                        .setNombre(editTextNombre.getText().toString())
+                        .setApellido(editTextApellido.getText().toString())
+                        .setEmail(editTextMail.getText().toString())
+                        .setDetalle(editTextDetalle.getText().toString())
+                        .setDni(editTextDni.getText().toString())
+                        .setPais(editTextPais.getText().toString())
+                        .setFechaNacimiento(editTextFecha.getText().toString())
+                        .setDomicilio(editTextDomicilio.getText().toString())
+                        .build();
+                mListener.enResumenConfirmado(conductor);
+            });
 
 
 
         }
 
         return view;
-    }
-
-
-    private void setPic(ImageView imageView, String currentPhotoPath) {
-        // Get the dimensions of the View
-        int targetW = 300;
-        int targetH = 200;
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-        imageView.setImageBitmap(bitmap);
     }
 
 
@@ -129,5 +140,6 @@ public class ResumenFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void enResumenConfirmado(Conductor mail);
     }
 }

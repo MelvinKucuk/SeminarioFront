@@ -1,6 +1,8 @@
 package com.melvin.seminario.dao;
 
 import com.melvin.seminario.Util.ResultListener;
+import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Email;
 import com.melvin.seminario.model.Post;
 
 import java.util.List;
@@ -11,7 +13,8 @@ import retrofit2.Response;
 
 public class DaoInternetPosts extends DaoHelper {
 
-    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
+    //public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
+    public static final String BASE_URL = "http://192.168.0.182:8080";
     private PostService postService;
 
     public DaoInternetPosts(){
@@ -32,5 +35,20 @@ public class DaoInternetPosts extends DaoHelper {
 
             }
         });
+    }
+
+    public void mandarMail(Conductor conductor){
+        postService.mandarEmail(conductor).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String a = call.toString();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                String a = call.toString();
+            }
+        });
+
     }
 }

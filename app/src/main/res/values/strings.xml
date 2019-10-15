@@ -29,4 +29,18 @@
     <string name="text_datos_conductor">Los datos del conductor se agregaron correctamente.</string>
     <string name="text_datos_choque">La foto del choque se agregó correctamente.</string>
     <string name="text_datos_cedula">La foto de la cedula se agregó correctamente.</string>
+    <string name="label_datos">Verificá tus datos</string>
+    <string name="tus_datos">Tus datos</string>
+    <string name="dni">DNI</string>
+    <string name="domicilio">Domicilio</string>
+    <string name="datos_del_tercero">Datos del tercero</string>
+    <string name="licencia">Licencia</string>
+    <string name="choque">Choque</string>
+    <string name="cedula">Cedula</string>
+    <string name="poliza">Poliza</string>
+    <string name="text_accidente">Detalles del accidente</string>
+    <string name="editar">Editar</string>
+    <string name="datos_correctos">Los datos se han enviado correctamente!</string>
+    <string name="label_breve">En la brevedad nos comunicaremos con vos para seguir el proceso.</string>
+    <string name="reintenar">Reintenar</string>
 </resources>

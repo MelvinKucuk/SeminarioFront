@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "169530648562",
+    "firebase_url": "https://seminariofront.firebaseio.com",
+    "project_id": "seminariofront",
+    "storage_bucket": "seminariofront.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169530648562:android:ba5d48439c3034d7e52d6b",
+        "android_client_info": {
+          "package_name": "com.melvin.seminario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169530648562-f0u12vst573jcfbehvoc15es02srft09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.melvin.seminario",
+            "certificate_hash": "d317016e604347a311e54f8d1c67a8c38175cd9b"
+          }
+        },
+        {
+          "client_id": "169530648562-94m4cnursi61316kkq5ss9ga6q9ndk4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX_cLUe9d40-1aO0Aw_TkHdcPByM-WsLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169530648562-94m4cnursi61316kkq5ss9ga6q9ndk4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,87 +10,384 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewImageLicencia"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="40dp"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="@string/label_datos"
+            android:textColor="@color/primaryText"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarSiniestros" />
 
-        <ImageView
-            android:id="@+id/imageViewLicencia"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tus_datos"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="65dp"
+            android:layout_marginStart="40dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <View
+            android:id="@+id/spliter1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/ic_auto" />
+            android:layout_height="1dp"
+            android:background="@color/primaryText"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"/>
 
+        <TextView
+            android:id="@+id/textNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spliter1" />
 
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewImageChoque"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewImageLicencia">
-
-        <ImageView
-            android:id="@+id/imageViewChoque"
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/ic_auto" />
+            android:layout_height="wrap_content"
+            android:text="Pablo"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNombre" />
 
+        <TextView
+            android:id="@+id/textApellido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apellido"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewImageCedula"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewImageChoque">
-
-        <ImageView
-            android:id="@+id/imageViewCedula"
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextApellido"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/ic_auto" />
+            android:layout_height="wrap_content"
+            android:text="Lorenzo"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textApellido" />
+
+        <TextView
+            android:id="@+id/textDni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dni"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextApellido" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextDni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="387653339"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDni" />
+
+        <TextView
+            android:id="@+id/textFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="47dp"
+            android:text="@string/fecha_de_nacimiento"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextApellido" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="16/05/1994"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="@+id/textFecha"
+            app:layout_constraintTop_toBottomOf="@+id/textFecha" />
+
+        <TextView
+            android:id="@+id/textPais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pais"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDni" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextPais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Argentina"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPais" />
+
+        <TextView
+            android:id="@+id/textDomicilio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/domicilio"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPais" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextDomicilio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Av. Córdoba 2345"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDomicilio" />
+
+        <TextView
+            android:id="@+id/textMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_mail"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDomicilio" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="melvinalek@gmail.com"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textMail" />
+
+        <TextView
+            android:id="@+id/textViewTercero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/datos_del_tercero"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="40dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
+
+        <View
+            android:id="@+id/spliter2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primaryText"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTercero"/>
 
 
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/textViewLicencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/licencia"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spliter2" />
+
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewImageLicencia"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLicencia">
+
+            <ImageView
+                android:id="@+id/imageViewLicencia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_auto" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewChoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choque"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageLicencia" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewImageChoque"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewChoque">
+
+            <ImageView
+                android:id="@+id/imageViewChoque"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_auto" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewCedula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cedula"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageChoque" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewImageCedula"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCedula">
+
+            <ImageView
+                android:id="@+id/imageViewCedula"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_auto" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewPoliza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/poliza"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="40dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageCedula" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewImagePoliza"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageCedula">
+            app:layout_constraintTop_toBottomOf="@+id/textViewPoliza">
 
 
             <ImageView
@@ -102,6 +399,140 @@
 
 
         </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewAccidente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_accidente"
+            android:textColor="@color/primaryText"
+            android:layout_marginTop="70dp"
+            android:layout_marginStart="40dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImagePoliza" />
+
+        <View
+            android:id="@+id/spliter3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primaryText"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAccidente"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="40dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spliter3">
+
+
+            <EditText
+                android:id="@+id/editTextDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Iba manejando por Niceto Vega y un auto vino por la derecha, pasó en rojo y me choco el lado izquierdo del auto."
+                android:layout_margin="20dp"
+                android:textColor="@color/primaryText"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@null"
+                android:textSize="18sp"
+                app:backgroundTint="@color/primaryText"
+                 />
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewSiguiente"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="43dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewDetalle">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/siguiente"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryText"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewEditar"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="43dp"
+            android:paddingBottom="50dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewSiguiente">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/editar"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryText"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+
 
     </android.support.constraint.ConstraintLayout>
 
