@@ -1,21 +1,39 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.melvin.seminario.R;
+import com.melvin.seminario.Util.TemplatePDF;
 import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Email;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +47,7 @@ public class ResumenFragment extends Fragment {
     public static final String KEY_CHOQUE = "choque";
 
     private OnFragmentInteractionListener mListener;
+    private TemplatePDF pdf;
 
     @BindView(R.id.imageViewCedula)
     ImageView imagenCedula;
@@ -54,6 +73,8 @@ public class ResumenFragment extends Fragment {
     EditText editTextMail;
     @BindView (R.id.cardViewSiguiente)
     CardView botonSiguiente;
+    @BindView (R.id.cardViewEditar)
+    CardView botonEditar;
     @BindView (R.id.editTextDetalle)
     EditText editTextDetalle;
 
@@ -113,6 +134,25 @@ public class ResumenFragment extends Fragment {
                         .build();
                 mListener.enResumenConfirmado(conductor);
             });
+
+            pdf = new TemplatePDF(getActivity());
+            try{
+                pdf.openDocument();
+                pdf.addMetaData("Denuncia", "Denuncia", "Crash App");
+                pdf.addCampo("Nombre", editTextNombre.getText().toString());
+                pdf.addCampo("Apellido", editTextApellido.getText().toString());
+                pdf.addCampo("Detalle", editTextDetalle.getText().toString());
+                pdf.closeDocument();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+            botonEditar.setOnClickListener(v -> pdf.viewPdf(getActivity()));
+
+
+
 
 
 
