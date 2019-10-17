@@ -10,8 +10,8 @@ import retrofit2.Response;
 
 public class DaoInternetUsuarios extends DaoHelper {
 
-//    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
-    public static final String BASE_URL = "http://192.168.0.182:8080";
+    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
+//    public static final String BASE_URL = "http://192.168.0.182:8080";
     private UsuarioService usuarioService;
 
     public DaoInternetUsuarios(){
