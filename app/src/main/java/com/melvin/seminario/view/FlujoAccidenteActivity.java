@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.melvin.seminario.R;
-import com.melvin.seminario.dao.DaoInternetPosts;
+import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
-import com.melvin.seminario.model.Email;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements  UbicacionFragment.OnFragmentInteractionListener,
@@ -22,7 +21,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     ExitoChoqueFragment.OnFragmentInteractionListener,
                     ExitoCedulaFragment.OnFragmentInteractionListener,
                     ResumenFragment.OnFragmentInteractionListener,
-                    ExitoResumenFragment.OnFragmentInteractionListener{
+                    ExitoResumenFragment.OnFragmentInteractionListener,
+                    MapsFragment.OnFragmentInteractionListener{
 
     private ProgressBar progressBar;
     private ImageView imageView;
@@ -32,6 +32,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private String imagePathPoliza;
     private ConstraintLayout rootLayout;
     private Conductor conductor;
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,15 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void enSi() {
+        MapsFragment fragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void enUnicacionConfirmada(double longitude, double latitude) {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
+        this.longitude = longitude;
+        this.latitude = latitude;
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
@@ -160,7 +170,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     public void enResumenConfirmado(Conductor conductor) {
         ExitoResumenFragment fragment = new ExitoResumenFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
-        new DaoInternetPosts().mandarMail(conductor);
+        new DaoInternetUsuarios().mandarMail(conductor);
     }
 
     @Override
