@@ -22,111 +22,56 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarSiniestros" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="65dp"
             android:text="@string/tus_datos"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="65dp"
-            android:layout_marginStart="40dp"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <View
-            android:id="@+id/spliter1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primaryText"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"/>
-
         <TextView
             android:id="@+id/textNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/nombre"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spliter1" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/editTextNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pablo"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textSize="18sp"
-            app:backgroundTint="@color/primaryText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textNombre" />
 
         <TextView
             android:id="@+id/textApellido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/apellido"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/editTextApellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorenzo"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textSize="18sp"
-            app:backgroundTint="@color/primaryText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textApellido" />
 
         <TextView
             android:id="@+id/textDni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/dni"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextApellido" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/editTextDni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="387653339"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textSize="18sp"
-            app:backgroundTint="@color/primaryText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textDni" />
 
         <TextView
             android:id="@+id/textFecha"
@@ -140,6 +85,199 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextApellido" />
 
+        <TextView
+            android:id="@+id/textPais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/pais"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDni" />
+
+        <TextView
+            android:id="@+id/textDomicilio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/domicilio"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPais" />
+
+        <TextView
+            android:id="@+id/textMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/hint_mail"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDomicilio" />
+
+        <TextView
+            android:id="@+id/textViewTercero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/datos_del_tercero"
+            android:textColor="@color/primaryText"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
+
+        <TextView
+            android:id="@+id/textViewLicencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/licencia"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spliter2" />
+
+        <TextView
+            android:id="@+id/textViewChoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/choque"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageLicencia" />
+
+        <TextView
+            android:id="@+id/textViewCedula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/cedula"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageChoque" />
+
+        <TextView
+            android:id="@+id/textViewPoliza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/poliza"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImageCedula" />
+
+        <TextView
+            android:id="@+id/textViewAccidente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/text_accidente"
+            android:textColor="@color/primaryText"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewImagePoliza" />
+
+        <View
+            android:id="@+id/spliter1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <View
+            android:id="@+id/spliter2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTercero" />
+
+        <View
+            android:id="@+id/spliter3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAccidente" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="Pablo"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNombre" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="Lorenzo"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textApellido" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextDni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="387653339"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDni" />
+
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editTextFecha"
             android:layout_width="wrap_content"
@@ -152,132 +290,55 @@
             app:layout_constraintStart_toStartOf="@+id/textFecha"
             app:layout_constraintTop_toBottomOf="@+id/textFecha" />
 
-        <TextView
-            android:id="@+id/textPais"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pais"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDni" />
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editTextPais"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
             android:text="Argentina"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:textSize="18sp"
             app:backgroundTint="@color/primaryText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textPais" />
 
-        <TextView
-            android:id="@+id/textDomicilio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/domicilio"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPais" />
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editTextDomicilio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
             android:text="Av. Córdoba 2345"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:textSize="18sp"
             app:backgroundTint="@color/primaryText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textDomicilio" />
 
-        <TextView
-            android:id="@+id/textMail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hint_mail"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDomicilio" />
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editTextMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
             android:text="melvinalek@gmail.com"
             android:textColor="@color/primaryText"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:textSize="18sp"
             app:backgroundTint="@color/primaryText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textMail" />
-
-        <TextView
-            android:id="@+id/textViewTercero"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/datos_del_tercero"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="40dp"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
-
-        <View
-            android:id="@+id/spliter2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primaryText"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTercero"/>
-
-
-        <TextView
-            android:id="@+id/textViewLicencia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/licencia"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spliter2" />
-
-
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewImageLicencia"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -294,24 +355,12 @@
 
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/textViewChoque"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choque"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageLicencia" />
-
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewImageChoque"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="40dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -328,18 +377,6 @@
 
 
         </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/textViewCedula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cedula"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageChoque" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewImageCedula"
@@ -363,18 +400,6 @@
 
 
         </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/textViewPoliza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/poliza"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="40dp"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageCedula" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewImagePoliza"
@@ -400,32 +425,6 @@
 
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/textViewAccidente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_accidente"
-            android:textColor="@color/primaryText"
-            android:layout_marginTop="70dp"
-            android:layout_marginStart="40dp"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImagePoliza" />
-
-        <View
-            android:id="@+id/spliter3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primaryText"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAccidente"/>
-
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewDetalle"
             android:layout_width="match_parent"
@@ -444,16 +443,15 @@
                 android:id="@+id/editTextDetalle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Iba manejando por Niceto Vega y un auto vino por la derecha, pasó en rojo y me choco el lado izquierdo del auto."
                 android:layout_margin="20dp"
-                android:textColor="@color/primaryText"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:background="@null"
+                android:text="Iba manejando por Niceto Vega y un auto vino por la derecha, pasó en rojo y me choco el lado izquierdo del auto."
+                android:textColor="@color/primaryText"
                 android:textSize="18sp"
-                app:backgroundTint="@color/primaryText"
-                 />
+                app:backgroundTint="@color/primaryText" />
 
 
         </android.support.v7.widget.CardView>
@@ -531,7 +529,6 @@
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
-
 
 
     </android.support.constraint.ConstraintLayout>

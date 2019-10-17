@@ -1,8 +1,7 @@
 package com.melvin.seminario.dao;
 
-import com.melvin.seminario.Util.ResultListener;
+import com.melvin.seminario.util.ResultListener;
 import com.melvin.seminario.model.Conductor;
-import com.melvin.seminario.model.Email;
 import com.melvin.seminario.model.Post;
 
 import java.util.List;

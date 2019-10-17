@@ -1,4 +1,4 @@
-package com.melvin.seminario.Util;
+package com.melvin.seminario.util;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -33,7 +33,7 @@ public class TemplatePDF {
     private Paragraph paragraph;
     private Font fuenteTitulo = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
     private Font fuenteSubtitulo = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-    private Font fuenteTexto = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+    private Font fuenteTexto = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.NORMAL);
     private Font fuenteHighText = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, BaseColor.RED);
 
     public TemplatePDF(Context context) {
@@ -83,6 +83,15 @@ public class TemplatePDF {
     private void addChildParagraph(Paragraph childParagraph){
         childParagraph.setAlignment(Element.ALIGN_LEFT);
         paragraph.add(childParagraph);
+    }
+
+    public void addImage(String path) throws Exception{
+        paragraph = new Paragraph(0);
+        document.add(paragraph);
+        document.newPage();
+        Image image = Image.getInstance(path);
+        image.scaleToFit(300, 300);
+        document.add(image);
     }
 
     public void viewPdf(Activity activity){

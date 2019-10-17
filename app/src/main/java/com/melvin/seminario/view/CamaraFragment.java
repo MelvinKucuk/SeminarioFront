@@ -67,6 +67,7 @@ public class CamaraFragment extends Fragment {
             }
             if (esCedula){
                 textView.setText(getString(R.string.text_cedula));
+                image.setImageResource(R.drawable.ic_cedula);
             }
             if (esPoliza){
                 textView.setText(getString(R.string.text_poliza));

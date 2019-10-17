@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -68,6 +69,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
         constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
         constraintSet.applyTo(rootLayout);
+        imageView.setVisibility(View.GONE);
         DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
         imagePathLicencia = imagePath;
         Bundle datos = new Bundle();
@@ -85,6 +87,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
         constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.imagen2, ConstraintSet.BOTTOM);
         constraintSet.applyTo(rootLayout);
+        imageView.setVisibility(View.VISIBLE);
         this.conductor = conductor;
         ExitoConductorFragment fragment = new ExitoConductorFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
@@ -102,6 +105,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        imageView.setImageResource(R.drawable.ic_progreso_2);
         fragment.setArguments(datos);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -111,6 +115,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
+        imageView.setImageResource(R.drawable.ic_progreso_3);
         fragment.setArguments(datos);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -127,13 +132,20 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_POLIZA, true);
+        imageView.setImageResource(R.drawable.ic_progreso_4);
         fragment.setArguments(datos);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
     public void pasarDatosPoliza(String imagePath) {
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(rootLayout);
+        constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
+        constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
+        constraintSet.applyTo(rootLayout);
         imagePathPoliza = imagePath;
+        imageView.setVisibility(View.GONE);
         ResumenFragment fragment = new ResumenFragment();
         Bundle datos = new Bundle();
         datos.putString(ResumenFragment.KEY_CHOQUE, imagePathChoque);

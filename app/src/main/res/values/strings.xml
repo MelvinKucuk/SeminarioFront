@@ -42,5 +42,6 @@
     <string name="editar">Editar</string>
     <string name="datos_correctos">Los datos se han enviado correctamente!</string>
     <string name="label_breve">En la brevedad nos comunicaremos con vos para seguir el proceso.</string>
-    <string name="reintenar">Reintenar</string>
+    <string name="reintentar">Reintentar</string>
+    <string name="detalle">Detalle</string>
 </resources>
