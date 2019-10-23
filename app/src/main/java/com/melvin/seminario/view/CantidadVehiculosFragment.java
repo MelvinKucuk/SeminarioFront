@@ -1,7 +1,6 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -29,8 +28,8 @@ public class CantidadVehiculosFragment extends Fragment {
 
         CardView botonSi = view.findViewById(R.id.cardViewSi);
         CardView botonNo = view.findViewById(R.id.cardViewNo);
-        botonSi.setOnClickListener(v -> mListener.enInteraccion());
-        botonNo.setOnClickListener(v -> mListener.enInteraccion());
+        botonSi.setOnClickListener(v -> mListener.enOtroVehiculoSi());
+        botonNo.setOnClickListener(v -> mListener.enOtroVehiculoSi());
 
         return view;
     }
@@ -54,6 +53,6 @@ public class CantidadVehiculosFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enInteraccion();
+        void enOtroVehiculoSi();
     }
 }

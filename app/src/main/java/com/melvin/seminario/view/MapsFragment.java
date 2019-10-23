@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -137,7 +136,7 @@ public class MapsFragment extends Fragment implements LocationListener {
             });
         }
 
-        botonUbicacion.setOnClickListener(v -> mListener.enUnicacionConfirmada(longitude, latitude));
+        botonUbicacion.setOnClickListener(v -> mListener.enUbicacionConfirmada(longitude, latitude));
 
         return rootView;
     }
@@ -341,6 +340,6 @@ public class MapsFragment extends Fragment implements LocationListener {
 
 
     public interface OnFragmentInteractionListener {
-        void enUnicacionConfirmada(double longitude, double latitude);
+        void enUbicacionConfirmada(double longitude, double latitude);
     }
 }

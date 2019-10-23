@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.UsuarioController;
-import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.util.ResultListener;
 
 import butterknife.BindView;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         public void finish(Boolean resultado) {
                             if (resultado) {
                                 progressDialog.dismiss();
-                                startActivity(new Intent(MainActivity.this, SeleccionarSiniestroActivity.class));
+                                startActivity(new Intent(MainActivity.this, MenuActivity.class));
                             }
                             else {
                                 progressDialog.dismiss();

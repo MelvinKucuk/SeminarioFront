@@ -45,4 +45,11 @@
     <string name="reintentar">Reintentar</string>
     <string name="detalle">Detalle</string>
     <string name="title_activity_maps">Map</string>
+    <string name="datos">Datos</string>
+    <string name="guardar_datos">Guardar Datos</string>
+    <string name="ubicaci_n">Ubicación</string>
+    <string name="label_ubicación">Ingresá los datos de la ubicación</string>
+    <string name="direccion">Dirección</string>
+    <string name="hora">Hora</string>
+    <string name="fecha">Fecha</string>
 </resources>

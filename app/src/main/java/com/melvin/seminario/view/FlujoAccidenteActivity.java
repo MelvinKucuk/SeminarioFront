@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.melvin.seminario.R;
+import com.melvin.seminario.UbicacionManualFragment;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
 
@@ -22,7 +23,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     ExitoCedulaFragment.OnFragmentInteractionListener,
                     ResumenFragment.OnFragmentInteractionListener,
                     ExitoResumenFragment.OnFragmentInteractionListener,
-                    MapsFragment.OnFragmentInteractionListener{
+                    MapsFragment.OnFragmentInteractionListener,
+                    UbicacionManualFragment.OnFragmentInteractionListener{
 
     private ProgressBar progressBar;
     private ImageView imageView;
@@ -53,13 +55,19 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
 
     @Override
-    public void enSi() {
+    public void enUbicacionSi() {
         MapsFragment fragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
-    public void enUnicacionConfirmada(double longitude, double latitude) {
+    public void enUbicacionNo() {
+        UbicacionManualFragment fragment = new UbicacionManualFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void enUbicacionConfirmada(double longitude, double latitude) {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
         this.longitude = longitude;
         this.latitude = latitude;
@@ -67,7 +75,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     @Override
-    public void enInteraccion() {
+    public void enOtroVehiculoSi() {
         CamaraFragment fragment = new CamaraFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
