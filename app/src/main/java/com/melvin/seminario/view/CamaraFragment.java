@@ -25,6 +25,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class CamaraFragment extends Fragment {
 
@@ -41,6 +44,8 @@ public class CamaraFragment extends Fragment {
     private boolean esChoque;
     private boolean esCedula;
     private boolean esPoliza;
+    @BindView(R.id.cardViewOmitir)
+    CardView botonOmitir;
 
     public CamaraFragment() {
     }
@@ -50,12 +55,16 @@ public class CamaraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camara, container, false);
+        ButterKnife.bind(this, view);
 
         CardView botonAbrirCamara = view.findViewById(R.id.cardViewCamara);
         botonAbrirCamara.setOnClickListener(v -> dipatchTakePicture());
 
         image = view.findViewById(R.id.licenciaIcono);
         textView  = view.findViewById(R.id.textViewCamara);
+
+        botonOmitir.setOnClickListener(v -> mListener.omitirFotoRegistro());
+
 
         if (getArguments() != null) {
             esChoque = getArguments().getBoolean(KEY_CHOQUE);
@@ -64,14 +73,17 @@ public class CamaraFragment extends Fragment {
             if (esChoque){
                 textView.setText(getString(R.string.text_choque));
                 image.setImageResource(R.drawable.ic_auto);
+                botonOmitir.setOnClickListener(v -> mListener.omitirFotoChoque());
             }
             if (esCedula){
                 textView.setText(getString(R.string.text_cedula));
                 image.setImageResource(R.drawable.ic_cedula);
+                botonOmitir.setOnClickListener(v -> mListener.omitirFotoCedula());
             }
             if (esPoliza){
                 textView.setText(getString(R.string.text_poliza));
                 image.setImageResource(R.drawable.ic_poliza);
+                botonOmitir.setOnClickListener(v -> mListener.omitirFotoPoliza());
             }
         }
 
@@ -103,6 +115,10 @@ public class CamaraFragment extends Fragment {
         void pasarDatosChoque(String imagePath);
         void pasarDatosCedula(String imagePath);
         void pasarDatosPoliza(String imagePath);
+        void omitirFotoRegistro();
+        void omitirFotoChoque();
+        void omitirFotoCedula();
+        void omitirFotoPoliza();
     }
 
     private void dipatchTakePicture(){

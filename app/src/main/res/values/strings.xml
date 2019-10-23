@@ -52,4 +52,6 @@
     <string name="direccion">Dirección</string>
     <string name="hora">Hora</string>
     <string name="fecha">Fecha</string>
+    <string name="crear_usuario">Crear Usuario</string>
+    <string name="repetir_contrasena">Repetir Contraseña</string>
 </resources>

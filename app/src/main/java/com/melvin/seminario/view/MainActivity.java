@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextMail;
     @BindView(R.id.editTextConstraseña)
     EditText editTextContraseña;
+    @BindView(R.id.cardViewIngresar)
+    CardView botonIngresar;
+    @BindView(R.id.cardViewCrearUsuario)
+    CardView botonCrearUsuario;
     private ProgressDialog progressDialog;
 
 
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressDialog = new ProgressDialog(this);
 
-        CardView botonIngresar = findViewById(R.id.cardViewIngresar);
+        botonIngresar = findViewById(R.id.cardViewIngresar);
         botonIngresar.setOnClickListener(v -> {
 
                     String username = editTextMail.getText().toString();
@@ -56,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
         );
+        botonCrearUsuario.setOnClickListener(v -> {
+            //startActivity(new Intent(MainActivity.this, CrearUsuarioActivity.class));
+        });
 
 
     }

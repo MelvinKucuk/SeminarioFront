@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.melvin.seminario.R;
-import com.melvin.seminario.UbicacionManualFragment;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
 
@@ -36,6 +35,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private Conductor conductor;
     private double latitude;
     private double longitude;
+    private String fecha;
+    private String hora;
+    private String direccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +69,55 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     @Override
+    public void enUbicacionManualConfirmada(String fecha, String hora, String direccion) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.direccion = direccion;
+        CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
     public void enUbicacionConfirmada(double longitude, double latitude) {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
         this.longitude = longitude;
         this.latitude = latitude;
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void omitirFotoRegistro() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        imageView.setImageResource(R.drawable.ic_progreso_2);
+        fragment.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void omitirFotoChoque() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
+        imageView.setImageResource(R.drawable.ic_progreso_3);
+        fragment.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void omitirFotoCedula() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_POLIZA, true);
+        imageView.setImageResource(R.drawable.ic_progreso_4);
+        fragment.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void omitirFotoPoliza() {
+        terminarProceso(null);
     }
 
     @Override
@@ -119,7 +165,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     @Override
-    public void enExitoCompleto() {
+    public void enExitoConductor() {
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
@@ -157,21 +203,30 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void pasarDatosPoliza(String imagePath) {
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(rootLayout);
-        constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
-        constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
-        constraintSet.applyTo(rootLayout);
-        imagePathPoliza = imagePath;
-        imageView.setVisibility(View.GONE);
-        ResumenFragment fragment = new ResumenFragment();
-        Bundle datos = new Bundle();
-        datos.putString(ResumenFragment.KEY_CHOQUE, imagePathChoque);
-        datos.putString(ResumenFragment.KEY_POLIZA, imagePathPoliza);
-        datos.putString(ResumenFragment.KEY_CEDULA, imagePathCedula);
-        datos.putString(ResumenFragment.KEY_LICENCIA, imagePathLicencia);
-        fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        terminarProceso(imagePath);
+    }
+
+    private void terminarProceso(String  imagePath) {
+        if (imagePathChoque != null && imagePathCedula != null && imagePathLicencia != null && imagePathLicencia != null) {
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(rootLayout);
+            constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
+            constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
+            constraintSet.applyTo(rootLayout);
+            imagePathPoliza = imagePath;
+            imageView.setVisibility(View.GONE);
+            ResumenFragment fragment = new ResumenFragment();
+            Bundle datos = new Bundle();
+            datos.putString(ResumenFragment.KEY_CHOQUE, imagePathChoque);
+            datos.putString(ResumenFragment.KEY_POLIZA, imagePathPoliza);
+            datos.putString(ResumenFragment.KEY_CEDULA, imagePathCedula);
+            datos.putString(ResumenFragment.KEY_LICENCIA, imagePathLicencia);
+            fragment.setArguments(datos);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        } else {
+            ExitoResumenFragment fragment = new ExitoResumenFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        }
     }
 
     @Override

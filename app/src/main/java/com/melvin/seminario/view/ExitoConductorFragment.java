@@ -1,7 +1,6 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -33,7 +32,7 @@ public class ExitoConductorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_exito_conductor, container, false);
 
         botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
-        botonSiguiente.setOnClickListener(v -> mListener.enExitoCompleto());
+        botonSiguiente.setOnClickListener(v -> mListener.enExitoConductor());
 
         return view;
     }
@@ -58,6 +57,6 @@ public class ExitoConductorFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        void enExitoCompleto();
+        void enExitoConductor();
     }
 }
