@@ -87,7 +87,7 @@ public class MapsFragment extends Fragment implements LocationListener {
                                 Manifest.permission.ACCESS_FINE_LOCATION
                         }, REQUEST_LOCATION);
                     } else {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50, new LocationListener() {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
                             @Override
                             public void onLocationChanged(Location location) {
                                 progressDialog.dismiss();
@@ -125,7 +125,7 @@ public class MapsFragment extends Fragment implements LocationListener {
                         progressDialog.setMessage("Obteniendo Ubicacion");
                         progressDialog.setCancelable(false);
                         progressDialog.setCanceledOnTouchOutside(false);
-                        progressDialog.show();
+                        //progressDialog.show();
                         if (location != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             latitude = location.getLatitude();
@@ -169,10 +169,10 @@ public class MapsFragment extends Fragment implements LocationListener {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                             && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50, new LocationListener() {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
                             @Override
                             public void onLocationChanged(Location location) {
-                                progressDialog.dismiss();
+                                //progressDialog.dismiss();
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
 
@@ -308,7 +308,7 @@ public class MapsFragment extends Fragment implements LocationListener {
                             progressDialog.setMessage("Obteniendo Ubicacion");
                             progressDialog.setCancelable(false);
                             progressDialog.setCanceledOnTouchOutside(false);
-                            progressDialog.show();
+                            //progressDialog.show();
                             if (location != null) {
                                 location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                                 latitude = location.getLatitude();

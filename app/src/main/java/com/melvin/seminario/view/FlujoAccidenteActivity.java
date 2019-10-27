@@ -12,6 +12,7 @@ import com.melvin.seminario.R;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Denuncia;
+import com.melvin.seminario.model.Foto;
 
 import java.util.Calendar;
 
@@ -30,10 +31,10 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     private ProgressBar progressBar;
     private ImageView imageView;
-    private String imagePathLicencia;
-    private String imagePathChoque;
-    private String imagePathCedula;
-    private String imagePathPoliza;
+    private Foto fotoLicencia;
+    private Foto fotoChoque;
+    private Foto fotoCedula;
+    private Foto fotoPoliza;
     private ConstraintLayout rootLayout;
     private Conductor conductor;
     private double latitude;
@@ -90,7 +91,17 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     public void enUbicacionConfirmada(double longitude, double latitude) {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
         Calendar ahora = Calendar.getInstance();
-        //TODO obtener hora y fecha de ahora
+        String amPm;
+        String hora;
+        if (ahora.get(Calendar.HOUR_OF_DAY) > 12){
+            amPm = "PM";
+            hora = (ahora.get(Calendar.HOUR_OF_DAY)-12) + ":" + ahora.get(Calendar.MINUTE) + " " + amPm;
+        } else {
+            amPm = "AM";
+            hora = ahora.get(Calendar.HOUR_OF_DAY) + ":" + ahora.get(Calendar.MINUTE) + " " + amPm;
+        }
+        this.hora = hora;
+        this.fecha = ahora.get(Calendar.DAY_OF_MONTH) + "/" + (ahora.get(Calendar.MONTH)+1) + "/" + ahora.get(Calendar.YEAR);
         this.longitude = longitude;
         this.latitude = latitude;
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
@@ -146,7 +157,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         constraintSet.applyTo(rootLayout);
         imageView.setVisibility(View.GONE);
         DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
-        imagePathLicencia = imagePath;
+        fotoLicencia = new Foto(imagePath, "Licencia");
         denuncia.setImagePathsLicencia(new String[]{imagePath});
         Bundle datos = new Bundle();
         datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
@@ -172,7 +183,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void pasarDatosChoque(String imagePath) {
-        imagePathChoque = imagePath;
+        fotoChoque = new Foto(imagePath, "Choque");
         denuncia.setImagePathsChoque(new String[]{imagePath});
         ExitoChoqueFragment fragment = new ExitoChoqueFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
@@ -200,8 +211,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void pasarDatosCedula(String imagePath) {
-        imagePathCedula = imagePath;
-        denuncia.setImagePathCedula(this.imagePathCedula);
+        fotoCedula = new Foto(imagePath, "Cedula");
+        denuncia.setImagePathCedula(this.fotoCedula.getFilepath());
         ExitoCedulaFragment fragment = new ExitoCedulaFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -222,21 +233,21 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     private void terminarProceso(String  imagePath) {
-        if (imagePathChoque != null && imagePathCedula != null && imagePathLicencia != null && imagePathLicencia != null) {
+        if (fotoChoque != null && fotoCedula != null && fotoLicencia != null && fotoLicencia != null) {
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(rootLayout);
             constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
             constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
             constraintSet.applyTo(rootLayout);
-            imagePathPoliza = imagePath;
-            denuncia.setImagePathPoliza(this.imagePathPoliza);
+            fotoPoliza = new Foto(imagePath, "Poliza");
+            denuncia.setImagePathPoliza(this.fotoPoliza.getFilepath());
             imageView.setVisibility(View.GONE);
             ResumenFragment fragment = new ResumenFragment();
             Bundle datos = new Bundle();
-            datos.putString(ResumenFragment.KEY_CHOQUE, imagePathChoque);
-            datos.putString(ResumenFragment.KEY_POLIZA, imagePathPoliza);
-            datos.putString(ResumenFragment.KEY_CEDULA, imagePathCedula);
-            datos.putString(ResumenFragment.KEY_LICENCIA, imagePathLicencia);
+            datos.putString(ResumenFragment.KEY_CHOQUE, fotoChoque.getFilepath());
+            datos.putString(ResumenFragment.KEY_POLIZA, fotoPoliza.getFilepath());
+            datos.putString(ResumenFragment.KEY_CEDULA, fotoCedula.getFilepath());
+            datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
             fragment.setArguments(datos);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         } else {
