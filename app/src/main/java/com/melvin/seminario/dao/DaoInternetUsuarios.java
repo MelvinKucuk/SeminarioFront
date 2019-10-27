@@ -1,6 +1,7 @@
 package com.melvin.seminario.dao;
 
 import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.model.User;
 import com.melvin.seminario.util.ResultListener;
 
@@ -10,8 +11,8 @@ import retrofit2.Response;
 
 public class DaoInternetUsuarios extends DaoHelper {
 
-    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
-//    public static final String BASE_URL = "http://192.168.0.182:8080";
+//    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
+    public static final String BASE_URL = "http://192.168.0.182:8080";
     private UsuarioService usuarioService;
 
     public DaoInternetUsuarios(){
@@ -34,8 +35,8 @@ public class DaoInternetUsuarios extends DaoHelper {
     }
 
 
-    public void mandarMail(Conductor conductor){
-        usuarioService.mandarEmail(conductor).enqueue(new Callback<String>() {
+    public void mandarMail(Denuncia denuncia){
+        usuarioService.mandarEmail(denuncia).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String a = call.toString();

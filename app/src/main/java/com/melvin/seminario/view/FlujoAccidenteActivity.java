@@ -11,6 +11,9 @@ import android.widget.ProgressBar;
 import com.melvin.seminario.R;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Denuncia;
+
+import java.util.Calendar;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements  UbicacionFragment.OnFragmentInteractionListener,
@@ -38,6 +41,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private String fecha;
     private String hora;
     private String direccion;
+    private Denuncia denuncia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         setContentView(R.layout.activity_flujo_accidente);
 
         imageView = findViewById(R.id.imagen2);
+
+        denuncia = new Denuncia();
 
         rootLayout = findViewById(R.id.rootLayout);
 
@@ -73,6 +79,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         this.fecha = fecha;
         this.hora = hora;
         this.direccion = direccion;
+        denuncia.setFecha(this.fecha);
+        denuncia.setHora(this.hora);
+        denuncia.setDireccion(this.direccion);
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -80,6 +89,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enUbicacionConfirmada(double longitude, double latitude) {
         CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
+        Calendar ahora = Calendar.getInstance();
+        //TODO obtener hora y fecha de ahora
         this.longitude = longitude;
         this.latitude = latitude;
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
@@ -136,6 +147,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         imageView.setVisibility(View.GONE);
         DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
         imagePathLicencia = imagePath;
+        denuncia.setImagePathsLicencia(new String[]{imagePath});
         Bundle datos = new Bundle();
         datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
         fragment.setArguments(datos);
@@ -153,6 +165,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         constraintSet.applyTo(rootLayout);
         imageView.setVisibility(View.VISIBLE);
         this.conductor = conductor;
+        denuncia.setTercero(this.conductor);
         ExitoConductorFragment fragment = new ExitoConductorFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -160,6 +173,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarDatosChoque(String imagePath) {
         imagePathChoque = imagePath;
+        denuncia.setImagePathsChoque(new String[]{imagePath});
         ExitoChoqueFragment fragment = new ExitoChoqueFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -187,6 +201,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarDatosCedula(String imagePath) {
         imagePathCedula = imagePath;
+        denuncia.setImagePathCedula(this.imagePathCedula);
         ExitoCedulaFragment fragment = new ExitoCedulaFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -214,6 +229,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
             constraintSet.applyTo(rootLayout);
             imagePathPoliza = imagePath;
+            denuncia.setImagePathPoliza(this.imagePathPoliza);
             imageView.setVisibility(View.GONE);
             ResumenFragment fragment = new ResumenFragment();
             Bundle datos = new Bundle();
@@ -233,7 +249,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     public void enResumenConfirmado(Conductor conductor) {
         ExitoResumenFragment fragment = new ExitoResumenFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
-        new DaoInternetUsuarios().mandarMail(conductor);
+        denuncia.setAsegurado(conductor);
+        new DaoInternetUsuarios().mandarMail(denuncia);
     }
 
     @Override
