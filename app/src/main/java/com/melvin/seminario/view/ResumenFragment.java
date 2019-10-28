@@ -4,18 +4,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.melvin.seminario.R;
+import com.melvin.seminario.model.Foto;
 import com.melvin.seminario.util.TemplatePDF;
 import com.melvin.seminario.model.Conductor;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,18 +34,13 @@ public class ResumenFragment extends Fragment {
     public static final String KEY_CEDULA = "cedula";
     public static final String KEY_POLIZA = "poliza";
     public static final String KEY_CHOQUE = "choque";
+    public static final String KEY_TERCERO = "tercero";
 
     private OnFragmentInteractionListener mListener;
     private TemplatePDF pdf;
 
-    @BindView(R.id.imageViewCedula)
-    ImageView imagenCedula;
-    @BindView(R.id.imageViewLicencia)
-    ImageView imagenLicencia;
-    @BindView(R.id.imageViewPoliza)
-    ImageView imagenPoliza;
-    @BindView(R.id.imageViewChoque)
-    ImageView imagenChoque;
+    @BindView(R.id.recyclerFotos)
+    RecyclerView recyclerView;
     @BindView (R.id.editTextNombre)
     EditText editTextNombre;
     @BindView (R.id.editTextApellido)
@@ -59,6 +61,16 @@ public class ResumenFragment extends Fragment {
     CardView botonEditar;
     @BindView (R.id.editTextDetalle)
     EditText editTextDetalle;
+    @BindView (R.id.editTextNombreTercero)
+    EditText editTextNombreTercero;
+    @BindView (R.id.editTextApellidoTercero)
+    EditText editTextApellidoTercero;
+    @BindView (R.id.editTextPaisTercero)
+    EditText editTextPaisTercero;
+    @BindView (R.id.editTextLicencia)
+    EditText editTextLicencia;
+    @BindView (R.id.editTextFechaTercero)
+    EditText editTextFechaTercero;
 
 
     private  String pathLicencia;
@@ -84,23 +96,29 @@ public class ResumenFragment extends Fragment {
             String pathPoliza = datos.getString(KEY_POLIZA);
             String pathChoque = datos.getString(KEY_CHOQUE);
 
-            File filePoliza = new File(pathPoliza);
-            File fileChoque = new File(pathChoque);
-            File fileCedula = new File(pathCedula);
-            File fileLicencia = new File(pathLicencia);
+            Conductor tercero = datos.getParcelable(KEY_TERCERO);
 
-            Glide.with(view)
-                    .load(filePoliza)
-                    .into(imagenPoliza);
-            Glide.with(view)
-                    .load(fileChoque)
-                    .into(imagenChoque);
-            Glide.with(view)
-                    .load(fileCedula)
-                    .into(imagenCedula);
-            Glide.with(view)
-                    .load(fileLicencia)
-                    .into(imagenLicencia);
+            List<Foto> fotos = new ArrayList<>();
+            fotos.add(new Foto(pathLicencia, "Licencia"));
+            fotos.add(new Foto(pathCedula, "Cedula"));
+            fotos.add(new Foto(pathPoliza, "Poliza"));
+            fotos.add(new Foto(pathChoque, "Choque"));
+
+            FotosAdapter adapter = new FotosAdapter(fotos);
+
+            recyclerView.setAdapter(adapter);
+            recyclerView.setNestedScrollingEnabled(false);
+            RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(manager);
+
+            editTextNombreTercero.setText(tercero.getNombre());
+            editTextApellidoTercero.setText(tercero.getApellido());
+            editTextPaisTercero.setText(tercero.getPais());
+            editTextLicencia.setText(tercero.getLicencia());
+            editTextFechaTercero.setText(tercero.getFechaNacimiento());
+
+
+
 
 
             botonSiguiente.setOnClickListener(v -> {

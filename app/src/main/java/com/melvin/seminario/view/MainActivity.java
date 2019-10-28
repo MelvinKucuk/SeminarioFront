@@ -17,6 +17,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String KEY_USER = "USER";
+    public static final String USER_PREFERENCES = "UserPreferences";
+
     @BindView(R.id.editTextMail)
     EditText editTextMail;
     @BindView(R.id.editTextConstraseña)
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         public void finish(Boolean resultado) {
                             if (resultado) {
                                 progressDialog.dismiss();
+                                getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE).edit().putString(KEY_USER, username).apply();
                                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
                             }
                             else {

@@ -7,11 +7,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class DaoHelper {
     protected Retrofit retrofit;
+    //    public static final String BASE_URL = "https://stormy-wildwood-43671.herokuapp.com";
+//    public static final String BASE_URL = "http://192.168.0.182:8080";
+    public static final String BASE_URL = "http://192.168.43.249:8080";
 
-    public DaoHelper(String base_url) {
+    public DaoHelper() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create());
 
         retrofit = builder.client(httpClient.build()).build();
     }

@@ -1,8 +1,8 @@
 package com.melvin.seminario.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +18,8 @@ public class MenuActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbarSiniestros)
     Toolbar toolbar;
+    @BindView(R.id.botonConsulta)
+    ImageView botonConsulta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class MenuActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        botonConsulta.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, DenunciasActivity.class)));
 
 
         ImageView botonSiniestro = findViewById(R.id.botonSiniestros);

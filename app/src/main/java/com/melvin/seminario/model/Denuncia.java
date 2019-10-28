@@ -1,6 +1,10 @@
 package com.melvin.seminario.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Denuncia {
+    @SerializedName("_id")
+    private String id;
     private String direccion;
     private String fecha;
     private String hora;
@@ -93,5 +97,13 @@ public class Denuncia {
 
     public void setImagePathsExtras(String[] imagePathsExtras) {
         this.imagePathsExtras = imagePathsExtras;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

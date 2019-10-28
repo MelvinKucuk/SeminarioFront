@@ -123,4 +123,24 @@ public class Conductor implements Parcelable {
             return new Conductor[size];
         }
     };
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getLicencia() {
+        return licencia;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public String getPais() {
+        return pais;
+    }
 }

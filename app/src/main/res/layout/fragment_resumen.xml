@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -134,53 +134,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
 
-        <TextView
-            android:id="@+id/textViewLicencia"
-            android:layout_width="wrap_content"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerFotos"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
-            android:text="@string/licencia"
-            android:textColor="@color/primaryText"
-            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spliter2" />
+            app:layout_constraintTop_toBottomOf="@+id/spliter2"/>
+
 
         <TextView
-            android:id="@+id/textViewChoque"
+            android:id="@+id/textNombreTercero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="35dp"
-            android:text="@string/choque"
+            android:layout_marginTop="20dp"
+            android:text="@string/nombre"
             android:textColor="@color/primaryText"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageLicencia" />
-
-        <TextView
-            android:id="@+id/textViewCedula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="35dp"
-            android:text="@string/cedula"
-            android:textColor="@color/primaryText"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageChoque" />
-
-        <TextView
-            android:id="@+id/textViewPoliza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="35dp"
-            android:text="@string/poliza"
-            android:textColor="@color/primaryText"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImageCedula" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerFotos" />
 
         <TextView
             android:id="@+id/textViewAccidente"
@@ -193,7 +167,128 @@
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewImagePoliza" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextFechaTercero" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextNombreTercero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="Lorenzo"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNombreTercero" />
+
+
+        <TextView
+            android:id="@+id/textApellidoTercero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/apellido"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNombreTercero" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextApellidoTercero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="Lorenzo"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textApellidoTercero" />
+
+        <TextView
+            android:id="@+id/textPaisTercero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/pais"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextApellidoTercero" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextPaisTercero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="Lorenzo"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPaisTercero" />
+
+        <TextView
+            android:id="@+id/textViewLicencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/licencia"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPaisTercero" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextLicencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:text="387653339"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLicencia" />
+
+        <TextView
+            android:id="@+id/textFechaNacimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="47dp"
+            android:text="@string/fecha_de_nacimiento"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPaisTercero" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editTextFechaTercero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="16/05/1994"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primaryText"
+            app:layout_constraintStart_toStartOf="@+id/textFechaNacimiento"
+            app:layout_constraintTop_toBottomOf="@+id/textFechaNacimiento" />
+
 
         <View
             android:id="@+id/spliter1"
@@ -332,98 +427,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textMail" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewImageLicencia"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLicencia">
 
-            <ImageView
-                android:id="@+id/imageViewLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ic_auto" />
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewImageChoque"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewChoque">
-
-            <ImageView
-                android:id="@+id/imageViewChoque"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ic_auto" />
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewImageCedula"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCedula">
-
-            <ImageView
-                android:id="@+id/imageViewCedula"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ic_auto" />
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewImagePoliza"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPoliza">
-
-
-            <ImageView
-                android:id="@+id/imageViewPoliza"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ic_auto" />
-
-
-        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardViewDetalle"
@@ -533,4 +537,4 @@
 
     </android.support.constraint.ConstraintLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

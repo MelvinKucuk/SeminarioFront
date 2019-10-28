@@ -29,7 +29,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     MapsFragment.OnFragmentInteractionListener,
                     UbicacionManualFragment.OnFragmentInteractionListener{
 
-    private ProgressBar progressBar;
+    private String user;
     private ImageView imageView;
     private Foto fotoLicencia;
     private Foto fotoChoque;
@@ -48,6 +48,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flujo_accidente);
+
+        user = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+
 
         imageView = findViewById(R.id.imagen2);
 
@@ -248,6 +251,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             datos.putString(ResumenFragment.KEY_POLIZA, fotoPoliza.getFilepath());
             datos.putString(ResumenFragment.KEY_CEDULA, fotoCedula.getFilepath());
             datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
+            datos.putParcelable(ResumenFragment.KEY_TERCERO, denuncia.getTercero());
             fragment.setArguments(datos);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         } else {
