@@ -3,7 +3,6 @@ package com.melvin.seminario.view;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -46,7 +45,7 @@ public class UbicacionManualFragment extends Fragment {
     private int mesIngresado;
     private int anioIngresado;
 
-    @BindView(R.id.editTextDireccion)
+    @BindView(R.id.editTextCalle)
     EditText editTextDireccion;
     @BindView(R.id.editTextHora)
     EditText editTextHora;
@@ -76,7 +75,12 @@ public class UbicacionManualFragment extends Fragment {
                 int hour;
                 if (hourOfDay >= 12){
                     amPm = "PM";
-                    hour = hourOfDay-12;
+                    if (hourOfDay != 12) {
+                        hour = hourOfDay - 12;
+                    } else {
+                        hour = 12;
+                    }
+
                 } else {
                     amPm = "AM";
                     hour = hourOfDay;

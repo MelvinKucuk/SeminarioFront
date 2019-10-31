@@ -3,6 +3,7 @@ package com.melvin.seminario.view;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +28,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     ResumenFragment.OnFragmentInteractionListener,
                     ExitoResumenFragment.OnFragmentInteractionListener,
                     MapsFragment.OnFragmentInteractionListener,
-                    UbicacionManualFragment.OnFragmentInteractionListener{
+                    UbicacionManualFragment.OnFragmentInteractionListener,
+                    TieneDatosTerceroFragment.OnFragmentInteractionListener,
+                    DetalleFragment.OnFragmentInteractionListener{
 
     private String user;
     private ImageView imageView;
@@ -35,6 +38,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private Foto fotoChoque;
     private Foto fotoCedula;
     private Foto fotoPoliza;
+    private Foto fotoDanos;
     private ConstraintLayout rootLayout;
     private Conductor conductor;
     private double latitude;
@@ -61,7 +65,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         UbicacionFragment ubicacionFragment = new UbicacionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, ubicacionFragment).commit();
 
-
     }
 
 
@@ -69,14 +72,16 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enUbicacionSi() {
         MapsFragment fragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void enUbicacionNo() {
         UbicacionManualFragment fragment = new UbicacionManualFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
+
+
 
     @Override
     public void enUbicacionManualConfirmada(String fecha, String hora, String direccion) {
@@ -86,13 +91,13 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         denuncia.setFecha(this.fecha);
         denuncia.setHora(this.hora);
         denuncia.setDireccion(this.direccion);
-        CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        TieneDatosTerceroFragment fragment = new TieneDatosTerceroFragment();
+        cargarFragment(fragment);
     }
 
     @Override
     public void enUbicacionConfirmada(double longitude, double latitude) {
-        CantidadVehiculosFragment fragment = new CantidadVehiculosFragment();
+        TieneDatosTerceroFragment fragment = new TieneDatosTerceroFragment();
         Calendar ahora = Calendar.getInstance();
         String amPm;
         String hora;
@@ -107,27 +112,27 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         this.fecha = ahora.get(Calendar.DAY_OF_MONTH) + "/" + (ahora.get(Calendar.MONTH)+1) + "/" + ahora.get(Calendar.YEAR);
         this.longitude = longitude;
         this.latitude = latitude;
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void omitirFotoRegistro() {
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
-        datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
         imageView.setImageResource(R.drawable.ic_progreso_2);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void omitirFotoChoque() {
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
-        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
-        imageView.setImageResource(R.drawable.ic_progreso_3);
+        datos.putBoolean(CamaraFragment.KEY_DANOS, true);
+        imageView.setImageResource(R.drawable.ic_progreso_2);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
@@ -137,18 +142,35 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         datos.putBoolean(CamaraFragment.KEY_POLIZA, true);
         imageView.setImageResource(R.drawable.ic_progreso_4);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void omitirFotoPoliza() {
-        terminarProceso(null);
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
     }
 
     @Override
     public void enOtroVehiculoSi() {
+        //CamaraFragment fragment = new CamaraFragment();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        TieneDatosTerceroFragment fragment = new TieneDatosTerceroFragment();
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void enTieneDatosTercero() {
         CamaraFragment fragment = new CamaraFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void enNoTieneDatosTercero() {
+
     }
 
     @Override
@@ -165,7 +187,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
         rootLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
@@ -181,7 +203,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         this.conductor = conductor;
         denuncia.setTercero(this.conductor);
         ExitoConductorFragment fragment = new ExitoConductorFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
@@ -196,20 +218,20 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     public void enExitoConductor() {
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
-        datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
         imageView.setImageResource(R.drawable.ic_progreso_2);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void enChoqueConfirmado() {
         CamaraFragment fragment = new CamaraFragment();
         Bundle datos = new Bundle();
-        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
+        datos.putBoolean(CamaraFragment.KEY_DANOS, true);
         imageView.setImageResource(R.drawable.ic_progreso_3);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
@@ -217,7 +239,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         fotoCedula = new Foto(imagePath, "Cedula");
         denuncia.setImagePathCedula(this.fotoCedula.getFilepath());
         ExitoCedulaFragment fragment = new ExitoCedulaFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
@@ -227,12 +249,50 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         datos.putBoolean(CamaraFragment.KEY_POLIZA, true);
         imageView.setImageResource(R.drawable.ic_progreso_4);
         fragment.setArguments(datos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        cargarFragment(fragment);
     }
 
     @Override
     public void pasarDatosPoliza(String imagePath) {
-        terminarProceso(imagePath);
+        fotoPoliza = new Foto(imagePath, "Poiliza");
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_CHOQUE, true);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
+
+    }
+
+    @Override
+    public void pasarDatosDanos(String imagePath) {
+        fotoDanos = new Foto(imagePath, "Daños");
+        DetalleFragment fragment = new DetalleFragment();
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void omitirFotoDanos() {
+        DetalleFragment fragment = new DetalleFragment();
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void enDetalleCompletado(String detalle) {
+        terminarProceso(null);
+    }
+
+    @Override
+    public void enDetalleOmitir() {
+        terminarProceso(null);
+    }
+
+    @Override
+    public void enOtroVehiculoNo() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_DANOS, true);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
     }
 
     private void terminarProceso(String  imagePath) {
@@ -242,7 +302,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
             constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
             constraintSet.applyTo(rootLayout);
-            fotoPoliza = new Foto(imagePath, "Poliza");
             denuncia.setImagePathPoliza(this.fotoPoliza.getFilepath());
             imageView.setVisibility(View.GONE);
             ResumenFragment fragment = new ResumenFragment();
@@ -253,17 +312,17 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
             datos.putParcelable(ResumenFragment.KEY_TERCERO, denuncia.getTercero());
             fragment.setArguments(datos);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+            cargarFragment(fragment);
         } else {
             ExitoResumenFragment fragment = new ExitoResumenFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+            cargarFragment(fragment);
         }
     }
 
     @Override
     public void enResumenConfirmado(Conductor conductor) {
         ExitoResumenFragment fragment = new ExitoResumenFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+        cargarFragment(fragment);
         denuncia.setAsegurado(conductor);
         new DaoInternetUsuarios().mandarMail(denuncia);
     }
@@ -276,5 +335,9 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enExitoResumen() {
         finish();
+    }
+
+    private void cargarFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
     }
 }

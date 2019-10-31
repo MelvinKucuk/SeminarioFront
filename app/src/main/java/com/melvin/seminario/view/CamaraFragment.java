@@ -34,6 +34,7 @@ public class CamaraFragment extends Fragment {
     public static final String KEY_CHOQUE = "choque";
     public static final String KEY_CEDULA = "cedula";
     public static final String KEY_POLIZA = "poliza";
+    public static final String KEY_DANOS = "danos";
 
 
     public static final int CAMERA_ACTION = 200;
@@ -44,6 +45,7 @@ public class CamaraFragment extends Fragment {
     private boolean esChoque;
     private boolean esCedula;
     private boolean esPoliza;
+    private boolean esDanos;
     @BindView(R.id.cardViewOmitir)
     CardView botonOmitir;
 
@@ -70,6 +72,7 @@ public class CamaraFragment extends Fragment {
             esChoque = getArguments().getBoolean(KEY_CHOQUE);
             esCedula = getArguments().getBoolean(KEY_CEDULA);
             esPoliza = getArguments().getBoolean(KEY_POLIZA);
+            esDanos = getArguments().getBoolean(KEY_DANOS);
             if (esChoque){
                 textView.setText(getString(R.string.text_choque));
                 image.setImageResource(R.drawable.ic_auto);
@@ -84,6 +87,11 @@ public class CamaraFragment extends Fragment {
                 textView.setText(getString(R.string.text_poliza));
                 image.setImageResource(R.drawable.ic_poliza);
                 botonOmitir.setOnClickListener(v -> mListener.omitirFotoPoliza());
+            }
+            if (esDanos){
+                textView.setText(getString(R.string.text_danos));
+                image.setImageResource(R.drawable.ic_fotos);
+                botonOmitir.setOnClickListener(v -> mListener.omitirFotoDanos());
             }
         }
 
@@ -115,10 +123,12 @@ public class CamaraFragment extends Fragment {
         void pasarDatosChoque(String imagePath);
         void pasarDatosCedula(String imagePath);
         void pasarDatosPoliza(String imagePath);
+        void pasarDatosDanos(String imagePath);
         void omitirFotoRegistro();
         void omitirFotoChoque();
         void omitirFotoCedula();
         void omitirFotoPoliza();
+        void omitirFotoDanos();
     }
 
     private void dipatchTakePicture(){
@@ -156,6 +166,8 @@ public class CamaraFragment extends Fragment {
                     mListener.pasarDatosCedula(currentPhotoPath);
                 } else if (esPoliza){
                     mListener.pasarDatosPoliza(currentPhotoPath);
+                } else if (esDanos) {
+                    mListener.pasarDatosDanos(currentPhotoPath);
                 } else {
                     mListener.pasarDatosOtroConductor(currentPhotoPath);
                 }

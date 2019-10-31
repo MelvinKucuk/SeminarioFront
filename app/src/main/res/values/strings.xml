@@ -3,7 +3,7 @@
     <string name="hint_mail">Mail</string>
     <string name="hint_contraseña">Contraseña</string>
     <string name="button_ingresar">Ingresar</string>
-    <string name="boton_siniestros">Siniestros</string>
+    <string name="boton_siniestros">Denunciar Siniestros</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -15,6 +15,7 @@
     <string name="abrir_camara">Abrir cámara</string>
     <string name="text_licencia">Sacale una foto al registro del otro conductor</string>
     <string name="text_choque">Sacale una foto al choque del auto</string>
+    <string name="text_danos">¿Contás con fotografías de los daños?</string>
     <string name="text_cedula">Sacale una foto a la cedula verde del otro conductor</string>
     <string name="text_poliza">Sacale una foto a la poliza del otro conductor</string>
     <string name="seleccion_consulta">Selccioná tu consulta</string>
@@ -48,10 +49,16 @@
     <string name="datos">Datos</string>
     <string name="guardar_datos">Guardar Datos</string>
     <string name="ubicaci_n">Ubicación</string>
-    <string name="label_ubicación">Ingresá los datos de la ubicación</string>
+    <string name="label_ubicación">Completá los siguientes datos del accidente</string>
     <string name="direccion">Dirección</string>
     <string name="hora">Hora</string>
     <string name="fecha">Fecha</string>
     <string name="crear_usuario">Crear Usuario</string>
     <string name="repetir_contrasena">Repetir Contraseña</string>
+    <string name="datos_tercero">¿Contás con los datos del otro conductor?</string>
+    <string name="detallanos_tu_accidente">Detallanos tu accidente</string>
+    <string name="altura">Altura</string>
+    <string name="calle">Calle</string>
+    <string name="label_doble_mano">¿La calle era doble mano?</string>
+    <string name="fue_en_una_esquina">¿Fue en una esquina?</string>
 </resources>

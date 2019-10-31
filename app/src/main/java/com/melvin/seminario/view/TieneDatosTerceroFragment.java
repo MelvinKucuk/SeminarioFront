@@ -1,6 +1,7 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -10,30 +11,34 @@ import android.view.ViewGroup;
 
 import com.melvin.seminario.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class CantidadVehiculosFragment extends Fragment {
+
+public class TieneDatosTerceroFragment extends Fragment {
+
+    @BindView(R.id.cardViewSi)
+    CardView botonSi;
+    @BindView(R.id.cardViewNo)
+    CardView botonNo;
+
 
     private OnFragmentInteractionListener mListener;
 
-    public CantidadVehiculosFragment() {
-        // Required empty public constructor
+    public TieneDatosTerceroFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cantidad_vehiculos, container, false);
+        View view = inflater.inflate(R.layout.fragment_tiene_datos_tercero, container, false);
+        ButterKnife.bind(this, view);
 
-        CardView botonSi = view.findViewById(R.id.cardViewSi);
-        CardView botonNo = view.findViewById(R.id.cardViewNo);
-        botonSi.setOnClickListener(v -> mListener.enOtroVehiculoSi());
-        botonNo.setOnClickListener(v -> mListener.enOtroVehiculoNo());
+        botonSi.setOnClickListener(v -> mListener.enTieneDatosTercero());
+        botonNo.setOnClickListener(v -> mListener.enNoTieneDatosTercero());
 
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -53,7 +58,7 @@ public class CantidadVehiculosFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enOtroVehiculoSi();
-        void enOtroVehiculoNo();
+        void enTieneDatosTercero();
+        void enNoTieneDatosTercero();
     }
 }
