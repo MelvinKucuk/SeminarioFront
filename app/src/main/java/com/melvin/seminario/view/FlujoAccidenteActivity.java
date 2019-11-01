@@ -193,7 +193,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void enNoTieneDatosTercero() {
-
+        InformacionFragment fragment = new InformacionFragment();
+        cargarFragment(fragment);
     }
 
     @Override
