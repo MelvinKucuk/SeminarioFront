@@ -61,4 +61,5 @@
     <string name="calle">Calle</string>
     <string name="label_doble_mano">¿La calle era doble mano?</string>
     <string name="fue_en_una_esquina">¿Fue en una esquina?</string>
+    <string name="info">¿Contás con alguna infrmación?</string>
 </resources>

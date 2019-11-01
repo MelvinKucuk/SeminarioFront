@@ -1,5 +1,7 @@
 package com.melvin.seminario.view;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -16,6 +18,8 @@ import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.model.Foto;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class FlujoAccidenteActivity extends AppCompatActivity
         implements  UbicacionFragment.OnFragmentInteractionListener,
@@ -30,7 +34,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     MapsFragment.OnFragmentInteractionListener,
                     UbicacionManualFragment.OnFragmentInteractionListener,
                     TieneDatosTerceroFragment.OnFragmentInteractionListener,
-                    DetalleFragment.OnFragmentInteractionListener{
+                    DetalleFragment.OnFragmentInteractionListener,
+                    InformacionFragment.OnFragmentInteractionListener{
 
     private String user;
     private ImageView imageView;
@@ -54,7 +59,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         setContentView(R.layout.activity_flujo_accidente);
 
         user = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
-
 
         imageView = findViewById(R.id.imagen2);
 
@@ -112,6 +116,25 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         this.fecha = ahora.get(Calendar.DAY_OF_MONTH) + "/" + (ahora.get(Calendar.MONTH)+1) + "/" + ahora.get(Calendar.YEAR);
         this.longitude = longitude;
         this.latitude = latitude;
+        denuncia.setFecha(this.fecha);
+        denuncia.setHora(this.hora);
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        String address = "";
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String direccion = address;
+
+        denuncia.setDireccion(direccion);
         cargarFragment(fragment);
     }
 
@@ -325,6 +348,20 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         cargarFragment(fragment);
         denuncia.setAsegurado(conductor);
         new DaoInternetUsuarios().mandarMail(denuncia);
+    }
+
+    @Override
+    public void enNotieneInformacion() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_DANOS, true);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void enSiTieneInformacion() {
+
     }
 
     @Override
