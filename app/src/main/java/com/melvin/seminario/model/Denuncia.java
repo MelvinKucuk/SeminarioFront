@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class Denuncia {
     @SerializedName("_id")
     private String id;
-    private String direccion;
+    private String calle;
+    private String altura;
     private String fecha;
     private String hora;
     private Conductor asegurado;
@@ -15,12 +16,15 @@ public class Denuncia {
     private String[] imagePathsLicencia;
     private String[] imagePathsChoque;
     private String[] imagePathsExtras;
+    private String datos;
+    private boolean esEsquina;
+    private boolean esDobleMano;
 
     public Denuncia() {
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getCalle() {
+        return calle;
     }
 
     public String getFecha() {
@@ -59,8 +63,8 @@ public class Denuncia {
         return imagePathsExtras;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 
     public void setFecha(String fecha) {
@@ -105,5 +109,37 @@ public class Denuncia {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDatos() {
+        return datos;
+    }
+
+    public void setDatos(String datos) {
+        this.datos = datos;
+    }
+
+    public boolean isEsEsquina() {
+        return esEsquina;
+    }
+
+    public void setEsEsquina(boolean esEsquina) {
+        this.esEsquina = esEsquina;
+    }
+
+    public boolean isEsDobleMano() {
+        return esDobleMano;
+    }
+
+    public void setEsDobleMano(boolean esDobleMano) {
+        this.esDobleMano = esDobleMano;
+    }
+
+    public String getAltura() {
+        return altura;
+    }
+
+    public void setAltura(String altura) {
+        this.altura = altura;
     }
 }

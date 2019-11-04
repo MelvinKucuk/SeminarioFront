@@ -8,35 +8,46 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.melvin.seminario.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InformacionFragment extends Fragment {
 
-    @BindView(R.id.cardViewSi)
-    CardView botonSi;
-    @BindView(R.id.cardViewNo)
-    CardView botonNo;
+public class DatosFragment extends Fragment {
+
+    @BindView(R.id.editTextDetalle)
+    EditText editTextDatos;
+    @BindView(R.id.cardViewSiguiente)
+    CardView botonSiguiente;
 
     private OnFragmentInteractionListener mListener;
 
-    public InformacionFragment() {
+    public DatosFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_informacion, container, false);
+        View view = inflater.inflate(R.layout.fragment_datos, container, false);
         ButterKnife.bind(this, view);
 
-        botonNo.setOnClickListener(v -> mListener.enNotieneInformacion());
-        botonSi.setOnClickListener(v -> mListener.enSiTieneInformacion());
+        botonSiguiente.setOnClickListener(v -> {
+            if (!editTextDatos.getText().toString().isEmpty()){
+                mListener.enDatosIngresados(editTextDatos.getText().toString());
+            } else {
+                Toast.makeText(getContext(), "No pueden estar los datos vacíos", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
         return view;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -56,7 +67,6 @@ public class InformacionFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enNotieneInformacion();
-        void enSiTieneInformacion();
+        void enDatosIngresados(String datos);
     }
 }

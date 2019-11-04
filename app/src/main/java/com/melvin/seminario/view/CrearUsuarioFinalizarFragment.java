@@ -4,39 +4,28 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.melvin.seminario.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class InformacionFragment extends Fragment {
-
-    @BindView(R.id.cardViewSi)
-    CardView botonSi;
-    @BindView(R.id.cardViewNo)
-    CardView botonNo;
+public class CrearUsuarioFinalizarFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public InformacionFragment() {
+    public CrearUsuarioFinalizarFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_informacion, container, false);
-        ButterKnife.bind(this, view);
-
-        botonNo.setOnClickListener(v -> mListener.enNotieneInformacion());
-        botonSi.setOnClickListener(v -> mListener.enSiTieneInformacion());
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_crear_usuario_finalizar, container, false);
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -56,7 +45,5 @@ public class InformacionFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enNotieneInformacion();
-        void enSiTieneInformacion();
     }
 }

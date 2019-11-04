@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.melvin.seminario.R;
 
@@ -38,7 +39,10 @@ public class DetalleFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         botonSiguiente.setOnClickListener(v -> {
-            mListener.enDetalleCompletado(editTextDetalle.getText().toString());
+            if (!editTextDetalle.getText().toString().isEmpty())
+                mListener.enDetalleCompletado(editTextDetalle.getText().toString());
+            else
+                Toast.makeText(getActivity(), "El Detalle no puede estar vacio", Toast.LENGTH_SHORT).show();
         });
         botonOmitir.setOnClickListener(v -> mListener.enDetalleOmitir());
 

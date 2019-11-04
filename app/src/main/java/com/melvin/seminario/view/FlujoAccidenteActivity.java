@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
@@ -35,7 +34,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     UbicacionManualFragment.OnFragmentInteractionListener,
                     TieneDatosTerceroFragment.OnFragmentInteractionListener,
                     DetalleFragment.OnFragmentInteractionListener,
-                    InformacionFragment.OnFragmentInteractionListener{
+                    InformacionFragment.OnFragmentInteractionListener,
+                    DatosFragment.OnFragmentInteractionListener{
 
     private String user;
     private ImageView imageView;
@@ -46,12 +46,11 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private Foto fotoDanos;
     private ConstraintLayout rootLayout;
     private Conductor conductor;
-    private double latitude;
-    private double longitude;
     private String fecha;
     private String hora;
     private String direccion;
     private Denuncia denuncia;
+    private String detalle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +87,15 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
 
     @Override
-    public void enUbicacionManualConfirmada(String fecha, String hora, String direccion) {
+    public void enUbicacionManualConfirmada(String fecha, String hora, String direccion, boolean esEsquina, boolean esDobleMano) {
         this.fecha = fecha;
         this.hora = hora;
         this.direccion = direccion;
         denuncia.setFecha(this.fecha);
         denuncia.setHora(this.hora);
-        denuncia.setDireccion(this.direccion);
+        denuncia.setCalle(this.direccion);
+        denuncia.setEsEsquina(esEsquina);
+        denuncia.setEsDobleMano(esDobleMano);
         TieneDatosTerceroFragment fragment = new TieneDatosTerceroFragment();
         cargarFragment(fragment);
     }
@@ -114,8 +115,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         }
         this.hora = hora;
         this.fecha = ahora.get(Calendar.DAY_OF_MONTH) + "/" + (ahora.get(Calendar.MONTH)+1) + "/" + ahora.get(Calendar.YEAR);
-        this.longitude = longitude;
-        this.latitude = latitude;
         denuncia.setFecha(this.fecha);
         denuncia.setHora(this.hora);
 
@@ -132,9 +131,13 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        String direccion = address;
+        String[] aux = address.split(",");
+        String[] aux2 = aux[0].split(" ");
+        String calle = aux2[0];
+        String altura = aux2[1];
 
-        denuncia.setDireccion(direccion);
+        denuncia.setCalle(calle);
+        denuncia.setAltura(altura);
         cargarFragment(fragment);
     }
 
@@ -179,8 +182,6 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void enOtroVehiculoSi() {
-        //CamaraFragment fragment = new CamaraFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
         TieneDatosTerceroFragment fragment = new TieneDatosTerceroFragment();
         cargarFragment(fragment);
     }
@@ -290,6 +291,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarDatosDanos(String imagePath) {
         fotoDanos = new Foto(imagePath, "Daños");
+        denuncia.setImagePathsExtras(new String[]{imagePath});
         DetalleFragment fragment = new DetalleFragment();
         cargarFragment(fragment);
     }
@@ -302,6 +304,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void enDetalleCompletado(String detalle) {
+        this.detalle = detalle;
         terminarProceso(null);
     }
 
@@ -331,10 +334,12 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             ResumenFragment fragment = new ResumenFragment();
             Bundle datos = new Bundle();
             datos.putString(ResumenFragment.KEY_CHOQUE, fotoChoque.getFilepath());
+            datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
             datos.putString(ResumenFragment.KEY_POLIZA, fotoPoliza.getFilepath());
             datos.putString(ResumenFragment.KEY_CEDULA, fotoCedula.getFilepath());
-            datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
+            datos.putString(ResumenFragment.KEY_DANOS, fotoDanos.getFilepath());
             datos.putParcelable(ResumenFragment.KEY_TERCERO, denuncia.getTercero());
+            datos.putString(ResumenFragment.KEY_DETALLE, detalle);
             fragment.setArguments(datos);
             cargarFragment(fragment);
         } else {
@@ -362,7 +367,18 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     @Override
     public void enSiTieneInformacion() {
+        DatosFragment fragment = new DatosFragment();
+        cargarFragment(fragment);
+    }
 
+    @Override
+    public void enDatosIngresados(String datosTexto) {
+        denuncia.setDatos(datosTexto);
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_DANOS, true);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
     }
 
     @Override

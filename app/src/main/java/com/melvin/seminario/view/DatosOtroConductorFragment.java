@@ -67,14 +67,41 @@ public class DatosOtroConductorFragment extends Fragment {
         CardView botonReintentar = view.findViewById(R.id.cardViewReintentar);
 
         botonSiguiente.setOnClickListener(v -> {
-            Conductor conductor = new Conductor.Builder()
-                                        .setNombre(editTextNombre.getText().toString())
-                                        .setApellido(editTextApellido.getText().toString())
-                                        .setLicencia(editTextLicencia.getText().toString())
-                                        .setFechaNacimiento(editTextFechaNac.getText().toString())
-                                        .setPais(editTextPais.getText().toString())
+
+            String nombre = editTextNombre.getText().toString();
+            String apellido = editTextApellido.getText().toString();
+            String licencia = editTextLicencia.getText().toString();
+            String fechaNacimiento = editTextFechaNac.getText().toString();
+            String pais = editTextPais.getText().toString();
+
+            if (!nombre.isEmpty()){
+                if (!apellido.isEmpty()){
+                    if (!licencia.isEmpty()){
+                        if (!fechaNacimiento.isEmpty()){
+                            if (!pais.isEmpty()){
+                                Conductor conductor = new Conductor.Builder()
+                                        .setNombre(nombre)
+                                        .setApellido(apellido)
+                                        .setLicencia(licencia)
+                                        .setFechaNacimiento(fechaNacimiento)
+                                        .setPais(pais)
                                         .build();
-            mListener.enDatosConfirmados(conductor);
+                                mListener.enDatosConfirmados(conductor);
+                            } else {
+                                Toast.makeText(getActivity(), "Falta ingresar el Pais", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Falta ingresar la Fecha de Nacimiento", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Falta ingresar la Licencia", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Falta ingresar el Apellido", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "Falta ingresar el Nombre", Toast.LENGTH_SHORT).show();
+            }
         });
 
         botonReintentar.setOnClickListener(v -> mListener.enReintentar());

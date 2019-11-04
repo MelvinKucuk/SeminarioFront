@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,7 +38,10 @@ public class UbicacionManualFragment extends Fragment {
 
     private String fecha;
     private String hora;
-    private String direccion;
+    private String calle;
+    private String altura;
+    private boolean esDobleMano;
+    private boolean esEsquina;
 
     private int minutosIngresado;
     private int horaIngresada;
@@ -46,13 +50,23 @@ public class UbicacionManualFragment extends Fragment {
     private int anioIngresado;
 
     @BindView(R.id.editTextCalle)
-    EditText editTextDireccion;
+    EditText editTextCalle;
+    @BindView(R.id.editTextAltura)
+    EditText editTextAltura;
     @BindView(R.id.editTextHora)
     EditText editTextHora;
     @BindView(R.id.editTextFecha)
     EditText editTextFecha;
     @BindView(R.id.cardViewSiguiente)
     CardView botonSiguiente;
+    @BindView(R.id.checkboxSiDobleMano)
+    CheckBox checkBoxSiDobleMano;
+    @BindView(R.id.checkboxNoDobleMano)
+    CheckBox checkBoxNoDobleMano;
+    @BindView(R.id.checkboxSiEsquina)
+    CheckBox checkBoxSiEsquina;
+    @BindView(R.id.checkboxNoEsquina)
+    CheckBox checkBoxNoEsquina;
 
     private TimePickerDialog timePickerDialog;
 
@@ -117,30 +131,98 @@ public class UbicacionManualFragment extends Fragment {
             datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.show();
         });
+        checkBoxNoDobleMano.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked()){
+                checkBoxSiDobleMano.setEnabled(false);
+            } else {
+                checkBoxSiDobleMano.setEnabled(true);
+            }
+        });
+        checkBoxSiDobleMano.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked())
+                checkBoxNoDobleMano.setEnabled(false);
+            else
+                checkBoxNoDobleMano.setEnabled(true);
+            });
+        checkBoxNoEsquina.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked())
+                checkBoxSiEsquina.setEnabled(false);
+            else
+                checkBoxSiEsquina.setEnabled(true);
+        });
+        checkBoxSiEsquina.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked())
+                checkBoxNoEsquina.setEnabled(false);
+            else
+                checkBoxNoEsquina.setEnabled(true);
+        });
         botonSiguiente.setOnClickListener(v -> {
-            direccion = editTextDireccion.getText().toString();
+            calle = editTextCalle.getText().toString();
+            altura = editTextAltura.getText().toString();
             hora = editTextHora.getText().toString();
             fecha = editTextFecha.getText().toString();
+            esEsquina = checkBoxSiEsquina.isChecked();
+            esDobleMano = checkBoxSiDobleMano.isChecked();
 
-            if (!direccion.isEmpty()){
+
+            if (!calle.isEmpty()){
                 if (!hora.isEmpty()){
                     if (!fecha.isEmpty()){
                         if (diaIngresado == dia && mesIngresado == mes && anioIngresado == anio){
                             if (horaIngresada < horaActual){
-                                mListener.enUbicacionManualConfirmada(fecha, hora, direccion);
+                                if (!altura.isEmpty()) {
+                                    if (checkBoxSiEsquina.isChecked() || checkBoxNoEsquina.isChecked()) {
+                                        if (checkBoxNoDobleMano.isChecked() || checkBoxSiDobleMano.isChecked()){
+                                            mListener.enUbicacionManualConfirmada(fecha, hora, calle, esEsquina, esDobleMano);
+                                        } else {
+                                            Toast.makeText(getActivity(), "Falta ingresar si es Doble Mano", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(getActivity(), "Falta ingresar si es Esquina", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "Falta ingresar la altura", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 if (horaIngresada > horaActual){
                                     Toast.makeText(getActivity(), "Error: No se puede ingresar una hora posterior a la actual", Toast.LENGTH_SHORT).show();
                                 } else {
                                     if (minutosIngresado < minutosActual){
-                                        mListener.enUbicacionManualConfirmada(fecha, hora, direccion);
+                                        if (!altura.isEmpty()) {
+                                            if (checkBoxSiEsquina.isChecked() || checkBoxNoEsquina.isChecked()) {
+                                                if (checkBoxNoDobleMano.isChecked() || checkBoxSiDobleMano.isChecked()){
+                                                    mListener.enUbicacionManualConfirmada(fecha, hora, calle, esEsquina, esDobleMano);
+                                                } else {
+                                                    Toast.makeText(getActivity(), "Falta ingresar si es Doble Mano", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getActivity(), "Falta ingresar si es Esquina", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        else {
+                                            Toast.makeText(getActivity(), "Falta ingresar la altura", Toast.LENGTH_SHORT).show();
+                                        }
                                     } else {
                                         Toast.makeText(getActivity(), "Error: No se puede ingresar una hora posterior a la actual", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         } else {
-                            mListener.enUbicacionManualConfirmada(fecha, hora, direccion);
+                            if (!altura.isEmpty()) {
+                                if (checkBoxSiEsquina.isChecked() || checkBoxNoEsquina.isChecked()) {
+                                    if (checkBoxNoDobleMano.isChecked() || checkBoxSiDobleMano.isChecked()){
+                                        mListener.enUbicacionManualConfirmada(fecha, hora, calle, esEsquina, esDobleMano);
+                                    } else {
+                                        Toast.makeText(getActivity(), "Falta ingresar si es Doble Mano", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getActivity(), "Falta ingresar si es Esquina", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getActivity(), "Falta ingresar la altura", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     } else {
                         Toast.makeText(getActivity(), "Falta ingresar la fecha", Toast.LENGTH_SHORT).show();
@@ -177,6 +259,6 @@ public class UbicacionManualFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enUbicacionManualConfirmada(String fecha, String hora, String direccion);
+        void enUbicacionManualConfirmada(String fecha, String hora, String direccion, boolean esEsquina, boolean esDobleMano);
     }
 }

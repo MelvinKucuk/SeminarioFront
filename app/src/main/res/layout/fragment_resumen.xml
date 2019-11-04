@@ -453,7 +453,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:background="@null"
-                android:text="Iba manejando por Niceto Vega y un auto vino por la derecha, pasó en rojo y me choco el lado izquierdo del auto."
                 android:textColor="@color/primaryText"
                 android:textSize="18sp"
                 app:backgroundTint="@color/primaryText" />

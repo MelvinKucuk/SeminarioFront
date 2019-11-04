@@ -2,6 +2,7 @@ package com.melvin.seminario.view;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -66,7 +67,7 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
     private double fusedLongitude = 0.0;
     private boolean firstTime = true;
     private GoogleMap mGoogleMap;
-
+    private ProgressDialog progressDialog;
 
     public static final int REQUEST_LOCATION = 4;
 
@@ -87,6 +88,7 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
         SupportMapFragment mapFrag = ((SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.frg));
         mapFrag.getMapAsync(this);
+        progressDialog = new ProgressDialog(getActivity());
 
         isGpsEnabled = false;
         isPermissionEnabled = false;
@@ -127,6 +129,9 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
         if (firstTime) {
             actualizarPosicion();
             firstTime = false;
+        }
+        if (progressDialog.isShowing()){
+            progressDialog.dismiss();
         }
 
     }
@@ -315,9 +320,13 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
 
     //ACCIONES A TOMAR CON EL GPS ACTIVADO
     private void doWithLocation() {
-        //activity.startProgressDialog();
         //Desde aca se va a ejecutar onLocationChanged
         registerRequestUpdate(this);
+        progressDialog.setMessage("Obteniendo Ubicación");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
     }
 
     private void registerRequestUpdate(final com.google.android.gms.location.LocationListener listener) {

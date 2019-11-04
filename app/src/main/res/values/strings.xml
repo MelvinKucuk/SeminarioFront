@@ -50,7 +50,6 @@
     <string name="guardar_datos">Guardar Datos</string>
     <string name="ubicaci_n">Ubicación</string>
     <string name="label_ubicación">Completá los siguientes datos del accidente</string>
-    <string name="direccion">Dirección</string>
     <string name="hora">Hora</string>
     <string name="fecha">Fecha</string>
     <string name="crear_usuario">Crear Usuario</string>
@@ -62,4 +61,9 @@
     <string name="label_doble_mano">¿La calle era doble mano?</string>
     <string name="fue_en_una_esquina">¿Fue en una esquina?</string>
     <string name="info">¿Contás con alguna infrmación?</string>
+    <string name="completa_datos">Completá los siguientes datos</string>
+    <string name="datos_a_completar">Para que podamos ayudarte necesitamos que nos facilites toda la información que puedas del otro conductor.\nTené en cuenta los siguientes datos:</string>
+    <string name="tene_cuenta">•Tipo de vehículo\n•Marca y patente\n•Descripción del otro conductor</string>
+    <string name="ingresa_datos">Ingresá los datos pero no describas el accidente.</string>
+    <string name="finalizar">Finalizar</string>
 </resources>

@@ -2,6 +2,7 @@ package com.melvin.seminario.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,18 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.melvin.seminario.R;
+import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Foto;
 import com.melvin.seminario.util.TemplatePDF;
-import com.melvin.seminario.model.Conductor;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +30,9 @@ public class ResumenFragment extends Fragment {
     public static final String KEY_CEDULA = "cedula";
     public static final String KEY_POLIZA = "poliza";
     public static final String KEY_CHOQUE = "choque";
+    public static final String KEY_DANOS = "danos";
     public static final String KEY_TERCERO = "tercero";
+    public static final String KEY_DETALLE = "detalle";
 
     private OnFragmentInteractionListener mListener;
     private TemplatePDF pdf;
@@ -74,6 +72,7 @@ public class ResumenFragment extends Fragment {
 
 
     private  String pathLicencia;
+    private String detalle;
 
 
     public ResumenFragment() {
@@ -95,6 +94,8 @@ public class ResumenFragment extends Fragment {
             String pathCedula = datos.getString(KEY_CEDULA);
             String pathPoliza = datos.getString(KEY_POLIZA);
             String pathChoque = datos.getString(KEY_CHOQUE);
+            String pathDano = datos.getString(KEY_DANOS);
+            detalle = datos.getString(KEY_DETALLE);
 
             Conductor tercero = datos.getParcelable(KEY_TERCERO);
 
@@ -103,6 +104,7 @@ public class ResumenFragment extends Fragment {
             fotos.add(new Foto(pathCedula, "Cedula"));
             fotos.add(new Foto(pathPoliza, "Poliza"));
             fotos.add(new Foto(pathChoque, "Choque"));
+            fotos.add(new Foto(pathDano, "Daños"));
 
             FotosAdapter adapter = new FotosAdapter(fotos);
 
@@ -116,6 +118,7 @@ public class ResumenFragment extends Fragment {
             editTextPaisTercero.setText(tercero.getPais());
             editTextLicencia.setText(tercero.getLicencia());
             editTextFechaTercero.setText(tercero.getFechaNacimiento());
+            editTextDetalle.setText(detalle);
 
 
 
@@ -135,27 +138,31 @@ public class ResumenFragment extends Fragment {
                 mListener.enResumenConfirmado(conductor);
             });
 
-            pdf = new TemplatePDF(getActivity());
-            try{
-                pdf.openDocument();
-                pdf.addMetaData("Denuncia", "Denuncia", "Crash App");
-                pdf.addCampo(getString(R.string.nombre), editTextNombre.getText().toString());
-                pdf.addCampo(getString(R.string.apellido), editTextApellido.getText().toString());
-                pdf.addCampo(getString(R.string.pais), editTextPais.getText().toString());
-                pdf.addCampo(getString(R.string.dni), editTextDni.getText().toString());
-                pdf.addCampo(getString(R.string.fecha_de_nacimiento), editTextFecha.getText().toString());
-                pdf.addCampo(getString(R.string.domicilio), editTextDomicilio.getText().toString());
-                pdf.addCampo(getString(R.string.hint_mail), editTextMail.getText().toString());
-                pdf.addCampo(getString(R.string.detalle), editTextDetalle.getText().toString());
-                pdf.addImage(pathCedula);
-                pdf.closeDocument();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
 
 
-            botonEditar.setOnClickListener(v -> pdf.viewPdf(getActivity()));
+            botonEditar.setOnClickListener(v -> {
+                pdf = new TemplatePDF(getActivity());
+                try{
+                    pdf.openDocument();
+                    pdf.addMetaData("Denuncia", "Denuncia", "Crash App");
+                    pdf.addCampo(getString(R.string.nombre), editTextNombre.getText().toString());
+                    pdf.addCampo(getString(R.string.apellido), editTextApellido.getText().toString());
+                    pdf.addCampo(getString(R.string.pais), editTextPais.getText().toString());
+                    pdf.addCampo(getString(R.string.dni), editTextDni.getText().toString());
+                    pdf.addCampo(getString(R.string.fecha_de_nacimiento), editTextFecha.getText().toString());
+                    pdf.addCampo(getString(R.string.domicilio), editTextDomicilio.getText().toString());
+                    pdf.addCampo(getString(R.string.hint_mail), editTextMail.getText().toString());
+                    pdf.addCampo(getString(R.string.detalle), editTextDetalle.getText().toString());
+                    pdf.addImage(pathCedula);
+                    pdf.closeDocument();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                pdf.viewPdf(getActivity());
+
+            });
 
 
 

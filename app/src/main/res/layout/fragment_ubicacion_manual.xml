@@ -86,6 +86,7 @@
             android:lines="1"
             android:maxLines="1"
             android:singleLine="true"
+            android:inputType="number"
             android:textColor="@color/primaryText"
             android:textSize="18sp"
             app:backgroundTint="@color/primaryText"
