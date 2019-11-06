@@ -15,4 +15,7 @@ public interface UsuarioService {
     @POST("email")
     Call<String> mandarEmail(@Body Denuncia email);
 
+    @POST("users/newUser")
+    Call<User> crearUsuario(@Body User user);
+
 }

@@ -12,4 +12,7 @@ public interface DenunciaService {
 
     @GET("/denuncia/{username}/")
     Call<List<Denuncia>> getDenuncias(@Path("username") String username);
+
+    @GET("/denuncia/byId/{id}/")
+    Call<Denuncia> getDenunciaById(@Path("id") String id);
 }

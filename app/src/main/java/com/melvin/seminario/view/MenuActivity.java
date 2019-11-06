@@ -29,7 +29,6 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         botonConsulta.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, DenunciasActivity.class)));
 
@@ -51,7 +50,7 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.datos){
-            startActivity(new Intent(MenuActivity.this, FlujoAccidenteActivity.class));
+            startActivity(new Intent(MenuActivity.this, UsuarioActivity.class));
         }
         return true;
     }

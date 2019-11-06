@@ -17,8 +17,8 @@ public class Denuncia {
     private String[] imagePathsChoque;
     private String[] imagePathsExtras;
     private String datos;
-    private boolean esEsquina;
-    private boolean esDobleMano;
+    private Boolean esEsquina;
+    private Boolean esDobleMano;
 
     public Denuncia() {
     }
@@ -141,5 +141,50 @@ public class Denuncia {
 
     public void setAltura(String altura) {
         this.altura = altura;
+    }
+
+    public boolean chechCompleto() {
+        if (calle != null) {
+            if (altura != null) {
+                if (fecha != null) {
+                    if (hora != null) {
+                        if (imagePathPoliza != null) {
+                            if (imagePathCedula != null) {
+                                if (imagePathsChoque != null) {
+                                    if (imagePathsExtras != null) {
+                                        if (imagePathsLicencia != null) {
+                                            if (tercero != null) {
+                                                return true;
+                                            } else {
+                                                return false;
+                                            }
+                                        } else {
+                                            return false;
+                                        }
+                                    } else {
+                                        return false;
+                                    }
+                                } else {
+                                    return false;
+                                }
+
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

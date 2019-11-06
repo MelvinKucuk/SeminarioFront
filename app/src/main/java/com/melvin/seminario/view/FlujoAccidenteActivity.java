@@ -305,12 +305,12 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enDetalleCompletado(String detalle) {
         this.detalle = detalle;
-        terminarProceso(null);
+        terminarProceso();
     }
 
     @Override
     public void enDetalleOmitir() {
-        terminarProceso(null);
+        terminarProceso();
     }
 
     @Override
@@ -322,7 +322,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         cargarFragment(fragment);
     }
 
-    private void terminarProceso(String  imagePath) {
+    private void terminarProceso() {
         if (fotoChoque != null && fotoCedula != null && fotoLicencia != null && fotoLicencia != null) {
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(rootLayout);

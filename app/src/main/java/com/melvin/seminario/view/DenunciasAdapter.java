@@ -18,9 +18,11 @@ import butterknife.ButterKnife;
 public class DenunciasAdapter extends RecyclerView.Adapter {
 
     private List<Denuncia> datos;
+    private OnAdapterListener listener;
 
-    public DenunciasAdapter(List<Denuncia> datos) {
+    public DenunciasAdapter(List<Denuncia> datos, OnAdapterListener listener) {
         this.datos = datos;
+        this.listener = listener;
     }
 
     @NonNull
@@ -50,11 +52,13 @@ public class DenunciasAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(v -> listener.enDenunciaSeleccionada(datos.get(getAdapterPosition()).getId()));
         }
 
         void bind(Denuncia denuncia){
             this.denuncia.setText("Denuncia del dia " + denuncia.getFecha());
-            if (checkCompleto()){
+            if (denuncia.chechCompleto()){
                 completo.setTextColor(itemView.getContext().getResources().getColor(R.color.verde));
                 completo.setText("COMPLETO");
             } else {
@@ -66,6 +70,10 @@ public class DenunciasAdapter extends RecyclerView.Adapter {
         private boolean checkCompleto() {
             return true;
         }
+    }
+
+    interface  OnAdapterListener{
+        void enDenunciaSeleccionada(String id);
     }
 
     public void setDatos(List<Denuncia> datos) {

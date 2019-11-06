@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.DenunciaController;
+import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.util.ResultListener;
 
@@ -16,7 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DenunciasActivity extends AppCompatActivity {
+public class DenunciasActivity extends AppCompatActivity implements DenunciasAdapter.OnAdapterListener,
+                                                                    ResumenFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.recyclerDenuncias)
     RecyclerView recyclerView;
@@ -31,7 +33,7 @@ public class DenunciasActivity extends AppCompatActivity {
 
         datos = new ArrayList<>();
         String username = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
-        adapter = new DenunciasAdapter(datos);
+        adapter = new DenunciasAdapter(datos, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -44,5 +46,19 @@ public class DenunciasActivity extends AppCompatActivity {
                 adapter.setDatos(datos);
             }
         });
+    }
+
+    @Override
+    public void enDenunciaSeleccionada(String id) {
+        ResumenFragment fragment = new ResumenFragment();
+        Bundle datos = new Bundle();
+        datos.putString(ResumenFragment.KEY_ID, id);
+        fragment.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void enResumenConfirmado(Conductor mail) {
+
     }
 }

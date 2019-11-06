@@ -1,7 +1,6 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -21,9 +20,9 @@ public class CrearUsuarioMailFragment extends Fragment {
     @BindView(R.id.editTextMail)
     EditText editTextMail;
     @BindView(R.id.editTextContraseña)
-    EditText editTextContraseña;
+    EditText editTextContrasena;
     @BindView(R.id.editTextRepetirContraseña)
-    EditText editTextReptirContraseña;
+    EditText editTextReptirContrasena;
     @BindView(R.id.cardViewSiguiente)
     CardView botonSiguiente;
 
@@ -40,8 +39,8 @@ public class CrearUsuarioMailFragment extends Fragment {
         ButterKnife.bind(this, view);
         botonSiguiente.setOnClickListener(v -> {
             String mail = editTextMail.getText().toString();
-            String contrasena = editTextContraseña.getText().toString();
-            String repetirContrasena = editTextReptirContraseña.getText().toString();
+            String contrasena = editTextContrasena.getText().toString();
+            String repetirContrasena = editTextReptirContrasena.getText().toString();
 
             if (!mail.isEmpty()){
                 if (!contrasena.isEmpty()){

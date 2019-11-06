@@ -33,5 +33,21 @@ public class DaoInternetDenuncia extends DaoHelper{
         });
     }
 
+    public void obtenerDenunciaPorId(String id, ResultListener<Denuncia> listenerController){
+        denunciaService.getDenunciaById(id).enqueue(new Callback<Denuncia>() {
+            @Override
+            public void onResponse(Call<Denuncia> call, Response<Denuncia> response) {
+                if (response.isSuccessful()){
+                    listenerController.finish(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Denuncia> call, Throwable t) {
+                Throwable asd = t;
+            }
+        });
+    }
+
 
 }

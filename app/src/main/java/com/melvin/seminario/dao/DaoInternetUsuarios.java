@@ -21,7 +21,10 @@ public class DaoInternetUsuarios extends DaoHelper {
         usuarioService.obtenerUsuario(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                controllerListener.finish(response.body());
+                if (response.isSuccessful())
+                    controllerListener.finish(response.body());
+                else
+                    controllerListener.finish(new User());
             }
 
             @Override
@@ -44,6 +47,23 @@ public class DaoInternetUsuarios extends DaoHelper {
                 String a = call.toString();
             }
         });
+    }
 
+    public void crearUsuario(User usuario, ResultListener<Boolean> listenerController){
+        usuarioService.crearUsuario(usuario).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    listenerController.finish(true);
+                } else {
+                    listenerController.finish(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                listenerController.finish(false);
+            }
+        });
     }
 }
