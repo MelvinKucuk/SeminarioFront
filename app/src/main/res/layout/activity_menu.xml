@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonConsulta" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/botonDatos"
         android:layout_width="90dp"
         android:layout_height="100dp"
@@ -97,9 +97,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewConsulta" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewConsulta" />-->
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textViewDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonDatos" />
+        app:layout_constraintTop_toBottomOf="@+id/botonDatos" />-->
 
 
 

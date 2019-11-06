@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.editTextMail)
     EditText editTextMail;
     @BindView(R.id.editTextConstraseña)
-    EditText editTextContraseña;
+    EditText editTextContrasena;
     @BindView(R.id.cardViewIngresar)
     CardView botonIngresar;
     @BindView(R.id.cardViewCrearUsuario)
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         botonIngresar.setOnClickListener(v -> {
 
                     String username = editTextMail.getText().toString();
-                    String password = editTextContraseña.getText().toString();
+                    String password = editTextContrasena.getText().toString();
                     progressDialog.setMessage("Validando Usuario");
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
         botonCrearUsuario.setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, CrearUsuarioActivity.class));
+            startActivity(new Intent(MainActivity.this, CrearUsuarioActivity.class));
         });
 
 

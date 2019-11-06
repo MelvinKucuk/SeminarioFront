@@ -143,4 +143,8 @@ public class Conductor implements Parcelable {
     public String getPais() {
         return pais;
     }
+
+    public String getDetalle() {
+        return detalle;
+    }
 }

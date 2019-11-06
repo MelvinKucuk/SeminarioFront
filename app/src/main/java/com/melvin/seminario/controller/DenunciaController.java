@@ -1,6 +1,7 @@
 package com.melvin.seminario.controller;
 
 import com.melvin.seminario.dao.DaoInternetDenuncia;
+import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.util.ResultListener;
 
@@ -15,5 +16,9 @@ public class DenunciaController {
                 listenerView.finish(resultado);
             }
         });
+    }
+
+    public void obtenerDenuciaPorId (String id, ResultListener<Denuncia> listenerView){
+        new DaoInternetDenuncia().obtenerDenunciaPorId(id, listenerView);
     }
 }
