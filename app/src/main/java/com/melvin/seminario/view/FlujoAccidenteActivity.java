@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.melvin.seminario.R;
+import com.melvin.seminario.controller.UsuarioController;
 import com.melvin.seminario.dao.DaoInternetUsuarios;
 import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Denuncia;
@@ -131,10 +132,23 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        String[] aux = address.split(",");
-        String[] aux2 = aux[0].split(" ");
-        String calle = aux2[0];
-        String altura = aux2[1];
+        String calle = "";
+        String altura = "";
+
+        if (!address.isEmpty()) {
+
+            String[] aux = address.split(",");
+            String[] aux2 = aux[0].split(" ");
+
+            if (aux2.length == 3) {
+                calle = aux2[0] + " " + aux2[1];
+                altura = aux2[2];
+            } else {
+                calle = aux2[0];
+                altura = aux2[1];
+            }
+
+        }
 
         denuncia.setCalle(calle);
         denuncia.setAltura(altura);
@@ -343,6 +357,23 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             fragment.setArguments(datos);
             cargarFragment(fragment);
         } else {
+            user = getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+            new UsuarioController().recuperarUsuario(user,
+                    usuario -> {
+                        Conductor conductor = new Conductor.Builder()
+                                .setNombre(usuario.getNombre())
+                                .setApellido(usuario.getApellido())
+                                .setEmail(usuario.getUsername())
+                                .setDetalle(this.detalle)
+                                .setDni(usuario.getDni())
+                                .setPais(usuario.getPais())
+                                .setFechaNacimiento(usuario.getFechaNacimeinto())
+                                .setDomicilio(usuario.getDomicilio())
+                                .build();
+                        denuncia.setAsegurado(conductor);
+                        new DaoInternetUsuarios().mandarMail(denuncia);
+                    });
+
             ExitoResumenFragment fragment = new ExitoResumenFragment();
             cargarFragment(fragment);
         }

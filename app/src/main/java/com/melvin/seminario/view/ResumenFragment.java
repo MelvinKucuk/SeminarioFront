@@ -91,22 +91,24 @@ public class ResumenFragment extends Fragment {
         ButterKnife.bind(this, view);
         String id;
 
+        user = getActivity().getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+        new UsuarioController().recuperarUsuario(user,
+                usuario -> {
+                    editTextNombre.setText(usuario.getNombre());
+                    editTextApellido.setText(usuario.getApellido());
+                    editTextDni.setText(usuario.getDni());
+                    editTextFecha.setText(usuario.getFechaNacimeinto());
+                    editTextPais.setText(usuario.getPais());
+                    editTextMail.setText(usuario.getUsername());
+                    editTextDomicilio.setText(usuario.getDomicilio());
+                });
+
         Bundle datos = getArguments();
 
         if (datos != null) {
             id = datos.getString(KEY_ID);
             if (id != null) {
-                user = getActivity().getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
-                new UsuarioController().recuperarUsuario(user,
-                        usuario -> {
-                            editTextNombre.setText(usuario.getNombre());
-                            editTextApellido.setText(usuario.getApellido());
-                            editTextDni.setText(usuario.getDni());
-                            editTextFecha.setText(usuario.getFechaNacimeinto());
-                            editTextPais.setText(usuario.getPais());
-                            editTextMail.setText(usuario.getUsername());
-                            editTextDomicilio.setText(usuario.getDomicilio());
-                        });
+
 
                 new DenunciaController().obtenerDenuciaPorId(id,
                         denuncia -> {
@@ -117,11 +119,16 @@ public class ResumenFragment extends Fragment {
                             editTextLicencia.setText(denuncia.getTercero().getLicencia());
                             editTextDetalle.setText(denuncia.getAsegurado().getDetalle());
                             List<Foto> fotos = new ArrayList<>();
-                            fotos.add(new Foto(denuncia.getImagePathCedula(), "Cedula"));
-                            fotos.add(new Foto(denuncia.getImagePathPoliza(), "Poliza"));
-                            fotos.add(new Foto(denuncia.getImagePathsChoque()[0], "Choque"));
-                            fotos.add(new Foto(denuncia.getImagePathsExtras()[0], "Extras"));
-                            fotos.add(new Foto(denuncia.getImagePathsLicencia()[0], "Licencia"));
+                            if (denuncia.getImagePathCedula() != null)
+                                fotos.add(new Foto(denuncia.getImagePathCedula(), "Cedula"));
+                            if (denuncia.getImagePathPoliza() != null)
+                                fotos.add(new Foto(denuncia.getImagePathPoliza(), "Poliza"));
+                            if (denuncia.getImagePathsChoque().length != 0)
+                                fotos.add(new Foto(denuncia.getImagePathsChoque()[0], "Choque"));
+                            if (denuncia.getImagePathsExtras().length != 0)
+                                fotos.add(new Foto(denuncia.getImagePathsExtras()[0], "Extras"));
+                            if (denuncia.getImagePathsLicencia().length != 0)
+                                fotos.add(new Foto(denuncia.getImagePathsLicencia()[0], "Licencia"));
 
                             FotosAdapter adapter = new FotosAdapter(fotos);
 

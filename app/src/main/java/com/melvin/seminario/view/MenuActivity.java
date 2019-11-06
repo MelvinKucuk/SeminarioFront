@@ -7,9 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.melvin.seminario.R;
+import com.melvin.seminario.controller.UsuarioController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +23,10 @@ public class MenuActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.botonConsulta)
     ImageView botonConsulta;
+    @BindView(R.id.textViewBienvenida)
+    TextView textViewBienveida;
+
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,14 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        textViewBienveida.setVisibility(View.INVISIBLE);
+
+        user = getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+        new UsuarioController().recuperarUsuario(user,
+                usuario -> {
+                    textViewBienveida.setText(String.format("Hola %s %s", usuario.getNombre(), usuario.getApellido()));
+                    textViewBienveida.setVisibility(View.VISIBLE);
+                });
 
         botonConsulta.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, DenunciasActivity.class)));
 

@@ -13,11 +13,11 @@
     <string name="text_cant_vehiculo">¿Tuviste un accidente con otro vehiculo?</string>
     <string name="omitir">Omitir</string>
     <string name="abrir_camara">Abrir cámara</string>
-    <string name="text_licencia">Sacale una foto al registro del otro conductor</string>
-    <string name="text_choque">Sacale una foto al choque del auto</string>
+    <string name="text_licencia">Registro del otro conductor</string>
+    <string name="text_choque">Imágenes del siniestro</string>
     <string name="text_danos">¿Contás con fotografías de los daños?</string>
-    <string name="text_cedula">Sacale una foto a la cedula verde del otro conductor</string>
-    <string name="text_poliza">Sacale una foto a la poliza del otro conductor</string>
+    <string name="text_cedula">Cedula del otro conductor</string>
+    <string name="text_poliza">Póliza del otro conductor</string>
     <string name="seleccion_consulta">Selccioná tu consulta</string>
     <string name="boton_consulta">Consultá el estado de tu siniestro</string>
     <string name="boton_datos">Mis Datos</string>
@@ -66,4 +66,5 @@
     <string name="tene_cuenta">•Tipo de vehículo\n•Marca y patente\n•Descripción del otro conductor</string>
     <string name="ingresa_datos">Ingresá los datos pero no describas el accidente.</string>
     <string name="finalizar">Finalizar</string>
+    <string name="describa_el_accidente">Describa el accidente</string>
 </resources>

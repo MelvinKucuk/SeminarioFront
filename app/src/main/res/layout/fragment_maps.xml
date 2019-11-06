@@ -48,7 +48,7 @@
         android:id="@+id/botonActualizar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_usuario"
+        android:src="@drawable/ic_my_location"
         android:layout_gravity="end"
         android:layout_margin="20dp"/>
 </FrameLayout>
