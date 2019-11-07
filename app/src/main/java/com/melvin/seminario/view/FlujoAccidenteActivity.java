@@ -17,6 +17,7 @@ import com.melvin.seminario.model.Conductor;
 import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.model.Foto;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +53,10 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private String direccion;
     private Denuncia denuncia;
     private String detalle;
+    private ArrayList<String> filePathsLicencia = new ArrayList<>();
+    private ArrayList<String> filePathsChoque = new ArrayList<>();
+    private ArrayList<String> filePathsExtras = new ArrayList<>();
+    private ArrayList<String> filePathsDanos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,12 +227,20 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         imageView.setVisibility(View.GONE);
         DatosOtroConductorFragment fragment = new DatosOtroConductorFragment();
         fotoLicencia = new Foto(imagePath, "Licencia");
-        denuncia.setImagePathsLicencia(new String[]{imagePath});
+        filePathsLicencia.add(imagePath);
+        denuncia.setImagePathsLicencia(filePathsLicencia);
         Bundle datos = new Bundle();
         datos.putString(DatosOtroConductorFragment.KEY_IMAGE_PATH, imagePath);
         fragment.setArguments(datos);
         cargarFragment(fragment);
         rootLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    public void pasarFotoExtraLicencia(String imagePath) {
+        filePathsLicencia.add(imagePath);
+        ExitoConductorFragment fragment = new ExitoConductorFragment();
+        cargarFragment(fragment);
     }
 
     @Override
@@ -248,7 +261,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarDatosChoque(String imagePath) {
         fotoChoque = new Foto(imagePath, "Choque");
-        denuncia.setImagePathsChoque(new String[]{imagePath});
+        filePathsChoque.add(imagePath);
+        denuncia.setImagePathsChoque(filePathsChoque);
         ExitoChoqueFragment fragment = new ExitoChoqueFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
@@ -259,6 +273,15 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Bundle datos = new Bundle();
         datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
         imageView.setImageResource(R.drawable.ic_progreso_2);
+        fragment.setArguments(datos);
+        cargarFragment(fragment);
+    }
+
+    @Override
+    public void enAgregarMasFotosConductor() {
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_LICENCIA, true);
         fragment.setArguments(datos);
         cargarFragment(fragment);
     }
@@ -305,7 +328,8 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarDatosDanos(String imagePath) {
         fotoDanos = new Foto(imagePath, "Daños");
-        denuncia.setImagePathsExtras(new String[]{imagePath});
+        filePathsDanos.add(imagePath);
+        denuncia.setImagePathsExtras(filePathsDanos);
         DetalleFragment fragment = new DetalleFragment();
         cargarFragment(fragment);
     }
@@ -337,23 +361,32 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     }
 
     private void terminarProceso() {
-        if (fotoChoque != null && fotoCedula != null && fotoLicencia != null && fotoLicencia != null) {
+        if (fotoChoque != null || fotoCedula != null || fotoLicencia != null) {
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(rootLayout);
             constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
             constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.toolbarSiniestros, ConstraintSet.BOTTOM);
             constraintSet.applyTo(rootLayout);
-            denuncia.setImagePathPoliza(this.fotoPoliza.getFilepath());
+            if (fotoPoliza != null)
+                denuncia.setImagePathPoliza(this.fotoPoliza.getFilepath());
             imageView.setVisibility(View.GONE);
             ResumenFragment fragment = new ResumenFragment();
             Bundle datos = new Bundle();
-            datos.putString(ResumenFragment.KEY_CHOQUE, fotoChoque.getFilepath());
-            datos.putString(ResumenFragment.KEY_LICENCIA, fotoLicencia.getFilepath());
-            datos.putString(ResumenFragment.KEY_POLIZA, fotoPoliza.getFilepath());
-            datos.putString(ResumenFragment.KEY_CEDULA, fotoCedula.getFilepath());
-            datos.putString(ResumenFragment.KEY_DANOS, fotoDanos.getFilepath());
+            if (!filePathsChoque.isEmpty())
+                datos.putStringArrayList(ResumenFragment.KEY_CHOQUE, filePathsChoque);
+            if (!filePathsLicencia.isEmpty())
+                datos.putStringArrayList(ResumenFragment.KEY_LICENCIA, filePathsLicencia);
+            if (fotoPoliza != null)
+                datos.putString(ResumenFragment.KEY_POLIZA, fotoPoliza.getFilepath());
+            if (fotoCedula != null)
+                datos.putString(ResumenFragment.KEY_CEDULA, fotoCedula.getFilepath());
+            if (!filePathsDanos.isEmpty())
+                datos.putStringArrayList(ResumenFragment.KEY_DANOS, filePathsDanos);
             datos.putParcelable(ResumenFragment.KEY_TERCERO, denuncia.getTercero());
-            datos.putString(ResumenFragment.KEY_DETALLE, detalle);
+            if (detalle != null)
+                datos.putString(ResumenFragment.KEY_DETALLE, detalle);
+            if (!filePathsExtras.isEmpty())
+                datos.putStringArrayList(ResumenFragment.KEY_EXTRAS, filePathsExtras);
             fragment.setArguments(datos);
             cargarFragment(fragment);
         } else {

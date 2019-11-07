@@ -67,4 +67,5 @@
     <string name="ingresa_datos">Ingresá los datos pero no describas el accidente.</string>
     <string name="finalizar">Finalizar</string>
     <string name="describa_el_accidente">Describa el accidente</string>
+    <string name="agregar_fotos">Agregar más fotos</string>
 </resources>

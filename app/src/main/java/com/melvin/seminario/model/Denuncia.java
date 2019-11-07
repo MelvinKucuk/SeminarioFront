@@ -2,6 +2,8 @@ package com.melvin.seminario.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Denuncia {
     @SerializedName("_id")
     private String id;
@@ -13,9 +15,10 @@ public class Denuncia {
     private Conductor tercero;
     private String imagePathPoliza;
     private String imagePathCedula;
-    private String[] imagePathsLicencia;
-    private String[] imagePathsChoque;
-    private String[] imagePathsExtras;
+    private List<String> imagePathsLicencia;
+    private List<String> imagePathsChoque;
+    private List<String> imagePathsExtras;
+    private List<String> imagePathsDanos;
     private String datos;
     private Boolean esEsquina;
     private Boolean esDobleMano;
@@ -51,15 +54,15 @@ public class Denuncia {
         return imagePathCedula;
     }
 
-    public String[] getImagePathsLicencia() {
+    public List<String> getImagePathsLicencia() {
         return imagePathsLicencia;
     }
 
-    public String[] getImagePathsChoque() {
+    public List<String> getImagePathsChoque() {
         return imagePathsChoque;
     }
 
-    public String[] getImagePathsExtras() {
+    public List<String> getImagePathsExtras() {
         return imagePathsExtras;
     }
 
@@ -91,15 +94,15 @@ public class Denuncia {
         this.imagePathCedula = imagePathCedula;
     }
 
-    public void setImagePathsLicencia(String[] imagePathsLicencia) {
+    public void setImagePathsLicencia(List<String> imagePathsLicencia) {
         this.imagePathsLicencia = imagePathsLicencia;
     }
 
-    public void setImagePathsChoque(String[] imagePathsChoque) {
+    public void setImagePathsChoque(List<String> imagePathsChoque) {
         this.imagePathsChoque = imagePathsChoque;
     }
 
-    public void setImagePathsExtras(String[] imagePathsExtras) {
+    public void setImagePathsExtras(List<String> imagePathsExtras) {
         this.imagePathsExtras = imagePathsExtras;
     }
 
@@ -141,6 +144,14 @@ public class Denuncia {
 
     public void setAltura(String altura) {
         this.altura = altura;
+    }
+
+    public List<String> getImagePathsDanos() {
+        return imagePathsDanos;
+    }
+
+    public void setImagePathsDanos(List<String> imagePathsDanos) {
+        this.imagePathsDanos = imagePathsDanos;
     }
 
     public boolean chechCompleto() {

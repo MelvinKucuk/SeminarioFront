@@ -10,12 +10,18 @@ import android.view.ViewGroup;
 
 import com.melvin.seminario.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ExitoConductorFragment extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
 
-    private CardView botonSiguiente;
+    @BindView(R.id.cardViewSiguiente)
+    CardView botonSiguiente;
+    @BindView(R.id.cardViewFoto)
+    CardView botonMasFotos;
 
     public ExitoConductorFragment() {
     }
@@ -30,9 +36,10 @@ public class ExitoConductorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exito_conductor, container, false);
+        ButterKnife.bind(this, view);
 
-        botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
         botonSiguiente.setOnClickListener(v -> mListener.enExitoConductor());
+        botonMasFotos.setOnClickListener(v -> mListener.enAgregarMasFotosConductor());
 
         return view;
     }
@@ -58,5 +65,6 @@ public class ExitoConductorFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void enExitoConductor();
+        void enAgregarMasFotosConductor();
     }
 }

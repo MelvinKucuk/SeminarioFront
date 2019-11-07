@@ -35,6 +35,7 @@ public class ResumenFragment extends Fragment {
     public static final String KEY_DANOS = "danos";
     public static final String KEY_TERCERO = "tercero";
     public static final String KEY_DETALLE = "detalle";
+    public static final String KEY_EXTRAS = "extras";
     public static final String KEY_ID = "id";
 
     private OnFragmentInteractionListener mListener;
@@ -123,12 +124,21 @@ public class ResumenFragment extends Fragment {
                                 fotos.add(new Foto(denuncia.getImagePathCedula(), "Cedula"));
                             if (denuncia.getImagePathPoliza() != null)
                                 fotos.add(new Foto(denuncia.getImagePathPoliza(), "Poliza"));
-                            if (denuncia.getImagePathsChoque().length != 0)
-                                fotos.add(new Foto(denuncia.getImagePathsChoque()[0], "Choque"));
-                            if (denuncia.getImagePathsExtras().length != 0)
-                                fotos.add(new Foto(denuncia.getImagePathsExtras()[0], "Extras"));
-                            if (denuncia.getImagePathsLicencia().length != 0)
-                                fotos.add(new Foto(denuncia.getImagePathsLicencia()[0], "Licencia"));
+                            if (!denuncia.getImagePathsChoque().isEmpty()) {
+                                for (String filepath: denuncia.getImagePathsChoque()) {
+                                    fotos.add(new Foto(filepath, "Choque"));
+                                }
+                            }
+                            if (!denuncia.getImagePathsExtras().isEmpty()) {
+                                for (String filepath : denuncia.getImagePathsExtras()) {
+                                    fotos.add(new Foto(filepath, "Extras"));
+                                }
+                            }
+                            if (!denuncia.getImagePathsLicencia().isEmpty()) {
+                                for (String filepath : denuncia.getImagePathsLicencia()) {
+                                    fotos.add(new Foto(filepath, "Licencia"));
+                                }
+                            }
 
                             FotosAdapter adapter = new FotosAdapter(fotos);
 
@@ -143,21 +153,32 @@ public class ResumenFragment extends Fragment {
 
 
             } else {
-                pathLicencia = datos.getString(KEY_LICENCIA);
+                List<String> pathsLicencia = datos.getStringArrayList(KEY_LICENCIA);
                 String pathCedula = datos.getString(KEY_CEDULA);
                 String pathPoliza = datos.getString(KEY_POLIZA);
-                String pathChoque = datos.getString(KEY_CHOQUE);
-                String pathDano = datos.getString(KEY_DANOS);
+                List<String> pathsChoque = datos.getStringArrayList(KEY_CHOQUE);
+                List<String> pathsDano = datos.getStringArrayList(KEY_DANOS);
                 detalle = datos.getString(KEY_DETALLE);
 
                 Conductor tercero = datos.getParcelable(KEY_TERCERO);
 
                 List<Foto> fotos = new ArrayList<>();
-                fotos.add(new Foto(pathLicencia, "Licencia"));
-                fotos.add(new Foto(pathCedula, "Cedula"));
-                fotos.add(new Foto(pathPoliza, "Poliza"));
-                fotos.add(new Foto(pathChoque, "Choque"));
-                fotos.add(new Foto(pathDano, "Daños"));
+                if (pathsLicencia != null) {
+                    for (String filePath : pathsLicencia)
+                        fotos.add(new Foto(filePath, "Licencia"));
+                }
+                if (pathCedula != null)
+                    fotos.add(new Foto(pathCedula, "Cedula"));
+                if (pathPoliza != null)
+                    fotos.add(new Foto(pathPoliza, "Poliza"));
+                if (pathsChoque != null) {
+                    for (String filePath : pathsChoque)
+                        fotos.add(new Foto(filePath, "Choque"));
+                }
+                if (pathsDano != null) {
+                    for (String filePath : pathsDano)
+                        fotos.add(new Foto(filePath, "Daños"));
+                }
 
                 FotosAdapter adapter = new FotosAdapter(fotos);
 
@@ -166,12 +187,15 @@ public class ResumenFragment extends Fragment {
                 RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                 recyclerView.setLayoutManager(manager);
 
-                editTextNombreTercero.setText(tercero.getNombre());
-                editTextApellidoTercero.setText(tercero.getApellido());
-                editTextPaisTercero.setText(tercero.getPais());
-                editTextLicencia.setText(tercero.getLicencia());
-                editTextFechaTercero.setText(tercero.getFechaNacimiento());
-                editTextDetalle.setText(detalle);
+                if (tercero != null) {
+                    editTextNombreTercero.setText(tercero.getNombre());
+                    editTextApellidoTercero.setText(tercero.getApellido());
+                    editTextPaisTercero.setText(tercero.getPais());
+                    editTextLicencia.setText(tercero.getLicencia());
+                    editTextFechaTercero.setText(tercero.getFechaNacimiento());
+                }
+                if (detalle != null)
+                    editTextDetalle.setText(detalle);
 
 
                 botonSiguiente.setOnClickListener(v -> {

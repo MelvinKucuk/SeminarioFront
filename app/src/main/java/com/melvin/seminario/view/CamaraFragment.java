@@ -35,6 +35,7 @@ public class CamaraFragment extends Fragment {
     public static final String KEY_CEDULA = "cedula";
     public static final String KEY_POLIZA = "poliza";
     public static final String KEY_DANOS = "danos";
+    public static final String KEY_LICENCIA = "licencia";
 
 
     public static final int CAMERA_ACTION = 200;
@@ -46,6 +47,7 @@ public class CamaraFragment extends Fragment {
     private boolean esCedula;
     private boolean esPoliza;
     private boolean esDanos;
+    private boolean esLicenciaExtra;
     @BindView(R.id.cardViewOmitir)
     CardView botonOmitir;
 
@@ -73,6 +75,7 @@ public class CamaraFragment extends Fragment {
             esCedula = getArguments().getBoolean(KEY_CEDULA);
             esPoliza = getArguments().getBoolean(KEY_POLIZA);
             esDanos = getArguments().getBoolean(KEY_DANOS);
+            esLicenciaExtra = getArguments().getBoolean(KEY_LICENCIA);
             if (esChoque){
                 textView.setText(getString(R.string.text_choque));
                 image.setImageResource(R.drawable.ic_auto);
@@ -92,6 +95,9 @@ public class CamaraFragment extends Fragment {
                 textView.setText(getString(R.string.text_danos));
                 image.setImageResource(R.drawable.ic_fotos);
                 botonOmitir.setOnClickListener(v -> mListener.omitirFotoDanos());
+            }
+            if (esLicenciaExtra){
+                textView.setText(getString(R.string.text_licencia));
             }
         }
 
@@ -124,6 +130,7 @@ public class CamaraFragment extends Fragment {
         void pasarDatosCedula(String imagePath);
         void pasarDatosPoliza(String imagePath);
         void pasarDatosDanos(String imagePath);
+        void pasarFotoExtraLicencia(String imagePath);
         void omitirFotoRegistro();
         void omitirFotoChoque();
         void omitirFotoCedula();
@@ -158,8 +165,6 @@ public class CamaraFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_ACTION) {
 
-//                Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-//                image.setImageBitmap(bitmap);
                 if (esChoque){
                     mListener.pasarDatosChoque(currentPhotoPath);
                 } else if (esCedula) {
@@ -168,6 +173,8 @@ public class CamaraFragment extends Fragment {
                     mListener.pasarDatosPoliza(currentPhotoPath);
                 } else if (esDanos) {
                     mListener.pasarDatosDanos(currentPhotoPath);
+                } else if (esLicenciaExtra){
+                    mListener.pasarFotoExtraLicencia(currentPhotoPath);
                 } else {
                     mListener.pasarDatosOtroConductor(currentPhotoPath);
                 }
