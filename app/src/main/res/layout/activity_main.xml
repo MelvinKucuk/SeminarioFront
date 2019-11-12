@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/gradient_login"
     tools:context=".view.MainActivity">
 
     <FrameLayout
@@ -20,6 +20,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/buttonIngresar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:layout_marginBottom="683dp"
+                android:background="@drawable/border_button_login"
+                android:text="@string/button_ingresar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="25dp" />
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="177dp"
@@ -32,43 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cardViewMail"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardViewContraseña"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/editTextMail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:hint="@string/hint_mail"
-                        android:lines="1"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:inputType="textEmailAddress"
-                        android:padding="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </android.support.constraint.ConstraintLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
                 android:id="@+id/cardViewContraseña"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -76,7 +53,7 @@
                 android:padding="5dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardViewIngresar"
+                app:layout_constraintBottom_toTopOf="@+id/cardViewCrearUsuario"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
@@ -91,11 +68,11 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:hint="@string/hint_contraseña"
+                        android:inputType="textPassword"
                         android:lines="1"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:inputType="textPassword"
                         android:padding="16dp"
+                        android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -111,6 +88,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="38dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -128,7 +106,7 @@
                         android:padding="16dp"
                         android:text="@string/button_ingresar"
                         android:textAlignment="center"
-                        android:textColor="@color/primaryText"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -144,10 +122,10 @@
                 android:id="@+id/cardViewCrearUsuario"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="30dp"
                 android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardViewIngresar"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/buttonIngresar"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
@@ -174,9 +152,47 @@
 
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewMail"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/cardViewContraseña"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/editTextMail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="@string/hint_mail"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
 
 
         </android.support.constraint.ConstraintLayout>
+
+
 
 
 

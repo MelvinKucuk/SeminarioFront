@@ -22,7 +22,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_crear_usuario);
 
         CrearUsuarioMailFragment fragment = new CrearUsuarioMailFragment();
-        cargarFragment(fragment);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     private void cargarFragment(Fragment fragment){
