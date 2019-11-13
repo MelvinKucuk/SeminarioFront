@@ -1,8 +1,10 @@
 package com.melvin.seminario.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,6 +59,7 @@ public class CamaraFragment extends Fragment {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,6 +67,24 @@ public class CamaraFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         botonAbrirCamara.setOnClickListener(v -> dipatchTakePicture());
+        botonAbrirCamara.setOnTouchListener(
+                (v, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                            ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                            v.invalidate();
+                            break;
+                        }
+                    }
+                    return false;
+                });
 
         image = view.findViewById(R.id.licenciaIcono);
         textView  = view.findViewById(R.id.textViewCamara);

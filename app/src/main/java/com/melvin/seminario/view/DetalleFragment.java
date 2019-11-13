@@ -1,9 +1,12 @@
 package com.melvin.seminario.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,6 +34,7 @@ public class DetalleFragment extends Fragment {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +47,24 @@ public class DetalleFragment extends Fragment {
             else
                 Toast.makeText(getActivity(), "El Detalle no puede estar vacio", Toast.LENGTH_SHORT).show();
         });
+        botonSiguiente.setOnTouchListener(
+                (v, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                            ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                            v.invalidate();
+                            break;
+                        }
+                    }
+                    return false;
+                });
         botonOmitir.setOnClickListener(v -> mListener.enDetalleOmitir());
 
         return view;

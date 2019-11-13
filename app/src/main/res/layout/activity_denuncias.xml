@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Denuncias"
+        android:theme="@style/ToolbarTheme"
         app:titleTextColor="@color/white" />
 
     <android.support.v7.widget.RecyclerView

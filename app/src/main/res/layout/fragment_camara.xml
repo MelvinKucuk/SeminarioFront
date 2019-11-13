@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/licenciaIcono"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:src="@drawable/ic_registro"
         app:layout_constraintBottom_toTopOf="@+id/buttonCamara"
         app:layout_constraintEnd_toEndOf="parent"

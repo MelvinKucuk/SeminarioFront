@@ -63,7 +63,7 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
     }
 
     @Override
-    public void enResumenConfirmado(Conductor mail) {
+    public void enResumenConfirmado(Conductor asegurado, Conductor tercero) {
 
     }
 

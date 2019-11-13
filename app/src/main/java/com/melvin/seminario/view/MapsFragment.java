@@ -1,12 +1,14 @@
 package com.melvin.seminario.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -78,6 +81,7 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +107,24 @@ public class MapsFragment extends Fragment implements LocationListener, OnMapRea
         });
 
         botonUbicacion.setOnClickListener(v -> mListener.enUbicacionConfirmada(fusedLongitude, fusedLatitude));
+        botonUbicacion.setOnTouchListener(
+                (v, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                            ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                            v.invalidate();
+                            break;
+                        }
+                    }
+                    return false;
+                });
 
         return rootView;
     }

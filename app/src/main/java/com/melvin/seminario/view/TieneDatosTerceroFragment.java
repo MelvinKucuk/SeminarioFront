@@ -1,9 +1,12 @@
 package com.melvin.seminario.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +30,7 @@ public class TieneDatosTerceroFragment extends Fragment {
     public TieneDatosTerceroFragment() {
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +38,24 @@ public class TieneDatosTerceroFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         botonSi.setOnClickListener(v -> mListener.enTieneDatosTercero());
+        botonSi.setOnTouchListener(
+                (v, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                            ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                            v.invalidate();
+                            break;
+                        }
+                    }
+                    return false;
+                });
         botonNo.setOnClickListener(v -> mListener.enNoTieneDatosTercero());
 
         return view;

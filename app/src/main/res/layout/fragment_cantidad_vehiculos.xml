@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/autoIcono"
-        android:layout_width="160dp"
+        android:layout_width="260dp"
         android:layout_height="160dp"
         android:src="@drawable/ic_auto"
         app:layout_constraintBottom_toTopOf="@+id/buttonSi"

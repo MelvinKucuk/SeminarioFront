@@ -1,12 +1,15 @@
 package com.melvin.seminario.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -84,6 +87,7 @@ public class ResumenFragment extends Fragment {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -217,8 +221,33 @@ public class ResumenFragment extends Fragment {
                             .setFechaNacimiento(editTextFecha.getText().toString())
                             .setDomicilio(editTextDomicilio.getText().toString())
                             .build();
-                    mListener.enResumenConfirmado(conductor);
+                    Conductor terceroConductor = new Conductor.Builder()
+                                .setNombre(editTextNombreTercero.getText().toString())
+                                .setApellido(editTextApellidoTercero.getText().toString())
+                                .setPais(editTextPaisTercero.getText().toString())
+                                .setLicencia(editTextLicencia.getText().toString())
+                                .setFechaNacimiento(editTextFechaTercero.getText().toString())
+                            .build();
+                    mListener.enResumenConfirmado(conductor, terceroConductor);
                 });
+                botonSiguiente.setOnTouchListener(
+                        (v, event) -> {
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN: {
+                                    v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                                    ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                                    v.invalidate();
+                                    break;
+                                }
+                                case MotionEvent.ACTION_UP: {
+                                    v.getBackground().clearColorFilter();
+                                    ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                                    v.invalidate();
+                                    break;
+                                }
+                            }
+                            return false;
+                        });
 
 
                 botonEditar.setOnClickListener(v -> {
@@ -268,6 +297,6 @@ public class ResumenFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void enResumenConfirmado(Conductor mail);
+        void enResumenConfirmado(Conductor asegurado, Conductor tercero);
     }
 }
