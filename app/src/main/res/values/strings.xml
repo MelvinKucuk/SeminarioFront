@@ -68,4 +68,5 @@
     <string name="finalizar">Finalizar</string>
     <string name="describa_el_accidente">Describa el accidente</string>
     <string name="agregar_fotos">Agregar más fotos</string>
+    <string name="confirmar_ubicacion">Confirmar Ubicación</string>
 </resources>

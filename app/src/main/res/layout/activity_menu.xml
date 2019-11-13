@@ -88,31 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonConsulta" />
 
-    <!--<ImageView
-        android:id="@+id/botonDatos"
-        android:layout_width="90dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/ic_datos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewConsulta" />-->
 
-    <!--<TextView
-        android:id="@+id/textViewDatos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:text="@string/boton_datos"
-        android:textAlignment="center"
-        android:textColor="@color/primaryText"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonDatos" />-->
 
 
 
@@ -128,7 +104,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Siniestros"
-        app:titleTextColor="@color/primaryText" />
+        app:titleTextColor="@color/white" />
 
 
 </android.support.constraint.ConstraintLayout>

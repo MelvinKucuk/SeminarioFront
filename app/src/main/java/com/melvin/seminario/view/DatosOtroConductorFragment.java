@@ -3,24 +3,20 @@ package com.melvin.seminario.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
@@ -63,8 +59,8 @@ public class DatosOtroConductorFragment extends Fragment {
         editTextFechaNac = view.findViewById(R.id.editTextFecha);
         editTextPais = view.findViewById(R.id.editTextPais);
         ImageView imageView = view.findViewById(R.id.imageViewLicencia);
-        CardView botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
-        CardView botonReintentar = view.findViewById(R.id.cardViewReintentar);
+        Button botonSiguiente = view.findViewById(R.id.buttonSiguiente);
+        Button botonReintentar = view.findViewById(R.id.cardViewReintentar);
 
         botonSiguiente.setOnClickListener(v -> {
 

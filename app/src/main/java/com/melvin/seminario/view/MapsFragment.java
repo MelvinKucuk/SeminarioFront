@@ -15,11 +15,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -49,8 +49,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class MapsFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
-    @BindView(R.id.cardViewUbicacion)
-    CardView botonUbicacion;
+    @BindView(R.id.buttonUbicacion)
+    Button botonUbicacion;
     @BindView(R.id.botonActualizar)
     ImageView botonActualizar;
 

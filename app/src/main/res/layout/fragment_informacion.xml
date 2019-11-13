@@ -12,7 +12,7 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:src="@drawable/ic_info"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewSi"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,72 +34,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewSi"
-        android:layout_width="250dp"
+    <Button
+        android:id="@+id/buttonSi"
         android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:text="@string/si"
+        android:textColor="@color/primaryText"
+        android:textAllCaps="false"
+        android:textSize="20sp"
         android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewNo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNo"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/border_button"/>
 
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/si"
-                android:textAlignment="center"
-                android:textColor="@color/primaryText"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardViewNo"
-        android:layout_width="250dp"
+    <Button
+        android:id="@+id/buttonNo"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="30dp"
+        android:layout_width="250dp"
+        android:text="@string/no"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textColor="@color/primaryText"
+        android:textAllCaps="false"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/no"
-                android:textAlignment="center"
-                android:textColor="@color/primaryText"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        />
 
 </android.support.constraint.ConstraintLayout>

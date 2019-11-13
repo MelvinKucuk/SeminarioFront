@@ -239,7 +239,11 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void pasarFotoExtraLicencia(String imagePath) {
         filePathsLicencia.add(imagePath);
-        ExitoConductorFragment fragment = new ExitoConductorFragment();
+        CamaraFragment fragment = new CamaraFragment();
+        Bundle datos = new Bundle();
+        datos.putBoolean(CamaraFragment.KEY_CEDULA, true);
+        imageView.setImageResource(R.drawable.ic_progreso_2);
+        fragment.setArguments(datos);
         cargarFragment(fragment);
     }
 
@@ -448,6 +452,14 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enReintentar() {
         onBackPressed();
+        rootLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(rootLayout);
+        constraintSet.clear(R.id.fragmentContainer, ConstraintSet.TOP);
+        constraintSet.connect(R.id.fragmentContainer, ConstraintSet.TOP, R.id.imagen2, ConstraintSet.BOTTOM);
+        constraintSet.applyTo(rootLayout);
+        imageView.setVisibility(View.VISIBLE);
+        filePathsLicencia = new ArrayList<>();
     }
 
     @Override

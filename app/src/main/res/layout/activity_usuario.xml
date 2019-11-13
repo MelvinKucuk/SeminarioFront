@@ -8,21 +8,22 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
             android:text="@string/label_datos"
+            android:layout_marginTop="45dp"
             android:textColor="@color/primaryText"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarUsuarios" />
 
         <TextView
             android:id="@+id/textView2"
@@ -251,42 +252,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textMail" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewEditar"
-            android:layout_width="250dp"
+
+        <Button
+            android:id="@+id/buttonEditar"
             android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:text="@string/guardar_datos"
+            android:textColor="@color/primaryText"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="43dp"
-            android:paddingBottom="50dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="30dp"
-            app:cardUseCompatPadding="true"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextMail">
+            app:layout_constraintTop_toBottomOf="@+id/editTextMail"
+            android:background="@drawable/border_button"/>
 
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/guardar_datos"
-                    android:textAlignment="center"
-                    android:textColor="@color/primaryText"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
-
-        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarUsuarios"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Usuario"
+            app:titleTextColor="@color/white" />
 
     </android.support.constraint.ConstraintLayout>
 

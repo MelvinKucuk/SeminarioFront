@@ -1,7 +1,6 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ public class ExitoCedulaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exito_celula, container, false);
 
-        view.findViewById(R.id.cardViewSiguiente).setOnClickListener(v -> mListener.enCelulaConfirmada());
+        view.findViewById(R.id.buttonSiguiente).setOnClickListener(v -> mListener.enCelulaConfirmada());
 
         return view;
     }

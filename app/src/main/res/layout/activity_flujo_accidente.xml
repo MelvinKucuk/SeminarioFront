@@ -43,6 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Siniestros"
-        app:titleTextColor="@color/primaryText" />
+        app:titleTextColor="@color/white" />
 
 </android.support.constraint.ConstraintLayout>

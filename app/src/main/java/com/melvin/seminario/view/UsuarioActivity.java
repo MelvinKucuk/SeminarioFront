@@ -1,14 +1,14 @@
 package com.melvin.seminario.view;
 
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.UsuarioController;
-import com.melvin.seminario.model.User;
 
 import java.util.Calendar;
 
@@ -33,6 +33,8 @@ public class UsuarioActivity extends AppCompatActivity {
     EditText editTextPais;
     @BindView(R.id.editTextMail)
     EditText editTextMail;
+    @BindView(R.id.toolbarUsuarios)
+    Toolbar toolbar;
 
     public final Calendar c = Calendar.getInstance();
 
@@ -47,6 +49,10 @@ public class UsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         editTextFechaNacimiento.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -80,5 +86,11 @@ public class UsuarioActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

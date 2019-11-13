@@ -1,13 +1,12 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.melvin.seminario.R;
 
@@ -16,10 +15,10 @@ import butterknife.ButterKnife;
 
 public class InformacionFragment extends Fragment {
 
-    @BindView(R.id.cardViewSi)
-    CardView botonSi;
-    @BindView(R.id.cardViewNo)
-    CardView botonNo;
+    @BindView(R.id.buttonSi)
+    Button botonSi;
+    @BindView(R.id.buttonNo)
+    Button botonNo;
 
     private OnFragmentInteractionListener mListener;
 

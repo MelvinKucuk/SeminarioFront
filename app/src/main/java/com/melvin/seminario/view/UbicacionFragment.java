@@ -3,10 +3,10 @@ package com.melvin.seminario.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.melvin.seminario.R;
 
@@ -18,10 +18,10 @@ public class UbicacionFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    @BindView(R.id.cardViewSi)
-    CardView botonSi;
-    @BindView(R.id.cardViewNo)
-    CardView botonNo;
+    @BindView(R.id.buttonSi)
+    Button botonSi;
+    @BindView(R.id.buttonNo)
+    Button botonNo;
 
     public UbicacionFragment() {
         // Required empty public constructor
@@ -35,7 +35,7 @@ public class UbicacionFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        botonSi = view.findViewById(R.id.cardViewSi);
+        botonSi = view.findViewById(R.id.buttonSi);
         botonSi.setOnClickListener(v -> mListener.enUbicacionSi());
         botonNo.setOnClickListener(v -> mListener.enUbicacionNo());
 

@@ -2,13 +2,12 @@ package com.melvin.seminario.view;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,8 +34,8 @@ public class CrearUsuarioFinalizarFragment extends Fragment {
     EditText editTextFechaNacimiento;
     @BindView(R.id.editTextPais)
     EditText editTextPais;
-    @BindView(R.id.cardViewFinalizar)
-    CardView botonFinalizar;
+    @BindView(R.id.buttonFinalizar)
+    Button botonFinalizar;
 
     public final Calendar c = Calendar.getInstance();
 

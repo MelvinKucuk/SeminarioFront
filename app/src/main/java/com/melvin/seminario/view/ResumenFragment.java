@@ -2,7 +2,6 @@ package com.melvin.seminario.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.melvin.seminario.R;
@@ -58,10 +58,10 @@ public class ResumenFragment extends Fragment {
     EditText editTextDomicilio;
     @BindView (R.id.editTextMail)
     EditText editTextMail;
-    @BindView (R.id.cardViewSiguiente)
-    CardView botonSiguiente;
-    @BindView (R.id.cardViewEditar)
-    CardView botonEditar;
+    @BindView (R.id.buttonSiguiente)
+    Button botonSiguiente;
+    @BindView (R.id.buttonEditar)
+    Button botonEditar;
     @BindView (R.id.editTextDetalle)
     EditText editTextDetalle;
     @BindView (R.id.editTextNombreTercero)
@@ -113,12 +113,20 @@ public class ResumenFragment extends Fragment {
 
                 new DenunciaController().obtenerDenuciaPorId(id,
                         denuncia -> {
-                            editTextNombreTercero.setText(denuncia.getTercero().getNombre());
-                            editTextApellidoTercero.setText(denuncia.getTercero().getApellido());
-                            editTextFechaTercero.setText(denuncia.getTercero().getFechaNacimiento());
-                            editTextPaisTercero.setText(denuncia.getTercero().getPais());
-                            editTextLicencia.setText(denuncia.getTercero().getLicencia());
-                            editTextDetalle.setText(denuncia.getAsegurado().getDetalle());
+                            if (denuncia.getTercero() != null) {
+                                if (denuncia.getTercero().getNombre() != null)
+                                    editTextNombreTercero.setText(denuncia.getTercero().getNombre());
+                                if (denuncia.getTercero().getApellido() != null)
+                                    editTextApellidoTercero.setText(denuncia.getTercero().getApellido());
+                                if (denuncia.getTercero().getFechaNacimiento() != null)
+                                    editTextFechaTercero.setText(denuncia.getTercero().getFechaNacimiento());
+                                if (denuncia.getTercero().getPais() != null)
+                                    editTextPaisTercero.setText(denuncia.getTercero().getPais());
+                                if (denuncia.getTercero().getLicencia() != null)
+                                    editTextLicencia.setText(denuncia.getTercero().getLicencia());
+                            }
+                            if (denuncia.getAsegurado().getDetalle() != null)
+                                editTextDetalle.setText(denuncia.getAsegurado().getDetalle());
                             List<Foto> fotos = new ArrayList<>();
                             if (denuncia.getImagePathCedula() != null)
                                 fotos.add(new Foto(denuncia.getImagePathCedula(), "Cedula"));

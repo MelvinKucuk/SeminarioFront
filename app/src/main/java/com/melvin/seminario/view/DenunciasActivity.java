@@ -1,9 +1,10 @@
 package com.melvin.seminario.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.DenunciaController;
@@ -22,6 +23,8 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
 
     @BindView(R.id.recyclerDenuncias)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbarDenuncias)
+    Toolbar toolbar;
     private DenunciasAdapter adapter;
     private List<Denuncia> datos;
 
@@ -30,6 +33,8 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_denuncias);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         datos = new ArrayList<>();
         String username = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
@@ -60,5 +65,11 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
     @Override
     public void enResumenConfirmado(Conductor mail) {
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

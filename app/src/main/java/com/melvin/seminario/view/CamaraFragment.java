@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,8 +47,10 @@ public class CamaraFragment extends Fragment {
     private boolean esPoliza;
     private boolean esDanos;
     private boolean esLicenciaExtra;
-    @BindView(R.id.cardViewOmitir)
-    CardView botonOmitir;
+    @BindView(R.id.buttonOmitir)
+    Button botonOmitir;
+    @BindView(R.id.buttonCamara)
+    Button botonAbrirCamara;
 
     public CamaraFragment() {
     }
@@ -61,7 +62,6 @@ public class CamaraFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_camara, container, false);
         ButterKnife.bind(this, view);
 
-        CardView botonAbrirCamara = view.findViewById(R.id.cardViewCamara);
         botonAbrirCamara.setOnClickListener(v -> dipatchTakePicture());
 
         image = view.findViewById(R.id.licenciaIcono);

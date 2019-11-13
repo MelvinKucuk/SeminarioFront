@@ -1,13 +1,12 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.melvin.seminario.R;
 
@@ -27,7 +26,7 @@ public class ExitoChoqueFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exito_choque, container, false);
 
-        CardView botonSiguiente = view.findViewById(R.id.cardViewSiguiente);
+        Button botonSiguiente = view.findViewById(R.id.buttonSiguiente);
         botonSiguiente.setOnClickListener(v -> mListener.enChoqueConfirmado());
 
         return view;

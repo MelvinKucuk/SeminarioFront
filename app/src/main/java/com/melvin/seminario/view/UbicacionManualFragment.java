@@ -5,10 +5,10 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,8 +57,8 @@ public class UbicacionManualFragment extends Fragment {
     EditText editTextHora;
     @BindView(R.id.editTextFecha)
     EditText editTextFecha;
-    @BindView(R.id.cardViewSiguiente)
-    CardView botonSiguiente;
+    @BindView(R.id.buttonSiguiente)
+    Button botonSiguiente;
     @BindView(R.id.checkboxSiDobleMano)
     CheckBox checkBoxSiDobleMano;
     @BindView(R.id.checkboxNoDobleMano)

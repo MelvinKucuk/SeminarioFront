@@ -1,13 +1,12 @@
 package com.melvin.seminario.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,10 +18,10 @@ import butterknife.ButterKnife;
 
 public class DetalleFragment extends Fragment {
 
-    @BindView(R.id.cardViewSiguiente)
-    CardView botonSiguiente;
-    @BindView(R.id.cardViewOmitir)
-    CardView botonOmitir;
+    @BindView(R.id.buttonSiguiente)
+    Button botonSiguiente;
+    @BindView(R.id.buttonOmitir)
+    Button botonOmitir;
     @BindView(R.id.editTextDetalle)
     EditText editTextDetalle;
 

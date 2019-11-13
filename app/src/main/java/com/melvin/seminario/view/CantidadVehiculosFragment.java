@@ -3,17 +3,24 @@ package com.melvin.seminario.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.melvin.seminario.R;
+
+import butterknife.BindView;
 
 
 public class CantidadVehiculosFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.buttonSi)
+    Button botonSi;
+    @BindView(R.id.buttonNo)
+    Button botonNo;
 
     public CantidadVehiculosFragment() {
         // Required empty public constructor
@@ -26,8 +33,8 @@ public class CantidadVehiculosFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cantidad_vehiculos, container, false);
 
-        CardView botonSi = view.findViewById(R.id.cardViewSi);
-        CardView botonNo = view.findViewById(R.id.cardViewNo);
+        botonSi = view.findViewById(R.id.buttonSi);
+        botonNo = view.findViewById(R.id.buttonNo);
         botonSi.setOnClickListener(v -> mListener.enOtroVehiculoSi());
         botonNo.setOnClickListener(v -> mListener.enOtroVehiculoNo());
 

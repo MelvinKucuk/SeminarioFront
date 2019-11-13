@@ -2,9 +2,9 @@ package com.melvin.seminario.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextMail;
     @BindView(R.id.editTextConstraseña)
     EditText editTextContrasena;
-    @BindView(R.id.cardViewIngresar)
-    CardView botonIngresar;
-    @BindView(R.id.cardViewCrearUsuario)
-    CardView botonCrearUsuario;
+    @BindView(R.id.buttonIngresar)
+    Button botonIngresar;
+    @BindView(R.id.buttonCrearUsuario)
+    Button botonCrearUsuario;
     private ProgressDialog progressDialog;
 
 
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressDialog = new ProgressDialog(this);
 
-        botonIngresar = findViewById(R.id.cardViewIngresar);
         botonIngresar.setOnClickListener(v -> {
 
                     String username = editTextMail.getText().toString();

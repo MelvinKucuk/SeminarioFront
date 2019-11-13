@@ -3,10 +3,10 @@ package com.melvin.seminario.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.melvin.seminario.R;
 
@@ -18,10 +18,10 @@ public class ExitoConductorFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    @BindView(R.id.cardViewSiguiente)
-    CardView botonSiguiente;
-    @BindView(R.id.cardViewFoto)
-    CardView botonMasFotos;
+    @BindView(R.id.buttonSiguiente)
+    Button botonSiguiente;
+    @BindView(R.id.buttonFoto)
+    Button botonMasFotos;
 
     public ExitoConductorFragment() {
     }
