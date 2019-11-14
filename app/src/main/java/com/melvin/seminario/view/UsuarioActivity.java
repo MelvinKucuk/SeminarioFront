@@ -1,14 +1,20 @@
 package com.melvin.seminario.view;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.UsuarioController;
+import com.melvin.seminario.model.User;
 
 import java.util.Calendar;
 
@@ -35,6 +41,10 @@ public class UsuarioActivity extends AppCompatActivity {
     EditText editTextMail;
     @BindView(R.id.toolbarUsuarios)
     Toolbar toolbar;
+    @BindView(R.id.buttonGuardar)
+    Button botonGuardar;
+
+    private String username;
 
     public final Calendar c = Calendar.getInstance();
 
@@ -44,6 +54,7 @@ public class UsuarioActivity extends AppCompatActivity {
     private static final String CERO = "0";
     private static final String BARRA = "/";
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +64,24 @@ public class UsuarioActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        botonGuardar.setOnTouchListener(
+                (v, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                            ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                            v.invalidate();
+                            break;
+                        }
+                    }
+                    return false;
+                });
 
         editTextFechaNacimiento.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -76,6 +105,7 @@ public class UsuarioActivity extends AppCompatActivity {
         new UsuarioController().recuperarUsuario(user,
                 usuario -> {
                     if (usuario != null){
+                        username = usuario.getUsername();
                         editTextNombre.setText(usuario.getNombre());
                         editTextApellido.setText(usuario.getApellido());
                         editTextDni.setText(usuario.getDni());
@@ -85,6 +115,22 @@ public class UsuarioActivity extends AppCompatActivity {
                         editTextDomicilio.setText(usuario.getDomicilio());
                     }
                 });
+        botonGuardar.setOnClickListener(v -> {
+            User usuario = new User(username);
+            usuario.setNombre(editTextNombre.getText().toString());
+            usuario.setApellido(editTextApellido.getText().toString());
+            usuario.setDni(editTextDni.getText().toString());
+            usuario.setFechaNacimeinto(editTextFechaNacimiento.getText().toString());
+            usuario.setPais(editTextPais.getText().toString());
+            usuario.setDomicilio(editTextDomicilio.getText().toString());
+            new UsuarioController().actualizarUsuario(usuario,
+                        guardadoExitoso -> {
+                            if (guardadoExitoso){
+                                Toast.makeText(this, "Se guardaron los datos", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+        });
 
     }
 

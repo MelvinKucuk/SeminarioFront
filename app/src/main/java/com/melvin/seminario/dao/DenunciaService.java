@@ -5,7 +5,9 @@ import com.melvin.seminario.model.Denuncia;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 
 public interface DenunciaService {
@@ -15,4 +17,7 @@ public interface DenunciaService {
 
     @GET("/denuncia/byId/{id}/")
     Call<Denuncia> getDenunciaById(@Path("id") String id);
+
+    @PATCH("/denuncia/{id}")
+    Call<Boolean> updateDenunciaById(@Path("id") String id, @Body Denuncia denuncia);
 }

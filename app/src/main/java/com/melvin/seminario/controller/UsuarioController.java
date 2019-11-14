@@ -46,4 +46,8 @@ public class UsuarioController {
     public void crearUsuario(User usuario, ResultListener<Boolean> listenerView){
         new DaoInternetUsuarios().crearUsuario(usuario, listenerView);
     }
+
+    public void actualizarUsuario(User usuario, ResultListener<Boolean> listenerView){
+        new DaoInternetUsuarios().actualizarUsuario(usuario, listenerView);
+    }
 }

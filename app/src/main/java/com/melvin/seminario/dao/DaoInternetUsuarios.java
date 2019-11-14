@@ -66,4 +66,18 @@ public class DaoInternetUsuarios extends DaoHelper {
             }
         });
     }
+
+    public void actualizarUsuario(User user, ResultListener<Boolean> listenerController){
+        usuarioService.actualizarUsuario(user).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                listenerController.finish(true);
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                listenerController.finish(true);
+            }
+        });
+    }
 }

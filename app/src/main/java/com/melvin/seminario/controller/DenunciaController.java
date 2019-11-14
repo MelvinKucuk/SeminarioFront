@@ -21,4 +21,8 @@ public class DenunciaController {
     public void obtenerDenuciaPorId (String id, ResultListener<Denuncia> listenerView){
         new DaoInternetDenuncia().obtenerDenunciaPorId(id, listenerView);
     }
+
+    public void actualizarDenunciaPorId(String id, Denuncia denuncia, ResultListener<Boolean> listenerView){
+        new DaoInternetDenuncia().actualizarDenunciaPorId(id, denuncia, listenerView);
+    }
 }

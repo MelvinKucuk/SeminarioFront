@@ -49,5 +49,20 @@ public class DaoInternetDenuncia extends DaoHelper{
         });
     }
 
+    public void actualizarDenunciaPorId(String id, Denuncia denuncia, ResultListener<Boolean> listenerController){
+        denunciaService.updateDenunciaById(id, denuncia).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful())
+                    listenerController.finish(true);
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                listenerController.finish(true);
+            }
+        });
+    }
+
 
 }

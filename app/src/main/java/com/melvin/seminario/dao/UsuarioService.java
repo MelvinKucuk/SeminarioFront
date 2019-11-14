@@ -5,6 +5,7 @@ import com.melvin.seminario.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 
 public interface UsuarioService {
@@ -17,5 +18,8 @@ public interface UsuarioService {
 
     @POST("users/newUser")
     Call<User> crearUsuario(@Body User user);
+
+    @PATCH("users")
+    Call<Boolean> actualizarUsuario(@Body User user);
 
 }

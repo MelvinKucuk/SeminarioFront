@@ -254,7 +254,7 @@
 
 
         <Button
-            android:id="@+id/buttonEditar"
+            android:id="@+id/buttonGuardar"
             android:layout_height="wrap_content"
             android:layout_width="250dp"
             android:text="@string/guardar_datos"

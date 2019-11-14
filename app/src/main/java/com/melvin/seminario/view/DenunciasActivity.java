@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.DenunciaController;
@@ -27,6 +28,7 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
     Toolbar toolbar;
     private DenunciasAdapter adapter;
     private List<Denuncia> datos;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
 
     @Override
     public void enDenunciaSeleccionada(String id) {
+        this.id = id;
         ResumenFragment fragment = new ResumenFragment();
         Bundle datos = new Bundle();
         datos.putString(ResumenFragment.KEY_ID, id);
@@ -65,6 +68,15 @@ public class DenunciasActivity extends AppCompatActivity implements DenunciasAda
     @Override
     public void enResumenConfirmado(Conductor asegurado, Conductor tercero) {
 
+    }
+
+    @Override
+    public void enDenunciaModificada(Denuncia denuncia) {
+        new DenunciaController().actualizarDenunciaPorId(id, denuncia,
+                    actualizarExitoso -> {
+                        Toast.makeText(this, "Se Actualizo exitosamente", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                    });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.melvin.seminario.view;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -7,6 +8,10 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -63,6 +68,10 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flujo_accidente);
 
+        Toolbar toolbar = findViewById(R.id.toolbarSiniestros);
+        setSupportActionBar(toolbar);
+
+
         user = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
 
         imageView = findViewById(R.id.imagen2);
@@ -76,7 +85,20 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_flujo, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.casa){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void enUbicacionSi() {
@@ -441,6 +463,11 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public void enExitoResumen() {
         finish();
+    }
+
+    @Override
+    public void enDenunciaModificada(Denuncia denuncia) {
+
     }
 
     private void cargarFragment(Fragment fragment){

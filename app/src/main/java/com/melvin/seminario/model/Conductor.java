@@ -147,4 +147,8 @@ public class Conductor implements Parcelable {
     public String getDetalle() {
         return detalle;
     }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
 }

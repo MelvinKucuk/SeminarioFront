@@ -1,6 +1,7 @@
 package com.melvin.seminario.view;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -13,16 +14,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.DenunciaController;
 import com.melvin.seminario.controller.UsuarioController;
 import com.melvin.seminario.model.Conductor;
+import com.melvin.seminario.model.Denuncia;
 import com.melvin.seminario.model.Foto;
 import com.melvin.seminario.util.TemplatePDF;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,6 +85,14 @@ public class ResumenFragment extends Fragment {
 
     private  String pathLicencia;
     private String detalle;
+    private Denuncia denuncia;
+
+    public final Calendar c = Calendar.getInstance();
+    private final int dia = c.get(Calendar.DAY_OF_MONTH);
+    private final int mes = c.get(Calendar.MONTH);
+    private final int anio = c.get(Calendar.YEAR);
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
 
 
     public ResumenFragment() {
@@ -95,6 +107,40 @@ public class ResumenFragment extends Fragment {
 
         ButterKnife.bind(this, view);
         String id;
+
+        editTextFecha.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    final int mesActual = month+1;
+                    String diaFormateado = (dayOfMonth < 10)? CERO + dayOfMonth : String.valueOf(dayOfMonth);
+                    String mesFormateado = (mesActual < 10)? CERO + mesActual : String.valueOf(mesActual);
+                    String fecha = diaFormateado + BARRA + mesFormateado + BARRA + year;
+                    editTextFecha.setText(fecha);
+
+                }
+            }, anio, mes, dia);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+        });
+
+        editTextFechaTercero.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    final int mesActual = month+1;
+                    String diaFormateado = (dayOfMonth < 10)? CERO + dayOfMonth : String.valueOf(dayOfMonth);
+                    String mesFormateado = (mesActual < 10)? CERO + mesActual : String.valueOf(mesActual);
+                    String fecha = diaFormateado + BARRA + mesFormateado + BARRA + year;
+                    editTextFechaTercero.setText(fecha);
+
+                }
+            }, anio, mes, dia);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+        });
 
         user = getActivity().getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
         new UsuarioController().recuperarUsuario(user,
@@ -114,9 +160,11 @@ public class ResumenFragment extends Fragment {
             id = datos.getString(KEY_ID);
             if (id != null) {
 
+                botonSiguiente.setText("Guardar");
 
                 new DenunciaController().obtenerDenuciaPorId(id,
                         denuncia -> {
+                            this.denuncia = denuncia;
                             if (denuncia.getTercero() != null) {
                                 if (denuncia.getTercero().getNombre() != null)
                                     editTextNombreTercero.setText(denuncia.getTercero().getNombre());
@@ -159,6 +207,38 @@ public class ResumenFragment extends Fragment {
                             RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                             recyclerView.setLayoutManager(manager);
 
+                        });
+
+                botonSiguiente.setOnClickListener(v -> {
+                    Conductor terceroConductor = new Conductor.Builder()
+                            .setNombre(editTextNombreTercero.getText().toString())
+                            .setApellido(editTextApellidoTercero.getText().toString())
+                            .setPais(editTextPaisTercero.getText().toString())
+                            .setLicencia(editTextLicencia.getText().toString())
+                            .setFechaNacimiento(editTextFechaTercero.getText().toString())
+                            .build();
+                    denuncia.setTercero(terceroConductor);
+                    denuncia.getAsegurado().setDetalle(editTextDetalle.getText().toString());
+                    mListener.enDenunciaModificada(denuncia);
+                });
+
+                botonSiguiente.setOnTouchListener(
+                        (v, event) -> {
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN: {
+                                    v.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                                    ((Button) v).setTextColor(getResources().getColor(R.color.white));
+                                    v.invalidate();
+                                    break;
+                                }
+                                case MotionEvent.ACTION_UP: {
+                                    v.getBackground().clearColorFilter();
+                                    ((Button) v).setTextColor(getResources().getColor(R.color.primaryText));
+                                    v.invalidate();
+                                    break;
+                                }
+                            }
+                            return false;
                         });
 
 
@@ -298,5 +378,6 @@ public class ResumenFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void enResumenConfirmado(Conductor asegurado, Conductor tercero);
+        void enDenunciaModificada(Denuncia denuncia);
     }
 }
