@@ -36,7 +36,8 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        textViewBienveida.setVisibility(View.INVISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         user = getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
         new UsuarioController().recuperarUsuario(user,
@@ -66,6 +67,9 @@ public class MenuActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.datos){
             startActivity(new Intent(MenuActivity.this, UsuarioActivity.class));
+        }
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
         return true;
     }

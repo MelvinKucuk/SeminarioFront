@@ -1,5 +1,6 @@
 package com.melvin.seminario.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.UsuarioController;
@@ -95,7 +98,30 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.casa){
-            finish();
+            new AlertDialog.Builder(this)
+                    .setTitle("Finalizar Denuncia")
+                    .setMessage("¿Esta seguro que desea finalizar la denuncia?")
+                    .setPositiveButton("Si, guardar en borrador", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new UsuarioController().recuperarUsuario(user,
+                                    usuario -> {
+                                        Conductor conductor = new Conductor.Builder()
+                                                .setNombre(usuario.getNombre())
+                                                .setApellido(usuario.getApellido())
+                                                .setEmail(usuario.getUsername())
+                                                .setDni(usuario.getDni())
+                                                .setPais(usuario.getPais())
+                                                .setFechaNacimiento(usuario.getFechaNacimeinto())
+                                                .setDomicilio(usuario.getDomicilio())
+                                                .build();
+                                        denuncia.setAsegurado(conductor);
+                                        new DaoInternetUsuarios().mandarMail(denuncia);
+                                        finish();
+                                    });
+
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
         }
         return super.onOptionsItemSelected(item);
     }

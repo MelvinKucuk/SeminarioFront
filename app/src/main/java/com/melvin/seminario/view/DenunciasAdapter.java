@@ -48,6 +48,10 @@ public class DenunciasAdapter extends RecyclerView.Adapter {
         TextView denuncia;
         @BindView(R.id.textCompleto)
         TextView completo;
+        @BindView(R.id.textDireccion)
+        TextView direccion;
+        @BindView(R.id.numeroDenuncia)
+        TextView numeroDenuncia;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,12 +61,14 @@ public class DenunciasAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Denuncia denuncia){
-            this.denuncia.setText("Denuncia del dia " + denuncia.getFecha());
+            this.denuncia.setText(denuncia.getAsegurado().getDetalle());
+            direccion.setText(denuncia.getCalle() + " " + denuncia.getAltura());
+            numeroDenuncia.setText(denuncia.getId().substring(denuncia.getId().length()-5).toUpperCase());
             if (denuncia.chechCompleto()){
-                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.verde));
-                completo.setText("COMPLETO");
+                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.amarillo));
+                completo.setText("En proceso");
             } else {
-                completo.setText("INCOMPLETO");
+                completo.setText("Denegado");
                 completo.setTextColor(itemView.getContext().getResources().getColor(R.color.rojo));
             }
         }

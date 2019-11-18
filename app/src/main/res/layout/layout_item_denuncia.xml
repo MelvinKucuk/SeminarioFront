@@ -2,16 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:layout_height="wrap_content"
     android:paddingBottom="5dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,29 +23,64 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp">
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="12dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_ubicacion_denuncia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/numeroDenuncia" />
+
             <TextView
-                android:id="@+id/textDenuncia"
+                android:id="@+id/numeroDenuncia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Denuncia del dia 20/04/2019"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/primaryText"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textCompleto" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="A47953" />
+
+            <TextView
+                android:id="@+id/textDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gris"
+                android:textStyle="italic"
+                android:layout_marginStart="5dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                tools:text="Av. Córdoba y Esmeralda" />
+
+
+            <TextView
+                android:id="@+id/textDenuncia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:textColor="@color/primaryText"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                tools:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore" />
 
             <TextView
                 android:id="@+id/textCompleto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_marginEnd="136dp"
-                android:text="INCOMPLETO"
-                android:textColor="@color/rojo"
-                android:textStyle="bold"
-                android:textSize="20sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/amarillo"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="En proceso" />
 
         </android.support.constraint.ConstraintLayout>
 
