@@ -54,6 +54,8 @@ public class CamaraFragment extends Fragment {
     Button botonOmitir;
     @BindView(R.id.buttonCamara)
     Button botonAbrirCamara;
+    @BindView(R.id.textDorso)
+    TextView textDorso;
 
     public CamaraFragment() {
     }
@@ -121,6 +123,8 @@ public class CamaraFragment extends Fragment {
             if (esLicenciaExtra){
                 textView.setText(getString(R.string.text_licencia));
             }
+        } else {
+            textDorso.setVisibility(View.VISIBLE);
         }
 
 

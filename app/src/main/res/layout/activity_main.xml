@@ -20,14 +20,13 @@
                 android:id="@+id/buttonIngresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:layout_marginBottom="683dp"
+                android:layout_margin="15dp"
                 android:background="@drawable/border_button_login"
                 android:text="@string/button_ingresar"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/botonIngresarInvitado"
                 tools:layout_editor_absoluteX="25dp" />
 
             <ImageView
@@ -82,20 +81,33 @@
 
             <Button
                 android:id="@+id/buttonCrearUsuario"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/crear_usuario"
                 android:padding="16dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/crear_usuario"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/buttonIngresar"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <Button
+                android:id="@+id/botonIngresarInvitado"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:text="Ingresar como invitado"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/buttonCrearUsuario"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
             <EditText
                 android:id="@+id/editTextConstraseña"

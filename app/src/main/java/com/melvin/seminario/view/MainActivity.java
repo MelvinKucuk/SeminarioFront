@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button botonCrearUsuario;
     @BindView(R.id.checkboxRecordar)
     CheckBox checkBoxRecordar;
+    @BindView(R.id.botonIngresarInvitado)
+    Button botonInvitado;
     private ProgressDialog progressDialog;
 
     private String user;
@@ -48,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
         user = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE).getString(KEY_USER, "");
         pass = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE).getString(KEY_PASS, "");
 
+        botonCrearUsuario.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, CrearUsuarioActivity.class));
+        });
+
+        botonInvitado.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            Bundle datos = new Bundle();
+            datos.putBoolean(MenuActivity.KEY_INVITADO, true);
+            intent.putExtras(datos);
+            startActivity(intent);
+        });
+
+        // Recordar usaurio
         if (!user.isEmpty()){
             if (!pass.isEmpty()) {
                 checkBoxRecordar.setChecked(true);
@@ -102,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
         );
-        botonCrearUsuario.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, CrearUsuarioActivity.class));
-        });
+
 
 
     }

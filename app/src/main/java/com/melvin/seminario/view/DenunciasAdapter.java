@@ -65,11 +65,11 @@ public class DenunciasAdapter extends RecyclerView.Adapter {
             direccion.setText(denuncia.getCalle() + " " + denuncia.getAltura());
             numeroDenuncia.setText(denuncia.getId().substring(denuncia.getId().length()-5).toUpperCase());
             if (denuncia.chechCompleto()){
-                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.amarillo));
-                completo.setText("En proceso");
+                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.verde));
+                completo.setText("Denunciado");
             } else {
-                completo.setText("Denegado");
-                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.rojo));
+                completo.setText("Borrador");
+                completo.setTextColor(itemView.getContext().getResources().getColor(R.color.amarillo));
             }
         }
 

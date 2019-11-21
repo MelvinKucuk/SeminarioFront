@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import com.melvin.seminario.R;
 import com.melvin.seminario.controller.UsuarioController;
@@ -45,7 +46,10 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     TieneDatosTerceroFragment.OnFragmentInteractionListener,
                     DetalleFragment.OnFragmentInteractionListener,
                     InformacionFragment.OnFragmentInteractionListener,
-                    DatosFragment.OnFragmentInteractionListener{
+                    DatosFragment.OnFragmentInteractionListener,
+                    IngresarMailFragment.OnFragmentInteractionListener{
+
+    public static final String KEY_INVITADO = "invitado";
 
     private String user;
     private ImageView imageView;
@@ -65,6 +69,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
     private ArrayList<String> filePathsChoque = new ArrayList<>();
     private ArrayList<String> filePathsExtras = new ArrayList<>();
     private ArrayList<String> filePathsDanos = new ArrayList<>();
+    private Boolean esInvitado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +79,12 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbarSiniestros);
         setSupportActionBar(toolbar);
 
-
-        user = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
-
+        Bundle datos = getIntent().getExtras();
+        if (datos != null) {
+            this.esInvitado = datos.getBoolean(KEY_INVITADO, false);
+        } else {
+            user = getSharedPreferences(MainActivity.USER_PREFERENCES, MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+        }
         imageView = findViewById(R.id.imagen2);
 
         denuncia = new Denuncia();
@@ -104,21 +112,25 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                     .setPositiveButton("Si, guardar en borrador", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            new UsuarioController().recuperarUsuario(user,
-                                    usuario -> {
-                                        Conductor conductor = new Conductor.Builder()
-                                                .setNombre(usuario.getNombre())
-                                                .setApellido(usuario.getApellido())
-                                                .setEmail(usuario.getUsername())
-                                                .setDni(usuario.getDni())
-                                                .setPais(usuario.getPais())
-                                                .setFechaNacimiento(usuario.getFechaNacimeinto())
-                                                .setDomicilio(usuario.getDomicilio())
-                                                .build();
-                                        denuncia.setAsegurado(conductor);
-                                        new DaoInternetUsuarios().mandarMail(denuncia);
-                                        finish();
-                                    });
+                            if (esInvitado) {
+                                checkInvitado();
+                            } else {
+                                new UsuarioController().recuperarUsuario(user,
+                                        usuario -> {
+                                            Conductor conductor = new Conductor.Builder()
+                                                    .setNombre(usuario.getNombre())
+                                                    .setApellido(usuario.getApellido())
+                                                    .setEmail(usuario.getUsername())
+                                                    .setDni(usuario.getDni())
+                                                    .setPais(usuario.getPais())
+                                                    .setFechaNacimiento(usuario.getFechaNacimeinto())
+                                                    .setDomicilio(usuario.getDomicilio())
+                                                    .build();
+                                            denuncia.setAsegurado(conductor);
+                                            new DaoInternetUsuarios().mandarMail(denuncia);
+                                            finish();
+                                        });
+                            }
 
                         }})
                     .setNegativeButton(android.R.string.no, null).show();
@@ -443,7 +455,13 @@ public class FlujoAccidenteActivity extends AppCompatActivity
         cargarFragment(fragment);
         denuncia.setAsegurado(conductor);
         denuncia.setTercero(tercero);
-        new DaoInternetUsuarios().mandarMail(denuncia);
+        if (esInvitado){
+           if (denuncia.getAsegurado().getEmail().isEmpty()){
+               checkInvitado();
+           }
+        } else {
+            new DaoInternetUsuarios().mandarMail(denuncia);
+        }
     }
 
     @Override
@@ -498,5 +516,30 @@ public class FlujoAccidenteActivity extends AppCompatActivity
 
     private void cargarFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+    }
+
+    private void checkInvitado(){
+            new AlertDialog.Builder(this)
+                    .setTitle("Mail Requerido")
+                    .setMessage("Para continuar necesitamos tu mail")
+                    .setPositiveButton("Ingresar mail", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            FragmentManager manager = getSupportFragmentManager();
+                            IngresarMailFragment fragment = new IngresarMailFragment();
+                            fragment.show(manager, "tag");
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
+    }
+
+
+    @Override
+    public void enMailIngresado(String mail) {
+        Conductor conductor = new Conductor.Builder()
+                .setEmail(mail)
+                .build();
+        denuncia.setAsegurado(conductor);
+        new DaoInternetUsuarios().mandarMail(denuncia);
+        finish();
     }
 }

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/white"
-    >
+    tools:background="@color/white">
 
     <ImageView
         android:id="@+id/licenciaIcono"
@@ -17,6 +16,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCamara" />
+
+    <TextView
+        android:id="@+id/textDorso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_dorso"
+        android:textColor="@color/primaryText"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/licenciaIcono"
+        app:layout_constraintStart_toStartOf="@+id/licenciaIcono"
+        app:layout_constraintTop_toBottomOf="@+id/licenciaIcono" />
 
     <TextView
         android:id="@+id/textViewCamara"
@@ -37,33 +48,31 @@
 
     <Button
         android:id="@+id/buttonCamara"
-        android:layout_height="wrap_content"
         android:layout_width="250dp"
-        android:text="@string/abrir_camara"
-        android:textColor="@color/primaryText"
-        android:textAllCaps="false"
-        android:textSize="20sp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/border_button"
+        android:text="@string/abrir_camara"
+        android:textAllCaps="false"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonOmitir"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/border_button"/>
-
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <Button
         android:id="@+id/buttonOmitir"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
         android:text="@string/omitir"
         android:textAllCaps="false"
-        android:textSize="20sp"
         android:textColor="@color/primaryText"
-        android:layout_marginBottom="27dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

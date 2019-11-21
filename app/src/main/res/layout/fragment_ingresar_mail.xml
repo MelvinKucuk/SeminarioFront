@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="150dp"
+    android:minWidth="350dp"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimary"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="40dp"
+            android:hint="@string/hint_mail"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/disabledText"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:importantForAutofill="no"
+            />
+
+        <Button
+            android:id="@+id/botonAceptarMail"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextMail"
+            android:layout_alignRight="@id/editTextMail"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="Aceptar Mail"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/botonCancelar"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextMail"
+            android:layout_alignLeft="@id/editTextMail"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/cancelar"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</LinearLayout>
