@@ -44,6 +44,7 @@ public class ResumenFragment extends Fragment {
     public static final String KEY_DETALLE = "detalle";
     public static final String KEY_EXTRAS = "extras";
     public static final String KEY_ID = "id";
+    public static final String KEY_ESINVITADO = "esInvitado";
 
     private OnFragmentInteractionListener mListener;
     private TemplatePDF pdf;
@@ -86,6 +87,7 @@ public class ResumenFragment extends Fragment {
     private  String pathLicencia;
     private String detalle;
     private Denuncia denuncia;
+    private boolean esInvitado;
 
     public final Calendar c = Calendar.getInstance();
     private final int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -142,21 +144,30 @@ public class ResumenFragment extends Fragment {
             datePickerDialog.show();
         });
 
-        user = getActivity().getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
-        new UsuarioController().recuperarUsuario(user,
-                usuario -> {
-                    editTextNombre.setText(usuario.getNombre());
-                    editTextApellido.setText(usuario.getApellido());
-                    editTextDni.setText(usuario.getDni());
-                    editTextFecha.setText(usuario.getFechaNacimeinto());
-                    editTextPais.setText(usuario.getPais());
-                    editTextMail.setText(usuario.getUsername());
-                    editTextDomicilio.setText(usuario.getDomicilio());
-                });
+
 
         Bundle datos = getArguments();
 
+
+
         if (datos != null) {
+
+            esInvitado = datos.getBoolean(KEY_ESINVITADO, false);
+
+            if (!esInvitado) {
+                user = getActivity().getSharedPreferences(MainActivity.USER_PREFERENCES, MainActivity.MODE_PRIVATE).getString(MainActivity.KEY_USER, "");
+                new UsuarioController().recuperarUsuario(user,
+                        usuario -> {
+                            editTextNombre.setText(usuario.getNombre());
+                            editTextApellido.setText(usuario.getApellido());
+                            editTextDni.setText(usuario.getDni());
+                            editTextFecha.setText(usuario.getFechaNacimeinto());
+                            editTextPais.setText(usuario.getPais());
+                            editTextMail.setText(usuario.getUsername());
+                            editTextDomicilio.setText(usuario.getDomicilio());
+                        });
+            }
+
             id = datos.getString(KEY_ID);
             if (id != null) {
 

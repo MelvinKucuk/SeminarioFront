@@ -444,6 +444,7 @@ public class FlujoAccidenteActivity extends AppCompatActivity
             datos.putString(ResumenFragment.KEY_DETALLE, detalle);
         if (!filePathsExtras.isEmpty())
             datos.putStringArrayList(ResumenFragment.KEY_EXTRAS, filePathsExtras);
+        datos.putBoolean(ResumenFragment.KEY_ESINVITADO, esInvitado);
         fragment.setArguments(datos);
         cargarFragment(fragment);
 
@@ -540,6 +541,5 @@ public class FlujoAccidenteActivity extends AppCompatActivity
                 .build();
         denuncia.setAsegurado(conductor);
         new DaoInternetUsuarios().mandarMail(denuncia);
-        finish();
     }
 }
