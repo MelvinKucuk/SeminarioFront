@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
     TextView textViewConsulta;
 
     private String user;
-    private Boolean esInvitado;
+    private Boolean esInvitado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Bundle datos = getIntent().getExtras();
         if (datos != null) {
-            esInvitado = datos.getBoolean(KEY_INVITADO);
+            esInvitado = datos.getBoolean(KEY_INVITADO, false);
             if (esInvitado) {
                 textViewBienveida.setText("Hola Invitado");
                 textViewBienveida.setVisibility(View.VISIBLE);
@@ -73,7 +73,7 @@ public class MenuActivity extends AppCompatActivity {
         botonSiniestro.setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, FlujoAccidenteActivity.class);
             Bundle bundle = new Bundle();
-            if (esInvitado != null)
+            if (esInvitado)
                 bundle.putBoolean(FlujoAccidenteActivity.KEY_INVITADO, true);
             else
                 bundle.putBoolean(FlujoAccidenteActivity.KEY_INVITADO, false);
